@@ -68,15 +68,55 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         //locationManager.startMonitoringSignificantLocationChanges()
     }
     
+    func writeGeoEntryJSON(geoEntry: GeoEntry) {
+        let JSONString = Mapper().toJSONString(geoEntry)
+        let file = "\(geoEntry.millis!).json"
+        
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+            
+            let path = dir.stringByAppendingPathComponent(file);
+            
+            //writing
+            do {
+                try JSONString!.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
+            }
+            catch {/* error handling here */}
+        }
+    }
+    
+    func appendGeoEntryJSON(geoEntry: GeoEntry) {
+        let JSONString = Mapper().toJSONString(geoEntry)
+        let withNewline = "\(JSONString!)\r\n"
+        let fm = NSFileManager.defaultManager()
+        let dayTimePeriodFormatter = NSDateFormatter()
+        dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dayTimePeriodFormatter.stringFromDate(geoEntry.timestamp!)
+        
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+            
+            let path = dir.stringByAppendingPathComponent("\(dateString).json");
+            
+            //create file if it doesn't exist
+            if !fm.fileExistsAtPath(path) {
+                fm.createFileAtPath(path, contents: nil, attributes: nil)
+            }
+            let fileHandle = NSFileHandle(forUpdatingAtPath: path)
+            fileHandle?.seekToEndOfFile()
+            fileHandle?.writeData(withNewline.dataUsingEncoding(NSUTF8StringEncoding)!)
+            fileHandle?.closeFile()
+        }
+    }
+    
     // MARK: CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
 
-        let timestamp = (CLong)(newLocation.timestamp.timeIntervalSince1970 * 1000)
+        let millis = (CLong)(newLocation.timestamp.timeIntervalSince1970 * 1000)
         
         let newEntry = GeoEntry(lat: newLocation.coordinate.latitude,
                                 lon: newLocation.coordinate.longitude,
-                                timestamp: timestamp,
+                                millis: millis,
+                                timestamp: newLocation.timestamp,
                                 altitude: newLocation.altitude,
                                 speed: newLocation.speed,
                                 course: newLocation.course,
@@ -90,11 +130,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         geoEntries += [newEntry]
         tableView.reloadData()
         
-        //print(newEntry)
-        
-        let JSONString = Mapper().toJSONString(newEntry)
-        print(JSONString!)
-        
+        writeGeoEntryJSON(newEntry)
+        appendGeoEntryJSON(newEntry)
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {

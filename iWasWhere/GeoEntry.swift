@@ -16,7 +16,8 @@ struct GeoEntry: Mappable {
     var altitude: Double?
     var speed: Double?
     var course: Double?
-    var timestamp: CLong?
+    var millis: CLong?
+    var timestamp: NSDate?
     var horizontalAccuracy: Double?
     var verticalAccuracy: Double?
     
@@ -24,7 +25,8 @@ struct GeoEntry: Mappable {
     
     init?(lat: Double,
           lon: Double,
-          timestamp: CLong,
+          millis: CLong,
+          timestamp: NSDate,
           altitude: Double,
           speed: Double,
           course: Double,
@@ -38,8 +40,9 @@ struct GeoEntry: Mappable {
         self.course = course
         self.horizontalAccuracy = horizontalAccuracy
         self.verticalAccuracy = verticalAccuracy
-        
         self.timestamp = timestamp
+        self.millis = millis
+        
         if lat == 0.0 || lat == 0.0 || timestamp == 0 {
             return nil
         }
@@ -56,7 +59,7 @@ struct GeoEntry: Mappable {
         altitude           <- map["altitude"]
         speed              <- map["speed"]
         course             <- map["course"]
-        timestamp          <- map["timestamp"]
+        millis             <- map["millis"]
         horizontalAccuracy <- map["horizontalAccuracy"]
         verticalAccuracy   <- map["verticalAccuracy"]
     }
