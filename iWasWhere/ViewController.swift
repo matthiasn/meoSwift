@@ -27,7 +27,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         return geoEntries.count
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let geoEntry = geoEntries[indexPath.row]
@@ -53,7 +52,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         locationManager.delegate = self
-        locationManager.distanceFilter = 50
+        locationManager.distanceFilter = 100
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestAlwaysAuthorization()
     }
