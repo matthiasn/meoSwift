@@ -20,6 +20,7 @@ struct GeoEntry: Mappable {
     var timestamp: NSDate?
     var horizontalAccuracy: Double?
     var verticalAccuracy: Double?
+    var device: String = "iPhone"
     
     // MARK: Initialization
     
@@ -49,20 +50,19 @@ struct GeoEntry: Mappable {
     }
     
     init?(_ map: Map) {
-
     }
     
     // Mappable
     mutating func mapping(map: Map) {
-        lat                <- map["lat"]
-        lon                <- map["lon"]
+        lat                <- map["latitude"]
+        lon                <- map["longitude"]
         altitude           <- map["altitude"]
         speed              <- map["speed"]
         course             <- map["course"]
-        millis             <- map["millis"]
+        millis             <- map["timestamp"]
         horizontalAccuracy <- map["horizontalAccuracy"]
         verticalAccuracy   <- map["verticalAccuracy"]
+        device             <- map["device"]
     }
-    
 }
 
