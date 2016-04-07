@@ -16,6 +16,9 @@
 		ADB28B5E1CB5D3CD00CF15D5 /* iWasWhereTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B5D1CB5D3CD00CF15D5 /* iWasWhereTests.swift */; };
 		ADB28B691CB5D3CD00CF15D5 /* iWasWhereUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B681CB5D3CD00CF15D5 /* iWasWhereUITests.swift */; };
 		ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */; };
+		ADB28B791CB5DDA000CF15D5 /* GeoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B781CB5DDA000CF15D5 /* GeoTableViewCell.swift */; };
+		ADB28B7B1CB5DF9300CF15D5 /* GeoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */; };
+		ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		ADB28B681CB5D3CD00CF15D5 /* iWasWhereUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWasWhereUITests.swift; sourceTree = "<group>"; };
 		ADB28B6A1CB5D3CD00CF15D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ADB28B781CB5DDA000CF15D5 /* GeoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoTableViewCell.swift; sourceTree = "<group>"; };
+		ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoTableViewController.swift; sourceTree = "<group>"; };
+		ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,9 @@
 				ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */,
 				ADB28B471CB5D3CD00CF15D5 /* ViewController.swift */,
 				ADB28B491CB5D3CD00CF15D5 /* Main.storyboard */,
+				ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */,
+				ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */,
+				ADB28B781CB5DDA000CF15D5 /* GeoTableViewCell.swift */,
 				ADB28B4F1CB5D3CD00CF15D5 /* Assets.xcassets */,
 				ADB28B511CB5D3CD00CF15D5 /* LaunchScreen.storyboard */,
 				ADB28B541CB5D3CD00CF15D5 /* Info.plist */,
@@ -265,7 +274,10 @@
 			files = (
 				ADB28B481CB5D3CD00CF15D5 /* ViewController.swift in Sources */,
 				ADB28B4E1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld in Sources */,
+				ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */,
 				ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */,
+				ADB28B791CB5DDA000CF15D5 /* GeoTableViewCell.swift in Sources */,
+				ADB28B7B1CB5DF9300CF15D5 /* GeoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

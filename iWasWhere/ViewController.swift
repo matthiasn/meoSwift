@@ -10,7 +10,11 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-
+    
+    @IBOutlet weak var latLabel: UILabel!
+    @IBOutlet weak var lonLabel: UILabel!
+    @IBOutlet weak var tsLabel: UILabel!
+    
     // from http://szulctomasz.com/ios-9-getting-single-location-update-with-requestlocation/
     private var locationManager = CLLocationManager()
     
@@ -18,8 +22,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,12 +33,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBAction func geoRecord(sender: AnyObject) {
         print("record")
-        locationManager.requestLocation()
+        //locationManager.requestLocation()
+        //locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
     // MARK: CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations)
+        let newLocation = locations.last!
+        latLabel.text = "Lat: \(newLocation.coordinate.latitude)"
+        lonLabel.text = "Lon: \(newLocation.coordinate.longitude)"
+        tsLabel.text = "\(newLocation.timestamp)"
+        
+        print("current position: \(newLocation.coordinate.longitude) , \(newLocation.coordinate.latitude)")
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
