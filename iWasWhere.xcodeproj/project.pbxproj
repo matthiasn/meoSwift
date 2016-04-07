@@ -15,6 +15,7 @@
 		ADB28B531CB5D3CD00CF15D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB28B511CB5D3CD00CF15D5 /* LaunchScreen.storyboard */; };
 		ADB28B5E1CB5D3CD00CF15D5 /* iWasWhereTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B5D1CB5D3CD00CF15D5 /* iWasWhereTests.swift */; };
 		ADB28B691CB5D3CD00CF15D5 /* iWasWhereUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B681CB5D3CD00CF15D5 /* iWasWhereUITests.swift */; };
+		ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		ADB28B641CB5D3CD00CF15D5 /* iWasWhereUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWasWhereUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB28B681CB5D3CD00CF15D5 /* iWasWhereUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWasWhereUITests.swift; sourceTree = "<group>"; };
 		ADB28B6A1CB5D3CD00CF15D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		ADB28B391CB5D3CD00CF15D5 = {
 			isa = PBXGroup;
 			children = (
+				ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */,
 				ADB28B441CB5D3CD00CF15D5 /* iWasWhere */,
 				ADB28B5C1CB5D3CD00CF15D5 /* iWasWhereTests */,
 				ADB28B671CB5D3CD00CF15D5 /* iWasWhereUITests */,
