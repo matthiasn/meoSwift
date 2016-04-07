@@ -22,7 +22,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 50
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestAlwaysAuthorization()
     }
 
@@ -34,8 +35,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func geoRecord(sender: AnyObject) {
         print("record")
         //locationManager.requestLocation()
-        //locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startUpdatingLocation()
+        //locationManager.startMonitoringSignificantLocationChanges()
     }
     
     // MARK: CLLocationManagerDelegate
