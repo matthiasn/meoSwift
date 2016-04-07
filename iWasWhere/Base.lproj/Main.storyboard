@@ -18,53 +18,66 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9YR-47-G71">
-                                <rect key="frame" x="59" y="506" width="66" height="30"/>
+                                <rect key="frame" x="20" y="547" width="188" height="30"/>
                                 <color key="backgroundColor" red="0.85062792284084132" green="0.94027124887495839" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="record"/>
+                                <state key="normal" title="start geo tracking"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="621" width="188" height="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="geoRecord:" destination="BYZ-38-t0r" eventType="touchDown" id="sLg-z4-maE"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-kT-1lP" userLabel="lat">
-                                <rect key="frame" x="20" y="393" width="256" height="21"/>
+                                <rect key="frame" x="20" y="459" width="256" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="533" width="256" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s74-oe-RqQ" userLabel="lon">
-                                <rect key="frame" x="20" y="417" width="256" height="21"/>
+                                <rect key="frame" x="20" y="483" width="256" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="557" width="256" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvB-qX-1TR" userLabel="ts">
-                                <rect key="frame" x="20" y="441" width="256" height="21"/>
+                                <rect key="frame" x="20" y="507" width="256" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="581" width="256" height="21"/>
+                                </variation>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LMn-9U-HQf">
-                                <rect key="frame" x="0.0" y="47" width="384" height="327"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Geo entries JSON" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y9v-LN-6Mc">
+                                <rect key="frame" x="9" y="35" width="412" height="407"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="RtZ-S7-Ka0"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xKR-ZG-Gyj"/>
-                                </connections>
-                            </tableView>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="9" y="35" width="383" height="485"/>
+                                </variation>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="latLabel" destination="8qe-kT-1lP" id="8YD-FD-4Ts"/>
                         <outlet property="lonLabel" destination="s74-oe-RqQ" id="ENm-lp-22c"/>
-                        <outlet property="tableView" destination="LMn-9U-HQf" id="Yvi-2Y-dtE"/>
+                        <outlet property="textView" destination="Y9v-LN-6Mc" id="pdg-Cl-bNl"/>
                         <outlet property="tsLabel" destination="YvB-qX-1TR" id="4Ah-f4-FV4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="178"/>
+            <point key="canvasLocation" x="190.5" y="177.75"/>
         </scene>
     </scenes>
 </document>

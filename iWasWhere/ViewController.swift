@@ -10,51 +10,23 @@ import UIKit
 import CoreLocation
 import ObjectMapper
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var latLabel: UILabel!
     @IBOutlet weak var lonLabel: UILabel!
     @IBOutlet weak var tsLabel: UILabel!
-    
-    @IBOutlet var tableView: UITableView!
-    
-    // MARK: Properties
-    var geoEntries = [GeoEntry]()
-    
-    // MARK: - Table view data source
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return geoEntries.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        let geoEntry = geoEntries[indexPath.row]
-        cell.textLabel?.text = String(format: "Lat: %.5f Lon: %.5f", geoEntry.lat!, geoEntry.lon!)
-        //cell.textLabel?.text = Mapper().toJSONString(geoEntry)
-        return cell
-    }
+    @IBOutlet weak var textView: UITextView!
 
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     // from http://szulctomasz.com/ios-9-getting-single-location-update-with-requestlocation/
     private var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
         locationManager.delegate = self
         locationManager.distanceFilter = 100
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,23 +39,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         locationManager.startUpdatingLocation()
         //locationManager.startMonitoringSignificantLocationChanges()
     }
-    
-    func writeGeoEntryJSON(geoEntry: GeoEntry) {
-        let JSONString = Mapper().toJSONString(geoEntry)
-        let file = "\(geoEntry.millis!).json"
-        
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            
-            let path = dir.stringByAppendingPathComponent(file);
-            
-            //writing
-            do {
-                try JSONString!.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
-            }
-            catch {/* error handling here */}
-        }
-    }
-    
+
     func appendGeoEntryJSON(geoEntry: GeoEntry) {
         let JSONString = Mapper().toJSONString(geoEntry)
         let withNewline = "\(JSONString!)\r\n"
@@ -103,7 +59,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             let fileHandle = NSFileHandle(forUpdatingAtPath: path)
             fileHandle?.seekToEndOfFile()
             fileHandle?.writeData(withNewline.dataUsingEncoding(NSUTF8StringEncoding)!)
+            fileHandle?.seekToFileOffset(0)
+            let fileData = fileHandle?.readDataToEndOfFile()
             fileHandle?.closeFile()
+            textView.text = NSString(data: fileData!, encoding: NSUTF8StringEncoding) as! String
+            textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
         }
     }
     
@@ -127,10 +87,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         lonLabel.text = "Lon: \(newEntry.lon!)"
         tsLabel.text = "\(newLocation.timestamp)"
         
-        geoEntries += [newEntry]
-        tableView.reloadData()
-        
-        writeGeoEntryJSON(newEntry)
         appendGeoEntryJSON(newEntry)
     }
     
