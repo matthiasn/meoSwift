@@ -26,31 +26,6 @@
                                     <action selector="geoRecord:" destination="BYZ-38-t0r" eventType="touchDown" id="sLg-z4-maE"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yZ7-NY-Gft">
-                                <rect key="frame" x="20" y="47" width="524" height="299"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GeoTableViewCell" rowHeight="90" id="0zE-c2-FTl" customClass="GeoTableViewCell" customModule="iWasWhere" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="524" height="90"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0zE-c2-FTl" id="CCm-ku-hQ7">
-                                            <rect key="frame" x="0.0" y="0.0" width="524" height="89.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qL9-b7-poF" userLabel="geoLabel">
-                                                    <rect key="frame" x="71" y="17" width="240" height="44"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="gelLabel" destination="qL9-b7-poF" id="4sg-fN-tqK"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-kT-1lP" userLabel="lat">
                                 <rect key="frame" x="20" y="393" width="256" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -69,12 +44,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LMn-9U-HQf">
+                                <rect key="frame" x="0.0" y="47" width="384" height="327"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="RtZ-S7-Ka0"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xKR-ZG-Gyj"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="latLabel" destination="8qe-kT-1lP" id="8YD-FD-4Ts"/>
                         <outlet property="lonLabel" destination="s74-oe-RqQ" id="ENm-lp-22c"/>
+                        <outlet property="tableView" destination="LMn-9U-HQf" id="Yvi-2Y-dtE"/>
                         <outlet property="tsLabel" destination="YvB-qX-1TR" id="4Ah-f4-FV4"/>
                     </connections>
                 </viewController>

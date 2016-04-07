@@ -14,13 +14,6 @@ class GeoTableViewController: UITableViewController {
     var geoEntries = [GeoEntry]()
     
     
-    func loadSampleEntries() {
-        let g1 = GeoEntry(lat: 10, lon: 20, timestamp: 21123131)!
-        let g2 = GeoEntry(lat: 10, lon: 20, timestamp: 21123131)!
-        let g3 = GeoEntry(lat: 10, lon: 20, timestamp: 21123131)!
-        geoEntries += [g1, g2, g3]
-        print(geoEntries)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +23,7 @@ class GeoTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        loadSampleEntries()
+    
     }
 
     override func didReceiveMemoryWarning() {
