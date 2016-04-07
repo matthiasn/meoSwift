@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import ObjectMapper
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -30,8 +31,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let geoEntry = geoEntries[indexPath.row]
-        cell.textLabel?.text = String(format: "Lat: %.5f Lon: %.5f", geoEntry.lat, geoEntry.lon)
-        
+        cell.textLabel?.text = String(format: "Lat: %.5f Lon: %.5f", geoEntry.lat!, geoEntry.lon!)
+        //cell.textLabel?.text = Mapper().toJSONString(geoEntry)
         return cell
     }
 
@@ -63,7 +64,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
 
     @IBAction func geoRecord(sender: AnyObject) {
-        print("record")
         //locationManager.requestLocation()
         locationManager.startUpdatingLocation()
         //locationManager.startMonitoringSignificantLocationChanges()
@@ -84,14 +84,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
                                 horizontalAccuracy: newLocation.horizontalAccuracy,
                                 verticalAccuracy: newLocation.verticalAccuracy)!
         
-        latLabel.text = "Lat: \(newEntry.lat)"
-        lonLabel.text = "Lon: \(newEntry.lon)"
+        latLabel.text = "Lat: \(newEntry.lat!)"
+        lonLabel.text = "Lon: \(newEntry.lon!)"
         tsLabel.text = "\(newLocation.timestamp)"
         
         geoEntries += [newEntry]
         tableView.reloadData()
         
-        print(newEntry)
+        //print(newEntry)
+        
+        let JSONString = Mapper().toJSONString(newEntry)
+        print(JSONString!)
+        
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {

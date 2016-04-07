@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class GeoEntry {
+struct GeoEntry: Mappable {
     // MARK: Properties
-    var lat: Double
-    var lon: Double
-    var altitude: Double
-    var speed: Double
-    var course: Double
-    var timestamp: CLong
-    var horizontalAccuracy: Double
-    var verticalAccuracy: Double
+    var lat: Double?
+    var lon: Double?
+    var altitude: Double?
+    var speed: Double?
+    var course: Double?
+    var timestamp: CLong?
+    var horizontalAccuracy: Double?
+    var verticalAccuracy: Double?
     
     // MARK: Initialization
     
@@ -43,5 +44,22 @@ class GeoEntry {
             return nil
         }
     }
+    
+    init?(_ map: Map) {
+
+    }
+    
+    // Mappable
+    mutating func mapping(map: Map) {
+        lat                <- map["lat"]
+        lon                <- map["lon"]
+        altitude           <- map["altitude"]
+        speed              <- map["speed"]
+        course             <- map["course"]
+        timestamp          <- map["timestamp"]
+        horizontalAccuracy <- map["horizontalAccuracy"]
+        verticalAccuracy   <- map["verticalAccuracy"]
+    }
+    
 }
 
