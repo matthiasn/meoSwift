@@ -23,10 +23,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
-        locationManager.distanceFilter = 100
+        //locationManager.distanceFilter = 100
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
 
     override func didReceiveMemoryWarning() {
