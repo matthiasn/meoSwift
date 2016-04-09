@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lonLabel: UILabel!
     @IBOutlet weak var tsLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var visitTextView: UITextView!
 
     let myFile = MyFile()
     
@@ -54,8 +55,11 @@ class ViewController: UIViewController {
             lonLabel.text = "Lon: \(newEntry.lon!)"
             tsLabel.text = "\(newEntry.dateTime!)"
         }
-        textView.text = myFile.readFile()
+        textView.text = myFile.readFile(myFile.rollingFilename("geo-"))
         textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
+        
+        visitTextView.text = myFile.readFile("visits.json")
+        visitTextView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
     }
  
 }

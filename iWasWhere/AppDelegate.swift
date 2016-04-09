@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        locationManager.distanceFilter = 50
+        locationManager.distanceFilter = 100
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = true
@@ -73,15 +73,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        
         let newEntry = GeoEntry(location: locations.last!)!
         let JSONString = Mapper().toJSONString(newEntry)
-        myFile.appendLine(JSONString!)
-                
+        myFile.appendLine(myFile.rollingFilename("geo-"), line: JSONString!)
+        
         NSNotificationCenter.defaultCenter().postNotificationName("didUpdateLocations", object:nil, userInfo: ["newEntry":newEntry])
     }
     
     func locationManager(manager: CLLocationManager, didVisit visit: CLVisit) {
         let newVisit = Visit(visit: visit)
         let visitString = Mapper().toJSONString(newVisit!)
-        myFile.appendLine(visitString!)
+        myFile.appendLine("visits.json", line: visitString!)
         
         NSNotificationCenter.defaultCenter().postNotificationName("didVisit", object: nil)
     }

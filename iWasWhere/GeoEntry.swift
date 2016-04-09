@@ -22,33 +22,9 @@ class GeoEntry: Mappable {
     var horizontalAccuracy: Double?
     var verticalAccuracy: Double?
     var device: String = "iPhone"
+    var type: String = "geolocation"
     
     // MARK: Initialization
-    
-    init?(lat: Double,
-          lon: Double,
-          dateTime: NSDate,
-          altitude: Double,
-          speed: Double,
-          course: Double,
-          horizontalAccuracy: Double,
-          verticalAccuracy: Double) {
-        // Initialize stored properties.
-        self.lat = lat
-        self.lon = lon
-        self.altitude = altitude
-        self.speed = speed
-        self.course = course
-        self.horizontalAccuracy = horizontalAccuracy
-        self.verticalAccuracy = verticalAccuracy
-        self.timestamp = (CLong)(dateTime.timeIntervalSince1970 * 1000)
-        self.dateTime = "\(dateTime)"
-        
-        if lat == 0.0 || lat == 0.0 || timestamp == 0 {
-            return nil
-        }
-    }
-    
     init?(location: CLLocation) {
         self.lat = location.coordinate.latitude
         self.lon = location.coordinate.longitude
@@ -76,6 +52,7 @@ class GeoEntry: Mappable {
         horizontalAccuracy <- map["horizontalAccuracy"]
         verticalAccuracy   <- map["verticalAccuracy"]
         device             <- map["device"]
+        type               <- map["type"]
     }
 }
 

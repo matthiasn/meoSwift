@@ -14,15 +14,17 @@ class MyFile {
     let fm = NSFileManager.defaultManager()
     let dayTimePeriodFormatter = NSDateFormatter()
     
-    func appendLine(line: String) {
-        let withNewline = "\(line)\r\n"
-
+    func rollingFilename(prefix: String) -> String {
         dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dayTimePeriodFormatter.stringFromDate(NSDate())
+        return "\(prefix)\(dateString).json"
+    }
+    
+    func appendLine(fileName: String, line: String) {
+        let withNewline = "\(line)\r\n"
         
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            
-            let path = dir.stringByAppendingPathComponent("\(dateString).json");
+            let path = dir.stringByAppendingPathComponent(fileName);
             
             //create file if it doesn't exist
             if !fm.fileExistsAtPath(path) {
@@ -35,13 +37,9 @@ class MyFile {
         }
     }
     
-    func readFile() -> String {
-        dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dayTimePeriodFormatter.stringFromDate(NSDate())
-        
+    func readFile(fileName: String) -> String {
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            
-            let path = dir.stringByAppendingPathComponent("\(dateString).json");
+            let path = dir.stringByAppendingPathComponent(fileName);
             
             //create file if it doesn't exist
             if !fm.fileExistsAtPath(path) {

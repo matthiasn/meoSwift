@@ -20,6 +20,7 @@ class Visit: Mappable {
     var departureDate: String?
     var horizontalAccuracy: Double?
     var device: String = "iPhone"
+    var type: String = "visit"
     
     // MARK: Initialization 
     init?(visit: CLVisit) {
@@ -46,6 +47,7 @@ class Visit: Mappable {
         departureTimestamp <- map["departureTimestamp"]
         horizontalAccuracy <- map["horizontalAccuracy"]
         device             <- map["device"]
+        type               <- map["type"]
     }
 }
 

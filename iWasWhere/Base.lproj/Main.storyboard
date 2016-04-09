@@ -62,17 +62,37 @@
                                 <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="9" y="35" width="383" height="485"/>
+                                    <rect key="frame" x="9" y="35" width="361" height="349"/>
+                                </variation>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Visit entries JSON" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HJR-NI-huI">
+                                <rect key="frame" x="9" y="35" width="412" height="407"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="9" y="393" width="361" height="127"/>
                                 </variation>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="HJR-NI-huI"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="HJR-NI-huI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="latLabel" destination="8qe-kT-1lP" id="8YD-FD-4Ts"/>
                         <outlet property="lonLabel" destination="s74-oe-RqQ" id="ENm-lp-22c"/>
                         <outlet property="textView" destination="Y9v-LN-6Mc" id="pdg-Cl-bNl"/>
                         <outlet property="tsLabel" destination="YvB-qX-1TR" id="4Ah-f4-FV4"/>
+                        <outlet property="visitTextView" destination="HJR-NI-huI" id="r9G-0y-gEh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
