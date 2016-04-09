@@ -22,6 +22,7 @@
 		ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */; };
 		ADB28B7F1CB69BE600CF15D5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADB28B7E1CB69BE600CF15D5 /* Podfile */; };
 		ADDDB7311CB936320036E175 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* MyFile.swift */; };
+		ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7321CB95F3C0036E175 /* Visit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoEntry.swift; sourceTree = "<group>"; };
 		ADB28B7E1CB69BE600CF15D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		ADDDB7301CB936320036E175 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
+		ADDDB7321CB95F3C0036E175 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		CA0200818370EF9BEF457B4C /* Pods_iWasWhere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWasWhere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -135,6 +137,7 @@
 				ADB28B491CB5D3CD00CF15D5 /* Main.storyboard */,
 				ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */,
 				ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */,
+				ADDDB7321CB95F3C0036E175 /* Visit.swift */,
 				ADB28B781CB5DDA000CF15D5 /* GeoTableViewCell.swift */,
 				ADB28B4F1CB5D3CD00CF15D5 /* Assets.xcassets */,
 				ADB28B511CB5D3CD00CF15D5 /* LaunchScreen.storyboard */,
@@ -364,6 +367,7 @@
 				ADB28B4E1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld in Sources */,
 				ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */,
 				ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */,
+				ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */,
 				ADB28B791CB5DDA000CF15D5 /* GeoTableViewCell.swift in Sources */,
 				ADB28B7B1CB5DF9300CF15D5 /* GeoTableViewController.swift in Sources */,
 			);

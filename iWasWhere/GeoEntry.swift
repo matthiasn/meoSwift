@@ -8,16 +8,17 @@
 
 import UIKit
 import ObjectMapper
+import CoreLocation
 
-struct GeoEntry: Mappable {
+class GeoEntry: Mappable {
     // MARK: Properties
     var lat: Double?
     var lon: Double?
     var altitude: Double?
     var speed: Double?
     var course: Double?
-    var millis: CLong?
-    var timestamp: NSDate?
+    var timestamp: CLong?
+    var dateTime: String?
     var horizontalAccuracy: Double?
     var verticalAccuracy: Double?
     var device: String = "iPhone"
@@ -26,8 +27,7 @@ struct GeoEntry: Mappable {
     
     init?(lat: Double,
           lon: Double,
-          millis: CLong,
-          timestamp: NSDate,
+          dateTime: NSDate,
           altitude: Double,
           speed: Double,
           course: Double,
@@ -41,25 +41,38 @@ struct GeoEntry: Mappable {
         self.course = course
         self.horizontalAccuracy = horizontalAccuracy
         self.verticalAccuracy = verticalAccuracy
-        self.timestamp = timestamp
-        self.millis = millis
+        self.timestamp = (CLong)(dateTime.timeIntervalSince1970 * 1000)
+        self.dateTime = "\(dateTime)"
         
         if lat == 0.0 || lat == 0.0 || timestamp == 0 {
             return nil
         }
     }
     
-    init?(_ map: Map) {
+    init?(location: CLLocation) {
+        self.lat = location.coordinate.latitude
+        self.lon = location.coordinate.longitude
+        self.dateTime = "\(location.timestamp)"
+        self.timestamp = (CLong)(location.timestamp.timeIntervalSince1970 * 1000)
+        self.altitude = location.altitude
+        self.speed = location.speed
+        self.course = location.course
+        self.horizontalAccuracy = location.horizontalAccuracy
+        self.verticalAccuracy = location.verticalAccuracy
+    }
+    
+    required init?(_ map: Map) {
     }
     
     // Mappable
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         lat                <- map["latitude"]
         lon                <- map["longitude"]
         altitude           <- map["altitude"]
         speed              <- map["speed"]
         course             <- map["course"]
-        millis             <- map["timestamp"]
+        timestamp          <- map["timestamp"]
+        dateTime           <- map["dateTime"]
         horizontalAccuracy <- map["horizontalAccuracy"]
         verticalAccuracy   <- map["verticalAccuracy"]
         device             <- map["device"]

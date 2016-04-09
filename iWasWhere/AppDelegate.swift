@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import ObjectMapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var window: UIWindow?
     
     private var locationManager = CLLocationManager()
+    let myFile = MyFile()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,14 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         application.registerUserNotificationSettings(settings)
         
         locationManager.delegate = self
-        locationManager.distanceFilter = 100
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 50
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.startMonitoringVisits()
         locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startMonitoringVisits()
         
         return true
     }
@@ -66,6 +68,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
     }()
+    
+    // MARK: CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        
+        let newEntry = GeoEntry(location: locations.last!)!
+        let JSONString = Mapper().toJSONString(newEntry)
+        myFile.appendLine(JSONString!)
+                
+        NSNotificationCenter.defaultCenter().postNotificationName("didUpdateLocations", object:nil, userInfo: ["newEntry":newEntry])
+    }
+    
+    func locationManager(manager: CLLocationManager, didVisit visit: CLVisit) {
+        let newVisit = Visit(visit: visit)
+        let visitString = Mapper().toJSONString(newVisit!)
+        myFile.appendLine(visitString!)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("didVisit", object: nil)
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
+    }
 
 }
 
