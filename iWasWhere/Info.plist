@@ -38,6 +38,7 @@
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>gps</string>
 		<string>location-services</string>
 		<string>armv7</string>
 	</array>

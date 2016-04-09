@@ -17,16 +17,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tsLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
 
-    // from http://szulctomasz.com/ios-9-getting-single-location-update-with-requestlocation/
     private var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
-        //locationManager.distanceFilter = 100
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 100
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startMonitoringVisits()
+        locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.requestAlwaysAuthorization()
-        //locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
     }
 
@@ -34,20 +36,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func geoRecord(sender: AnyObject) {
         //locationManager.requestLocation()
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation()
         //locationManager.startMonitoringSignificantLocationChanges()
+        
+        let notification = UILocalNotification()
+        notification.applicationIconBadgeNumber = 1
+        notification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        notification.alertBody = "Hey you! Yeah you! Swipe to unlock!"
+        notification.alertAction = "be awesome!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["CustomField1": "w00t"]
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 
-    func appendGeoEntryJSON(geoEntry: GeoEntry) {
-        let JSONString = Mapper().toJSONString(geoEntry)
-        let withNewline = "\(JSONString!)\r\n"
+    func appendLine(line: String) {
+        let withNewline = "\(line)\r\n"
         let fm = NSFileManager.defaultManager()
         let dayTimePeriodFormatter = NSDateFormatter()
         dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dayTimePeriodFormatter.stringFromDate(geoEntry.timestamp!)
+        let dateString = dayTimePeriodFormatter.stringFromDate(NSDate())
         
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             
@@ -87,8 +97,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         latLabel.text = "Lat: \(newEntry.lat!)"
         lonLabel.text = "Lon: \(newEntry.lon!)"
         tsLabel.text = "\(newLocation.timestamp)"
-        
-        appendGeoEntryJSON(newEntry)
+        let JSONString = Mapper().toJSONString(newEntry)
+        appendLine(JSONString!)
+    }
+    
+    func locationManager(manager: CLLocationManager, didVisit visit: CLVisit) {
+        print("Visit: \(visit)")
+        appendLine("Visit \(visit.arrivalDate) to \(visit.departureDate) \(visit.coordinate.latitude) \(visit.coordinate.latitude) \(visit.horizontalAccuracy)")
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
