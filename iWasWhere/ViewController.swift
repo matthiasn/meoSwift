@@ -18,6 +18,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var textView: UITextView!
 
     private var locationManager = CLLocationManager()
+    let myFile = MyFile()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,32 +53,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 
-    func appendLine(line: String) {
-        let withNewline = "\(line)\r\n"
-        let fm = NSFileManager.defaultManager()
-        let dayTimePeriodFormatter = NSDateFormatter()
-        dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dayTimePeriodFormatter.stringFromDate(NSDate())
-        
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            
-            let path = dir.stringByAppendingPathComponent("\(dateString).json");
-            
-            //create file if it doesn't exist
-            if !fm.fileExistsAtPath(path) {
-                fm.createFileAtPath(path, contents: nil, attributes: nil)
-            }
-            let fileHandle = NSFileHandle(forUpdatingAtPath: path)
-            fileHandle?.seekToEndOfFile()
-            fileHandle?.writeData(withNewline.dataUsingEncoding(NSUTF8StringEncoding)!)
-            fileHandle?.seekToFileOffset(0)
-            let fileData = fileHandle?.readDataToEndOfFile()
-            fileHandle?.closeFile()
-            textView.text = NSString(data: fileData!, encoding: NSUTF8StringEncoding) as! String
-            textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
-        }
-    }
-    
     // MARK: CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
@@ -98,12 +73,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         lonLabel.text = "Lon: \(newEntry.lon!)"
         tsLabel.text = "\(newLocation.timestamp)"
         let JSONString = Mapper().toJSONString(newEntry)
-        appendLine(JSONString!)
+
+        myFile.appendLine(JSONString!)
+        
+        textView.text = myFile.readFile()
+        textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
     }
     
     func locationManager(manager: CLLocationManager, didVisit visit: CLVisit) {
         print("Visit: \(visit)")
-        appendLine("Visit \(visit.arrivalDate) to \(visit.departureDate) \(visit.coordinate.latitude) \(visit.coordinate.latitude) \(visit.horizontalAccuracy)")
+        myFile.appendLine("Visit \(visit.arrivalDate) to \(visit.departureDate) \(visit.coordinate.latitude) \(visit.coordinate.latitude) \(visit.horizontalAccuracy)")
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {

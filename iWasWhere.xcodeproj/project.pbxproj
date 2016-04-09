@@ -21,6 +21,7 @@
 		ADB28B7B1CB5DF9300CF15D5 /* GeoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */; };
 		ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */; };
 		ADB28B7F1CB69BE600CF15D5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADB28B7E1CB69BE600CF15D5 /* Podfile */; };
+		ADDDB7311CB936320036E175 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* MyFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoTableViewController.swift; sourceTree = "<group>"; };
 		ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoEntry.swift; sourceTree = "<group>"; };
 		ADB28B7E1CB69BE600CF15D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		ADDDB7301CB936320036E175 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
 		CA0200818370EF9BEF457B4C /* Pods_iWasWhere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWasWhere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 				ADB28B511CB5D3CD00CF15D5 /* LaunchScreen.storyboard */,
 				ADB28B541CB5D3CD00CF15D5 /* Info.plist */,
 				ADB28B4C1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld */,
+				ADDDB7301CB936320036E175 /* MyFile.swift */,
 			);
 			path = iWasWhere;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDDB7311CB936320036E175 /* MyFile.swift in Sources */,
 				ADB28B481CB5D3CD00CF15D5 /* ViewController.swift in Sources */,
 				ADB28B4E1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld in Sources */,
 				ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */,
