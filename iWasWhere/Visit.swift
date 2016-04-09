@@ -41,11 +41,11 @@ class Visit: Mappable {
     func mapping(map: Map) {
         latitude           <- map["latitude"]
         longitude          <- map["longitude"]
-        arrivalDate        <- map["arrivalDate"]
-        departureDate      <- map["departureDate"]
-        arrivalTimestamp   <- map["arrivalTimestamp"]
-        departureTimestamp <- map["departureTimestamp"]
-        horizontalAccuracy <- map["horizontalAccuracy"]
+        arrivalDate        <- map["arrival-date"]
+        departureDate      <- map["departure-date"]
+        arrivalTimestamp   <- map["arrival-timestamp"]
+        departureTimestamp <- map["departure-timestamp"]
+        horizontalAccuracy <- map["horizontal-accuracy"]
         device             <- map["device"]
         type               <- map["type"]
     }

@@ -48,9 +48,9 @@ class GeoEntry: Mappable {
         speed              <- map["speed"]
         course             <- map["course"]
         timestamp          <- map["timestamp"]
-        dateTime           <- map["dateTime"]
-        horizontalAccuracy <- map["horizontalAccuracy"]
-        verticalAccuracy   <- map["verticalAccuracy"]
+        dateTime           <- map["date-time"]
+        horizontalAccuracy <- map["horizontal-accuracy"]
+        verticalAccuracy   <- map["vertical-accuracy"]
         device             <- map["device"]
         type               <- map["type"]
     }
