@@ -10,20 +10,22 @@ import UIKit
 import CoreLocation
 import ObjectMapper
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
     
-    @IBOutlet weak var latLabel: UILabel!
-    @IBOutlet weak var lonLabel: UILabel!
-    @IBOutlet weak var tsLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var visitTextView: UITextView!
+    @IBOutlet weak var textInput: UITextView!
 
     let myFile = MyFile()
+    var tempEntry: TextEntry? = nil
+    private var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didUpdateLocations", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didVisit", object: nil)
+        locationManager.delegate = self
+        loadFiles()
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,19 +49,50 @@ class ViewController: UIViewController {
         //locationManager.startUpdatingLocation()
         //locationManager.startMonitoringSignificantLocationChanges()
     }
-
-    @objc func updateUI(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let newEntry = userInfo["newEntry"] as! GeoEntry
-            latLabel.text = "Lat: \(newEntry.lat!)"
-            lonLabel.text = "Lon: \(newEntry.lon!)"
-            tsLabel.text = "\(newEntry.dateTime!)"
-        }
+    
+    @IBAction func saveText(sender: AnyObject) {
+        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate())
+        let newEntryString = Mapper().toJSONString(newEntry!)
+        myFile.appendLine("text-entries.json", line: newEntryString!)
+        tempEntry = newEntry
+        textInput.text = ""
+        textInput.resignFirstResponder()
+        locationManager.requestLocation()
+    }
+    
+    func loadFiles() {
         textView.text = myFile.readFile(myFile.rollingFilename("geo-"))
         textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
         
         visitTextView.text = myFile.readFile("visits.json")
         visitTextView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
+    }
+
+    @objc func updateUI(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let newEntry = userInfo["newEntry"] as! GeoEntry
+        }
+        loadFiles()
+    }
+    
+    // MARK: CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if (tempEntry != nil) {
+            let loc = locations.last!
+            
+            tempEntry?.latitude = loc.coordinate.latitude
+            tempEntry?.longitude = loc.coordinate.longitude
+            tempEntry?.horizontalAccuracy = loc.horizontalAccuracy
+            tempEntry?.gpsTimestamp = (CLong)(loc.timestamp.timeIntervalSince1970 * 1000)
+
+            let JSONString = Mapper().toJSONString(tempEntry!)
+            myFile.appendLine("text-entries.json", line: JSONString!)
+            tempEntry = nil
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
     }
  
 }

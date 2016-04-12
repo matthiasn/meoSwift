@@ -14,7 +14,7 @@ import ObjectMapper
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-    
+
     private var locationManager = CLLocationManager()
     let myFile = MyFile()
 
@@ -27,11 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        locationManager.distanceFilter = 100
+        locationManager.distanceFilter = 1000
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = true
-        //locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.startMonitoringVisits()
         

@@ -23,75 +23,71 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="start geo tracking"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="621" width="188" height="30"/>
+                                    <rect key="frame" x="9" y="509" width="188" height="30"/>
                                 </variation>
                                 <connections>
                                     <action selector="geoRecord:" destination="BYZ-38-t0r" eventType="touchDown" id="sLg-z4-maE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-kT-1lP" userLabel="lat">
-                                <rect key="frame" x="20" y="459" width="256" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="533" width="256" height="21"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s74-oe-RqQ" userLabel="lon">
-                                <rect key="frame" x="20" y="483" width="256" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="557" width="256" height="21"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvB-qX-1TR" userLabel="ts">
-                                <rect key="frame" x="20" y="507" width="256" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="581" width="256" height="21"/>
-                                </variation>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Geo entries JSON" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y9v-LN-6Mc">
                                 <rect key="frame" x="9" y="35" width="412" height="407"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="9" y="35" width="361" height="349"/>
+                                    <rect key="frame" x="9" y="249" width="361" height="116"/>
                                 </variation>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Visit entries JSON" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HJR-NI-huI">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Visit entries JSON" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HJR-NI-huI">
                                 <rect key="frame" x="9" y="35" width="412" height="407"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="9" y="393" width="361" height="127"/>
+                                    <rect key="frame" x="9" y="374" width="361" height="127"/>
                                 </variation>
                             </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="P4Q-UI-ZPt">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="twitter"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="9" y="33" width="361" height="153"/>
+                                </variation>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
+                                <rect key="frame" x="20" y="547" width="188" height="30"/>
+                                <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="save"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="246" y="191" width="124" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="saveText:" destination="BYZ-38-t0r" eventType="touchDown" id="aMg-HR-0ir"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="HJR-NI-huI"/>
+                                <exclude reference="P4Q-UI-ZPt"/>
+                                <exclude reference="W08-ep-yBc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="HJR-NI-huI"/>
+                                <include reference="P4Q-UI-ZPt"/>
+                                <include reference="W08-ep-yBc"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="latLabel" destination="8qe-kT-1lP" id="8YD-FD-4Ts"/>
-                        <outlet property="lonLabel" destination="s74-oe-RqQ" id="ENm-lp-22c"/>
+                        <outlet property="textInput" destination="P4Q-UI-ZPt" id="ILC-7F-Bcn"/>
                         <outlet property="textView" destination="Y9v-LN-6Mc" id="pdg-Cl-bNl"/>
-                        <outlet property="tsLabel" destination="YvB-qX-1TR" id="4Ah-f4-FV4"/>
                         <outlet property="visitTextView" destination="HJR-NI-huI" id="r9G-0y-gEh"/>
                     </connections>
                 </viewController>
