@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,52 +19,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9YR-47-G71">
-                                <rect key="frame" x="20" y="547" width="188" height="30"/>
-                                <color key="backgroundColor" red="0.85062792284084132" green="0.94027124887495839" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="start geo tracking"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="9" y="509" width="188" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="geoRecord:" destination="BYZ-38-t0r" eventType="touchDown" id="sLg-z4-maE"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Geo entries JSON" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y9v-LN-6Mc">
-                                <rect key="frame" x="9" y="35" width="412" height="407"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="9" y="249" width="361" height="116"/>
-                                </variation>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Visit entries JSON" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HJR-NI-huI">
-                                <rect key="frame" x="9" y="35" width="412" height="407"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="9" y="374" width="361" height="127"/>
-                                </variation>
-                            </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="P4Q-UI-ZPt">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="340" id="dWE-aq-lhv">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="340"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="twitter"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="9" y="33" width="361" height="153"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dWE-aq-lhv"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="30" y="61" width="340" height="211"/>
+                                    <mask key="constraints">
+                                        <include reference="dWE-aq-lhv"/>
+                                    </mask>
                                 </variation>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
                                 <rect key="frame" x="20" y="547" width="188" height="30"/>
                                 <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="12" minY="6" maxX="11" maxY="6"/>
                                 <state key="normal" title="save"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="246" y="191" width="124" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="303" y="335" width="57" height="30"/>
                                 </variation>
                                 <connections>
                                     <action selector="saveText:" destination="BYZ-38-t0r" eventType="touchDown" id="aMg-HR-0ir"/>
@@ -70,25 +56,53 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="P4Q-UI-ZPt" secondAttribute="trailing" constant="3" id="Bgi-aG-BWj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="W08-ep-yBc" secondAttribute="trailing" constant="20" id="Hfv-5i-8wN"/>
+                            <constraint firstItem="P4Q-UI-ZPt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="XDf-va-JCg">
+                                <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                            </constraint>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W08-ep-yBc" secondAttribute="bottom" constant="50" id="cOX-3a-8b9">
+                                <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                            </constraint>
+                            <constraint firstItem="P4Q-UI-ZPt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="djB-Vs-5mC">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
+                            <constraint firstItem="W08-ep-yBc" firstAttribute="top" secondItem="P4Q-UI-ZPt" secondAttribute="bottom" constant="10" id="vEM-eS-P1G">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="HJR-NI-huI"/>
                                 <exclude reference="P4Q-UI-ZPt"/>
                                 <exclude reference="W08-ep-yBc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Bgi-aG-BWj"/>
+                                <exclude reference="XDf-va-JCg"/>
+                                <exclude reference="djB-Vs-5mC"/>
+                                <exclude reference="Hfv-5i-8wN"/>
+                                <exclude reference="vEM-eS-P1G"/>
+                                <exclude reference="cOX-3a-8b9"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="HJR-NI-huI"/>
                                 <include reference="P4Q-UI-ZPt"/>
                                 <include reference="W08-ep-yBc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Bgi-aG-BWj"/>
+                                <include reference="XDf-va-JCg"/>
+                                <include reference="djB-Vs-5mC"/>
+                                <include reference="Hfv-5i-8wN"/>
+                                <include reference="vEM-eS-P1G"/>
+                                <include reference="cOX-3a-8b9"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="textInput" destination="P4Q-UI-ZPt" id="ILC-7F-Bcn"/>
-                        <outlet property="textView" destination="Y9v-LN-6Mc" id="pdg-Cl-bNl"/>
-                        <outlet property="visitTextView" destination="HJR-NI-huI" id="r9G-0y-gEh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

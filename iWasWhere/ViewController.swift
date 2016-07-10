@@ -61,11 +61,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func loadFiles() {
-        textView.text = myFile.readFile(myFile.rollingFilename("geo-"))
-        textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
+        //textView.text = myFile.readFile(myFile.rollingFilename("geo-"))
+        //textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
         
-        visitTextView.text = myFile.readFile("visits.json")
-        visitTextView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
+        //visitTextView.text = myFile.readFile("visits.json")
+        //visitTextView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
     }
 
     @objc func updateUI(notification: NSNotification) {
