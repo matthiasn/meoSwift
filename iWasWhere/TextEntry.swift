@@ -15,8 +15,8 @@ class TextEntry: Mappable {
     var md: String?
     var latitude: Double?
     var longitude: Double?
-    var timestamp: CLong?
-    var gpsTimestamp: CLong?
+    var timestamp: Double?
+    var gpsTimestamp: Double?
     var dateTime: String?
     var horizontalAccuracy: Double?
     var device: String = "iPhone"
@@ -33,7 +33,7 @@ class TextEntry: Mappable {
         self.latitude = lat
         self.longitude = lon
         self.horizontalAccuracy = horizontalAccuracy
-        self.timestamp = (CLong)(submitDateTime.timeIntervalSince1970 * 1000)
+        self.timestamp = submitDateTime.timeIntervalSince1970
         self.dateTime = "\(submitDateTime)"
     }
     
@@ -41,7 +41,7 @@ class TextEntry: Mappable {
           submitDateTime: NSDate) {
         // Initialize stored properties.
         self.md = md
-        self.timestamp = (CLong)(submitDateTime.timeIntervalSince1970 * 1000)
+        self.timestamp = submitDateTime.timeIntervalSince1970
         self.dateTime = "\(submitDateTime)"
     }
     

@@ -17,7 +17,7 @@ class GeoEntry: Mappable {
     var altitude: Double?
     var speed: Double?
     var course: Double?
-    var timestamp: CLong?
+    var timestamp: Double?
     var dateTime: String?
     var horizontalAccuracy: Double?
     var verticalAccuracy: Double?
@@ -29,7 +29,7 @@ class GeoEntry: Mappable {
         self.lat = location.coordinate.latitude
         self.lon = location.coordinate.longitude
         self.dateTime = "\(location.timestamp)"
-        self.timestamp = (CLong)(location.timestamp.timeIntervalSince1970 * 1000)
+        self.timestamp = location.timestamp.timeIntervalSince1970
         self.altitude = location.altitude
         self.speed = location.speed
         self.course = location.course

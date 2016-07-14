@@ -14,8 +14,8 @@ class Visit: Mappable {
     // MARK: Properties
     var latitude: Double?
     var longitude: Double?
-    var arrivalTimestamp: CLong?
-    var departureTimestamp: CLong?
+    var arrivalTimestamp: Double?
+    var departureTimestamp: Double?
     var arrivalDate: String?
     var departureDate: String?
     var horizontalAccuracy: Double?
@@ -28,8 +28,8 @@ class Visit: Mappable {
         self.latitude = visit.coordinate.latitude
         self.longitude = visit.coordinate.longitude
         self.horizontalAccuracy = visit.horizontalAccuracy
-        self.arrivalTimestamp = (CLong)(visit.arrivalDate.timeIntervalSince1970 * 1000)
-        self.departureTimestamp = (CLong)(visit.departureDate.timeIntervalSince1970 * 1000)
+        self.arrivalTimestamp = visit.arrivalDate.timeIntervalSince1970
+        self.departureTimestamp = visit.departureDate.timeIntervalSince1970
         self.arrivalDate = "\(visit.arrivalDate)"
         self.departureDate = "\(visit.departureDate)"
     }

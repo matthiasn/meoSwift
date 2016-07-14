@@ -83,7 +83,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             tempEntry?.latitude = loc.coordinate.latitude
             tempEntry?.longitude = loc.coordinate.longitude
             tempEntry?.horizontalAccuracy = loc.horizontalAccuracy
-            tempEntry?.gpsTimestamp = (CLong)(loc.timestamp.timeIntervalSince1970 * 1000)
+            tempEntry?.gpsTimestamp = loc.timestamp.timeIntervalSince1970
 
             let JSONString = Mapper().toJSONString(tempEntry!)
             myFile.appendLine("text-entries.json", line: JSONString!)
