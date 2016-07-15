@@ -25,7 +25,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didUpdateLocations", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didVisit", object: nil)
         locationManager.delegate = self
-        loadFiles()
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,19 +59,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestLocation()
     }
     
-    func loadFiles() {
-        //textView.text = myFile.readFile(myFile.rollingFilename("geo-"))
-        //textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
-        
-        //visitTextView.text = myFile.readFile("visits.json")
-        //visitTextView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count-1, 0))
+    @IBAction func upload(sender: AnyObject) {
+        let api = RestApiManager()
+        api.upload()
     }
 
     @objc func updateUI(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             let newEntry = userInfo["newEntry"] as! GeoEntry
         }
-        loadFiles()
     }
     
     // MARK: CLLocationManagerDelegate

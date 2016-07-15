@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		64D0B42B7979D698C847A1A6 /* Pods_iWasWhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0200818370EF9BEF457B4C /* Pods_iWasWhere.framework */; };
+		AD2B7A9F1D3845D100B720F3 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */; };
 		AD79B1611CBB61D3006AFECC /* TextEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD79B1601CBB61D3006AFECC /* TextEntry.swift */; };
 		ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */; };
 		ADB28B481CB5D3CD00CF15D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B471CB5D3CD00CF15D5 /* ViewController.swift */; };
@@ -46,6 +47,8 @@
 /* Begin PBXFileReference section */
 		146FA68A3D04818F9178084F /* Pods-iWasWhere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhere/Pods-iWasWhere.debug.xcconfig"; sourceTree = "<group>"; };
 		61BB30EDA3A29906C360A91B /* Pods-iWasWhere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhere.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhere/Pods-iWasWhere.release.xcconfig"; sourceTree = "<group>"; };
+		AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
+		AD2B7AA01D39908500B720F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AD79B1601CBB61D3006AFECC /* TextEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEntry.swift; sourceTree = "<group>"; };
 		ADB28B421CB5D3CD00CF15D5 /* iWasWhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWasWhere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 		ADB28B441CB5D3CD00CF15D5 /* iWasWhere */ = {
 			isa = PBXGroup;
 			children = (
+				AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */,
 				ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */,
 				ADB28B471CB5D3CD00CF15D5 /* ViewController.swift */,
 				ADB28B491CB5D3CD00CF15D5 /* Main.storyboard */,
@@ -172,6 +176,7 @@
 		F11B7744BD2C8B57A84EBF02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD2B7AA01D39908500B720F3 /* CFNetwork.framework */,
 				CA0200818370EF9BEF457B4C /* Pods_iWasWhere.framework */,
 			);
 			name = Frameworks;
@@ -374,6 +379,7 @@
 				ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */,
 				ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */,
 				ADB28B791CB5DDA000CF15D5 /* GeoTableViewCell.swift in Sources */,
+				AD2B7A9F1D3845D100B720F3 /* RestApiManager.swift in Sources */,
 				ADB28B7B1CB5DF9300CF15D5 /* GeoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
