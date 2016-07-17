@@ -56,9 +56,6 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
                                 <state key="normal" title="upload"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="104" y="506" width="77" height="34"/>
-                                </variation>
                                 <connections>
                                     <action selector="upload:" destination="BYZ-38-t0r" eventType="touchDown" id="bgf-Zm-g3U"/>
                                 </connections>
@@ -92,14 +89,14 @@
                                 <exclude reference="pwT-So-zkU"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="cOX-3a-8b9"/>
+                                <exclude reference="oeZ-q4-3kt"/>
                                 <exclude reference="Bgi-aG-BWj"/>
                                 <exclude reference="XDf-va-JCg"/>
                                 <exclude reference="djB-Vs-5mC"/>
-                                <exclude reference="4dp-c7-4kJ"/>
                                 <exclude reference="Hfv-5i-8wN"/>
                                 <exclude reference="vEM-eS-P1G"/>
-                                <exclude reference="cOX-3a-8b9"/>
-                                <exclude reference="oeZ-q4-3kt"/>
+                                <exclude reference="4dp-c7-4kJ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -109,14 +106,14 @@
                                 <include reference="pwT-So-zkU"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="cOX-3a-8b9"/>
+                                <include reference="oeZ-q4-3kt"/>
                                 <include reference="Bgi-aG-BWj"/>
                                 <include reference="XDf-va-JCg"/>
                                 <include reference="djB-Vs-5mC"/>
-                                <include reference="4dp-c7-4kJ"/>
                                 <include reference="Hfv-5i-8wN"/>
                                 <include reference="vEM-eS-P1G"/>
-                                <include reference="cOX-3a-8b9"/>
-                                <include reference="oeZ-q4-3kt"/>
+                                <include reference="4dp-c7-4kJ"/>
                             </mask>
                         </variation>
                     </view>

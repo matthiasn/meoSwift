@@ -1,10 +1,15 @@
 PODS:
   - ObjectMapper (1.2.0)
+  - RSBarcodes_Swift (0.1.9)
 
 DEPENDENCIES:
   - ObjectMapper (~> 1.2.0)
+  - RSBarcodes_Swift (~> 0.1.9)
 
 SPEC CHECKSUMS:
   ObjectMapper: b1e9c7c8a9f6400b72690c80072c131504caa66f
+  RSBarcodes_Swift: 3c37a05faa0c8742739e1b47eec2f0d3d786330f
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 6dbcf5a8875fbe3f34dc28bda5a8e7b261399808
+
+COCOAPODS: 1.0.1
