@@ -63,7 +63,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="pwT-So-zkU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="4dp-c7-4kJ"/>
+                            <constraint firstItem="pwT-So-zkU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="4dp-c7-4kJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="P4Q-UI-ZPt" secondAttribute="trailing" constant="3" id="Bgi-aG-BWj">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>

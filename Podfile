@@ -4,7 +4,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'iWasWhere' do
-  pod 'ObjectMapper', '~> 1.2.0'
+  pod 'ObjectMapper', '~> 1.3'
   pod 'RSBarcodes_Swift', '~> 0.1.9'
 end
 

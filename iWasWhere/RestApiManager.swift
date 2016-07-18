@@ -10,13 +10,13 @@ import Foundation
 
 class RestApiManager {
     let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-    let request = NSMutableURLRequest(URL: NSURL(string: "http://10.0.1.3:3001/upload/text-entries.json")!)
     var task: NSURLSessionDataTask!
 
-    func upload () {
+    func upload (address: String, filename: String) {
+        let request = NSMutableURLRequest(URL: NSURL(string: address + filename)!)
         request.HTTPMethod = "POST"
         let myFile = MyFile()
-        let str = myFile.readFile("text-entries.json")
+        let str = myFile.readFile(filename)
         let data = str.dataUsingEncoding(NSUTF8StringEncoding)
 
         task = session.uploadTaskWithRequest(request, fromData: data) { (data, response, error) -> Void in

@@ -60,8 +60,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func upload(sender: AnyObject) {
-        let api = RestApiManager()
-        api.upload()
+        let svc = ScanViewController()
+        self.presentViewController(svc, animated: true, completion: nil)
     }
 
     @objc func updateUI(notification: NSNotification) {

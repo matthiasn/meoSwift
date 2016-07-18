@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80225F92E888D0469865C327 /* Pods_iWasWhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1A2D233FFD5FEEE3E770E4 /* Pods_iWasWhere.framework */; };
 		A2A2341B667602DB79A8CD3C /* Pods_iWasWhereTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6F75C86F831FA028E6F74 /* Pods_iWasWhereTests.framework */; };
 		AB1FFFDB1874EB9F6E5DA126 /* Pods_iWasWhereUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137115D8B7A19643B9EE29FB /* Pods_iWasWhereUITests.framework */; };
+		AD17CE421D3D20FF00322E90 /* Pods_iWasWhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */; };
 		AD2B7A9F1D3845D100B720F3 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */; };
 		AD79B1611CBB61D3006AFECC /* TextEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD79B1601CBB61D3006AFECC /* TextEntry.swift */; };
 		ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */; };
@@ -55,6 +55,8 @@
 		607BB19CB50E04C1E9AF76BC /* Pods-iWasWhere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhere.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhere/Pods-iWasWhere.release.xcconfig"; sourceTree = "<group>"; };
 		8E8E23474723C526663619C0 /* Pods-iWasWhereUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhereUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhereUITests/Pods-iWasWhereUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A2A6F75C86F831FA028E6F74 /* Pods_iWasWhereTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWasWhereTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_iWasWhere.framework; path = "../../../Library/Developer/Xcode/DerivedData/iWasWhere-haynazeelaygtgcmhctnahqxqleo/Build/Products/Debug-iphonesimulator/Pods_iWasWhere.framework"; sourceTree = "<group>"; };
+		AD17CE431D3D210700322E90 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/iWasWhere-haynazeelaygtgcmhctnahqxqleo/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
 		AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		AD2B7AA01D39908500B720F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AD79B1601CBB61D3006AFECC /* TextEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEntry.swift; sourceTree = "<group>"; };
@@ -89,8 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD17CE421D3D20FF00322E90 /* Pods_iWasWhere.framework in Frameworks */,
 				ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */,
-				80225F92E888D0469865C327 /* Pods_iWasWhere.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +195,8 @@
 		F11B7744BD2C8B57A84EBF02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD17CE431D3D210700322E90 /* ObjectMapper.framework */,
+				AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */,
 				AD2B7AA01D39908500B720F3 /* CFNetwork.framework */,
 				FD1A2D233FFD5FEEE3E770E4 /* Pods_iWasWhere.framework */,
 				A2A6F75C86F831FA028E6F74 /* Pods_iWasWhereTests.framework */,
@@ -629,6 +633,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = matthiasn.iWasWhere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -641,6 +646,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = matthiasn.iWasWhere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Release;
 		};

@@ -1,6 +1,6 @@
 //
 //  ScanViewController.swift
-//  iWasWhere
+//  barcode
 //
 //  Created by mn on 18/07/16.
 //  Copyright © 2016 mn. All rights reserved.
@@ -10,27 +10,45 @@ import UIKit
 import RSBarcodes_Swift
 
 class ScanViewController: RSCodeReaderViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        var done = false
+        
+        //self.focusMarkLayer.strokeColor = UIColor.redColor().CGColor
+        //self.cornersLayer.strokeColor = UIColor.yellowColor().CGColor
+        //self.tapHandler = { point in
+        //    print(point)
+        //}
+        
+        self.barcodesHandler = { barcodes in
+            for barcode in barcodes {
+                if !done {
+                    print("uploading: " + barcode.stringValue)
+                    let api = RestApiManager()
+                    api.upload(barcode.stringValue, filename: "text-entries.json")
+                    api.upload(barcode.stringValue, filename: "visits.json")
+                    done = true
+                }
+                self.dismissViewControllerAnimated(true, completion: {});
+            }
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
