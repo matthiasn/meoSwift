@@ -9,12 +9,15 @@
 import UIKit
 import CoreLocation
 import ObjectMapper
+import AVFoundation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate {
     
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var visitTextView: UITextView!
     @IBOutlet weak var textInput: UITextView!
+    
+    var recordButton: UIButton!
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
 
     let myFile = MyFile()
     var tempEntry: TextEntry? = nil
@@ -25,6 +28,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didUpdateLocations", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didVisit", object: nil)
         locationManager.delegate = self
+        
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if allowed {
+                        // self.loadRecordingUI()
+                    } else {
+                        // failed to record!
+                    }
+                }
+            }
+        } catch {
+            // failed to record!
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +79,56 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         textInput.resignFirstResponder()
         locationManager.requestLocation()
     }
+    
+    
+    // from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
+    func finishRecording(success success: Bool) {
+        audioRecorder.stop()
+        audioRecorder = nil
+        
+        if success {
+            //recordButton.setTitle("Tap to Re-record", forState: .Normal)
+        } else {
+            //recordButton.setTitle("Tap to Record", forState: .Normal)
+            // recording failed :(
+        }
+    }
+    
+    // adapted from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
+    func startRecording() {
+    
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+            let audioFilename = dir.stringByAppendingPathComponent("recording.m4a");
+            let audioURL = NSURL(fileURLWithPath: audioFilename)
+            
+            let settings = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 44100.0,
+                AVNumberOfChannelsKey: 1 as NSNumber,
+                AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+            ]
+            
+            do {
+                audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
+                audioRecorder.delegate = self
+                audioRecorder.record()
+                
+                //recordButton.setTitle("Tap to Stop", forState: .Normal)
+            } catch {
+                finishRecording(success: false)
+            }
+        }
+        
+    }
+    
+    @IBAction func record(sender: AnyObject) {
+        startRecording()
+    }
+    
+    @IBAction func stop(sender: AnyObject) {
+        finishRecording(success: true)
+    }
+    
     
     @IBAction func upload(sender: AnyObject) {
         let svc = ScanViewController()
