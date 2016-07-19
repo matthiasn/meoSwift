@@ -16,12 +16,6 @@ class ScanViewController: RSCodeReaderViewController {
         
         var done = false
         
-        //self.focusMarkLayer.strokeColor = UIColor.redColor().CGColor
-        //self.cornersLayer.strokeColor = UIColor.yellowColor().CGColor
-        //self.tapHandler = { point in
-        //    print(point)
-        //}
-        
         self.barcodesHandler = { barcodes in
             for barcode in barcodes {
                 if !done {
