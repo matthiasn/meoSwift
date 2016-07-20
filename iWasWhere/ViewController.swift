@@ -29,6 +29,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        saveButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
+        saveButton.setTitle(String.fontAwesomeIconWithName(.FloppyO), forState: .Normal)
+        uploadButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
+        uploadButton.setTitle(String.fontAwesomeIconWithName(.Upload), forState: .Normal)
+        recordButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
+        recordButton.setTitle(String.fontAwesomeIconWithName(.Microphone), forState: .Normal)
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didUpdateLocations", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didVisit", object: nil)
         locationManager.delegate = self
@@ -90,7 +98,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         audioRecorder.stop()
         audioRecorder = nil
         print("finishRecording " + audioFilename)
-        recordButton.setTitle("record", forState: UIControlState.Normal)
+        recordButton.setTitle(String.fontAwesomeIconWithName(.Microphone), forState: .Normal)
 
         if success {
             //recordButton.setTitle("Tap to Re-record", forState: .Normal)
@@ -112,8 +120,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             
             let fileWithPath = dir.stringByAppendingPathComponent(audioFilename)
             let audioURL = NSURL(fileURLWithPath: fileWithPath)
-            
-            recordButton.setTitle("stop", forState: UIControlState.Normal)
+            recordButton.setTitle(String.fontAwesomeIconWithName(.Stop), forState: .Normal)
 
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -126,8 +133,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                 audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
                 audioRecorder.delegate = self
                 audioRecorder.record()
-                
-                //recordButton.setTitle("Tap to Stop", forState: .Normal)
             } catch {
                 finishRecording(success: false)
             }
