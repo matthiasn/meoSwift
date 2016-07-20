@@ -18,8 +18,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var recordButton: UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
+    var audioFilename: String!
 
-    let myFile = MyFile()
+    let fileManager = FileManager()
     var tempEntry: TextEntry? = nil
     private var locationManager = CLLocationManager()
     
@@ -71,22 +72,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     @IBAction func saveText(sender: AnyObject) {
-        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate())
+        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), media: audioFilename)
         let newEntryString = Mapper().toJSONString(newEntry!)
-        myFile.appendLine("text-entries.json", line: newEntryString!)
+        fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
         textInput.text = ""
         textInput.resignFirstResponder()
         locationManager.requestLocation()
+
+        // audio file name should be reset, just keeping it to initiate the upload without parsing the JSON
+        //audioFilename = nil
     }
-    
     
     // from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
     func finishRecording(success success: Bool) {
         audioRecorder.stop()
         audioRecorder = nil
         
-        print("finishRecording")
+        print("finishRecording " + audioFilename)
+        //print("finishRecording" + audioFilename)
         
         if success {
             //recordButton.setTitle("Tap to Re-record", forState: .Normal)
@@ -102,9 +106,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             
             let dayTimePeriodFormatter = NSDateFormatter()
-            dayTimePeriodFormatter.dateFormat = "yyyyMMdd-HHmmss"
-            let audioFilename = dir.stringByAppendingPathComponent(dayTimePeriodFormatter.stringFromDate(NSDate()) + ".m4a");
-            let audioURL = NSURL(fileURLWithPath: audioFilename)
+            dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
+
+//            audioFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + ".m4a"
+            audioFilename = "recording.m4a"
+            
+            let fileWithPath = dir.stringByAppendingPathComponent(audioFilename)
+            let audioURL = NSURL(fileURLWithPath: fileWithPath)
             
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -134,7 +142,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         finishRecording(success: true)
     }
     
-    
     @IBAction func upload(sender: AnyObject) {
         let svc = ScanViewController()
         self.presentViewController(svc, animated: true, completion: nil)
@@ -156,7 +163,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             tempEntry?.gpsTimestamp = loc.timestamp.timeIntervalSince1970
 
             let JSONString = Mapper().toJSONString(tempEntry!)
-            myFile.appendLine("text-entries.json", line: JSONString!)
+            fileManager.appendLine("text-entries.json", line: JSONString!)
             tempEntry = nil
         }
     }

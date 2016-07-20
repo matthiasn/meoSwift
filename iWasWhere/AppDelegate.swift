@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var window: UIWindow?
 
     private var locationManager = CLLocationManager()
-    let myFile = MyFile()
+    let fileManager = FileManager()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
+        //locationManager.startUpdatingLocation()
+        //locationManager.startMonitoringSignificantLocationChanges()
         locationManager.startMonitoringVisits()
         
         return true
@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        
         let newEntry = GeoEntry(location: locations.last!)!
         let JSONString = Mapper().toJSONString(newEntry)
-        myFile.appendLine(myFile.rollingFilename("geo-"), line: JSONString!)
+        fileManager.appendLine(fileManager.rollingFilename("geo-"), line: JSONString!)
         
         NSNotificationCenter.defaultCenter().postNotificationName("didUpdateLocations", object:nil, userInfo: ["newEntry":newEntry])
     }
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didVisit visit: CLVisit) {
         let newVisit = Visit(visit: visit)
         let visitString = Mapper().toJSONString(newVisit!)
-        myFile.appendLine("visits.json", line: visitString!)
+        fileManager.appendLine("visits.json", line: visitString!)
         
         NSNotificationCenter.defaultCenter().postNotificationName("didVisit", object: nil)
     }

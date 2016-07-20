@@ -23,6 +23,7 @@ class ScanViewController: RSCodeReaderViewController {
                     let api = RestApiManager()
                     api.upload(barcode.stringValue, filename: "text-entries.json")
                     api.upload(barcode.stringValue, filename: "visits.json")
+                    api.uploadAudio(barcode.stringValue, filename: "recording.m4a")
                     done = true
                 }
                 self.dismissViewControllerAnimated(true, completion: {});

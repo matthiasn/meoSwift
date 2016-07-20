@@ -39,11 +39,13 @@ class TextEntry: Mappable {
     }
     
     init?(md: String,
-          submitDateTime: NSDate) {
+          submitDateTime: NSDate,
+          media: String?) {
         // Initialize stored properties.
         self.md = md
         self.timestamp = submitDateTime.timeIntervalSince1970
         self.dateTime = "\(submitDateTime)"
+        self.media = media
     }
     
     required init?(_ map: Map) {

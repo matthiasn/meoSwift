@@ -11,6 +11,7 @@
 		AB1FFFDB1874EB9F6E5DA126 /* Pods_iWasWhereUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137115D8B7A19643B9EE29FB /* Pods_iWasWhereUITests.framework */; };
 		AD17CE421D3D20FF00322E90 /* Pods_iWasWhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */; };
 		AD2B7A9F1D3845D100B720F3 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */; };
+		AD5F97481D3FA72A00F5F883 /* GeoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F97451D3FA72A00F5F883 /* GeoEntry.swift */; };
 		AD79B1611CBB61D3006AFECC /* TextEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD79B1601CBB61D3006AFECC /* TextEntry.swift */; };
 		ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */; };
 		ADB28B481CB5D3CD00CF15D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B471CB5D3CD00CF15D5 /* ViewController.swift */; };
@@ -21,12 +22,9 @@
 		ADB28B5E1CB5D3CD00CF15D5 /* iWasWhereTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B5D1CB5D3CD00CF15D5 /* iWasWhereTests.swift */; };
 		ADB28B691CB5D3CD00CF15D5 /* iWasWhereUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B681CB5D3CD00CF15D5 /* iWasWhereUITests.swift */; };
 		ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */; };
-		ADB28B791CB5DDA000CF15D5 /* GeoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B781CB5DDA000CF15D5 /* GeoTableViewCell.swift */; };
-		ADB28B7B1CB5DF9300CF15D5 /* GeoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */; };
-		ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */; };
 		ADB28B7F1CB69BE600CF15D5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADB28B7E1CB69BE600CF15D5 /* Podfile */; };
 		ADCF3E4C1D3C41CA004FED07 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */; };
-		ADDDB7311CB936320036E175 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* MyFile.swift */; };
+		ADDDB7311CB936320036E175 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* FileManager.swift */; };
 		ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7321CB95F3C0036E175 /* Visit.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +57,7 @@
 		AD17CE431D3D210700322E90 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/iWasWhere-haynazeelaygtgcmhctnahqxqleo/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
 		AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		AD2B7AA01D39908500B720F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		AD5F97451D3FA72A00F5F883 /* GeoEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoEntry.swift; sourceTree = "<group>"; };
 		AD79B1601CBB61D3006AFECC /* TextEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEntry.swift; sourceTree = "<group>"; };
 		ADB28B421CB5D3CD00CF15D5 /* iWasWhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWasWhere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,12 +74,9 @@
 		ADB28B681CB5D3CD00CF15D5 /* iWasWhereUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWasWhereUITests.swift; sourceTree = "<group>"; };
 		ADB28B6A1CB5D3CD00CF15D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		ADB28B781CB5DDA000CF15D5 /* GeoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoTableViewCell.swift; sourceTree = "<group>"; };
-		ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoTableViewController.swift; sourceTree = "<group>"; };
-		ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoEntry.swift; sourceTree = "<group>"; };
 		ADB28B7E1CB69BE600CF15D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
-		ADDDB7301CB936320036E175 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
+		ADDDB7301CB936320036E175 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		ADDDB7321CB95F3C0036E175 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		DCBF09520CBDB9D320AE0C45 /* Pods-iWasWhereTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhereTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhereTests/Pods-iWasWhereTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD1A2D233FFD5FEEE3E770E4 /* Pods_iWasWhere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWasWhere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,20 +151,18 @@
 		ADB28B441CB5D3CD00CF15D5 /* iWasWhere */ = {
 			isa = PBXGroup;
 			children = (
+				AD5F97451D3FA72A00F5F883 /* GeoEntry.swift */,
 				AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */,
 				ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */,
 				ADB28B471CB5D3CD00CF15D5 /* ViewController.swift */,
 				ADB28B491CB5D3CD00CF15D5 /* Main.storyboard */,
-				ADB28B7A1CB5DF9300CF15D5 /* GeoTableViewController.swift */,
-				ADB28B7C1CB5E0A100CF15D5 /* GeoEntry.swift */,
 				ADDDB7321CB95F3C0036E175 /* Visit.swift */,
 				AD79B1601CBB61D3006AFECC /* TextEntry.swift */,
-				ADB28B781CB5DDA000CF15D5 /* GeoTableViewCell.swift */,
 				ADB28B4F1CB5D3CD00CF15D5 /* Assets.xcassets */,
 				ADB28B511CB5D3CD00CF15D5 /* LaunchScreen.storyboard */,
 				ADB28B541CB5D3CD00CF15D5 /* Info.plist */,
 				ADB28B4C1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld */,
-				ADDDB7301CB936320036E175 /* MyFile.swift */,
+				ADDDB7301CB936320036E175 /* FileManager.swift */,
 				ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */,
 			);
 			path = iWasWhere;
@@ -474,17 +468,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADDDB7311CB936320036E175 /* MyFile.swift in Sources */,
+				ADDDB7311CB936320036E175 /* FileManager.swift in Sources */,
 				ADB28B481CB5D3CD00CF15D5 /* ViewController.swift in Sources */,
+				AD5F97481D3FA72A00F5F883 /* GeoEntry.swift in Sources */,
 				ADB28B4E1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld in Sources */,
 				ADCF3E4C1D3C41CA004FED07 /* ScanViewController.swift in Sources */,
-				ADB28B7D1CB5E0A100CF15D5 /* GeoEntry.swift in Sources */,
 				AD79B1611CBB61D3006AFECC /* TextEntry.swift in Sources */,
 				ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */,
 				ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */,
-				ADB28B791CB5DDA000CF15D5 /* GeoTableViewCell.swift in Sources */,
 				AD2B7A9F1D3845D100B720F3 /* RestApiManager.swift in Sources */,
-				ADB28B7B1CB5DF9300CF15D5 /* GeoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
