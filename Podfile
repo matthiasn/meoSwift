@@ -6,6 +6,7 @@ use_frameworks!
 target 'iWasWhere' do
   pod 'ObjectMapper', '~> 1.3'
   pod 'RSBarcodes_Swift', '~> 0.1.9'
+  pod 'FontAwesome.swift'
 end
 
 target 'iWasWhereTests' do

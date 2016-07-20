@@ -46,6 +46,9 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
                                 <state key="normal" title="save"/>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="saveText:" destination="BYZ-38-t0r" eventType="touchDown" id="aMg-HR-0ir"/>
                                 </connections>
@@ -66,18 +69,11 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
                                 <state key="normal" title="upload"/>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="upload:" destination="BYZ-38-t0r" eventType="touchDown" id="bgf-Zm-g3U"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNw-5F-efg">
-                                <rect key="frame" x="20" y="547" width="188" height="30"/>
-                                <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                <state key="normal" title="stop"/>
-                                <connections>
-                                    <action selector="stop:" destination="BYZ-38-t0r" eventType="touchDown" id="1pz-LM-E7y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,14 +81,11 @@
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qtj-if-EOc" secondAttribute="bottom" constant="260" id="0eQ-rl-21d"/>
                             <constraint firstItem="pwT-So-zkU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="4dp-c7-4kJ"/>
+                            <constraint firstItem="Qtj-if-EOc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="90H-Mm-Yh3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="P4Q-UI-ZPt" secondAttribute="trailing" constant="3" id="Bgi-aG-BWj">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="W08-ep-yBc" secondAttribute="trailing" constant="20" id="Hfv-5i-8wN"/>
-                            <constraint firstItem="Qtj-if-EOc" firstAttribute="leading" secondItem="FNw-5F-efg" secondAttribute="trailing" constant="24" id="IUF-U9-Q1k">
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                            </constraint>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FNw-5F-efg" secondAttribute="bottom" constant="260" id="VqG-76-kg6"/>
                             <constraint firstItem="P4Q-UI-ZPt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="XDf-va-JCg">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -106,9 +99,6 @@
                             <constraint firstItem="W08-ep-yBc" firstAttribute="top" secondItem="P4Q-UI-ZPt" secondAttribute="bottom" constant="3" id="vEM-eS-P1G">
                                 <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                             </constraint>
-                            <constraint firstItem="FNw-5F-efg" firstAttribute="leading" secondItem="pwT-So-zkU" secondAttribute="trailing" constant="17" id="vzx-2i-Q7C">
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -116,19 +106,16 @@
                                 <exclude reference="W08-ep-yBc"/>
                                 <exclude reference="Qtj-if-EOc"/>
                                 <exclude reference="pwT-So-zkU"/>
-                                <exclude reference="FNw-5F-efg"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Bgi-aG-BWj"/>
                                 <exclude reference="XDf-va-JCg"/>
                                 <exclude reference="djB-Vs-5mC"/>
                                 <exclude reference="4dp-c7-4kJ"/>
-                                <exclude reference="vzx-2i-Q7C"/>
-                                <exclude reference="IUF-U9-Q1k"/>
+                                <exclude reference="90H-Mm-Yh3"/>
                                 <exclude reference="Hfv-5i-8wN"/>
                                 <exclude reference="vEM-eS-P1G"/>
                                 <exclude reference="0eQ-rl-21d"/>
-                                <exclude reference="VqG-76-kg6"/>
                                 <exclude reference="cOX-3a-8b9"/>
                                 <exclude reference="oeZ-q4-3kt"/>
                             </mask>
@@ -139,26 +126,26 @@
                                 <include reference="W08-ep-yBc"/>
                                 <include reference="Qtj-if-EOc"/>
                                 <include reference="pwT-So-zkU"/>
-                                <include reference="FNw-5F-efg"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Bgi-aG-BWj"/>
                                 <include reference="XDf-va-JCg"/>
                                 <include reference="djB-Vs-5mC"/>
                                 <include reference="4dp-c7-4kJ"/>
-                                <include reference="vzx-2i-Q7C"/>
-                                <include reference="IUF-U9-Q1k"/>
+                                <include reference="90H-Mm-Yh3"/>
                                 <include reference="Hfv-5i-8wN"/>
                                 <include reference="vEM-eS-P1G"/>
                                 <include reference="0eQ-rl-21d"/>
-                                <include reference="VqG-76-kg6"/>
                                 <include reference="cOX-3a-8b9"/>
                                 <include reference="oeZ-q4-3kt"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="recordButton" destination="Qtj-if-EOc" id="Ky8-MC-Lha"/>
+                        <outlet property="saveButton" destination="W08-ep-yBc" id="VmC-MR-o88"/>
                         <outlet property="textInput" destination="P4Q-UI-ZPt" id="ILC-7F-Bcn"/>
+                        <outlet property="uploadButton" destination="pwT-So-zkU" id="LjP-Xt-eOb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

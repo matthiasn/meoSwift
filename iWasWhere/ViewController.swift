@@ -10,12 +10,15 @@ import UIKit
 import CoreLocation
 import ObjectMapper
 import AVFoundation
+import FontAwesome_swift
 
 class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate {
     
     @IBOutlet weak var textInput: UITextView!
+    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var uploadButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
-    var recordButton: UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     var audioFilename: String!
@@ -87,7 +90,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         audioRecorder.stop()
         audioRecorder = nil
         print("finishRecording " + audioFilename)
-        
+        recordButton.setTitle("record", forState: UIControlState.Normal)
+
         if success {
             //recordButton.setTitle("Tap to Re-record", forState: .Normal)
         } else {
@@ -96,9 +100,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         }
     }
     
+    var isRecording = false
+
     // adapted from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
     func startRecording() {
-    
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             
             let dayTimePeriodFormatter = NSDateFormatter()
@@ -108,6 +113,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             let fileWithPath = dir.stringByAppendingPathComponent(audioFilename)
             let audioURL = NSURL(fileURLWithPath: fileWithPath)
             
+            recordButton.setTitle("stop", forState: UIControlState.Normal)
+
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
                 AVSampleRateKey: 44100.0,
@@ -128,11 +135,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     @IBAction func record(sender: AnyObject) {
-        startRecording()
-    }
-    
-    @IBAction func stop(sender: AnyObject) {
-        finishRecording(success: true)
+        if !isRecording {
+            startRecording()
+            isRecording = true
+            saveButton.enabled = false
+            uploadButton.enabled = false
+        }
+        else {
+            finishRecording(success: true)
+            isRecording = false
+            saveButton.enabled = true
+            uploadButton.enabled = true
+        }
     }
     
     @IBAction func upload(sender: AnyObject) {
