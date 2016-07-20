@@ -86,6 +86,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         audioRecorder.stop()
         audioRecorder = nil
         
+        print("finishRecording")
+        
         if success {
             //recordButton.setTitle("Tap to Re-record", forState: .Normal)
         } else {
@@ -98,7 +100,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     func startRecording() {
     
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let audioFilename = dir.stringByAppendingPathComponent("recording.m4a");
+            
+            let dayTimePeriodFormatter = NSDateFormatter()
+            dayTimePeriodFormatter.dateFormat = "yyyyMMdd-HHmmss"
+            let audioFilename = dir.stringByAppendingPathComponent(dayTimePeriodFormatter.stringFromDate(NSDate()) + ".m4a");
             let audioURL = NSURL(fileURLWithPath: audioFilename)
             
             let settings = [
@@ -137,7 +142,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
 
     @objc func updateUI(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            let newEntry = userInfo["newEntry"] as! GeoEntry
         }
     }
     

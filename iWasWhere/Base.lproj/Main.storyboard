@@ -106,7 +106,9 @@
                             <constraint firstItem="W08-ep-yBc" firstAttribute="top" secondItem="P4Q-UI-ZPt" secondAttribute="bottom" constant="3" id="vEM-eS-P1G">
                                 <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                             </constraint>
-                            <constraint firstItem="FNw-5F-efg" firstAttribute="leading" secondItem="pwT-So-zkU" secondAttribute="trailing" constant="17" id="vzx-2i-Q7C"/>
+                            <constraint firstItem="FNw-5F-efg" firstAttribute="leading" secondItem="pwT-So-zkU" secondAttribute="trailing" constant="17" id="vzx-2i-Q7C">
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">

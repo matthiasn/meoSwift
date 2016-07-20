@@ -18,6 +18,7 @@ class TextEntry: Mappable {
     var timestamp: Double?
     var gpsTimestamp: Double?
     var dateTime: String?
+    var media: String?
     var horizontalAccuracy: Double?
     var device: String = "iPhone"
     var type: String = "text"
@@ -54,6 +55,7 @@ class TextEntry: Mappable {
         md                 <- map["md"]
         longitude          <- map["longitude"]
         dateTime           <- map["date_time"]
+        media              <- map["media"]
         timestamp          <- map["timestamp"]
         gpsTimestamp       <- map["gps_timestamp"]
         horizontalAccuracy <- map["horizontal_accuracy"]
