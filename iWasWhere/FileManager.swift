@@ -40,22 +40,6 @@ class FileManager {
     func readBinaryFile(fileName: String) -> NSData? {
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             let path = dir.stringByAppendingPathComponent(fileName);
-            
-            //create file if it doesn't exist
-            if !fm.fileExistsAtPath(path) {
-                fm.createFileAtPath(path, contents: nil, attributes: nil)
-            }
-            let fileHandle = NSFileHandle(forUpdatingAtPath: path)
-            let fileData = fileHandle?.readDataToEndOfFile()
-            fileHandle?.closeFile()
-            return fileData!
-        }
-        return NSData()
-    }
-    
-    func readBinaryFile2(fileName: String) -> NSData? {
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = dir.stringByAppendingPathComponent(fileName);
             let data = NSData(contentsOfFile: path)
             return data
         }

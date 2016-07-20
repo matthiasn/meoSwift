@@ -6,7 +6,6 @@ use_frameworks!
 target 'iWasWhere' do
   pod 'ObjectMapper', '~> 1.3'
   pod 'RSBarcodes_Swift', '~> 0.1.9'
-  pod 'Alamofire', '~> 3.4'
 end
 
 target 'iWasWhereTests' do

@@ -72,25 +72,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     @IBAction func saveText(sender: AnyObject) {
-        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), media: audioFilename)
+        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename)
         let newEntryString = Mapper().toJSONString(newEntry!)
         fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
         textInput.text = ""
         textInput.resignFirstResponder()
         locationManager.requestLocation()
-
-        // audio file name should be reset, just keeping it to initiate the upload without parsing the JSON
-        //audioFilename = nil
+        audioFilename = nil
     }
     
     // from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
     func finishRecording(success success: Bool) {
         audioRecorder.stop()
         audioRecorder = nil
-        
         print("finishRecording " + audioFilename)
-        //print("finishRecording" + audioFilename)
         
         if success {
             //recordButton.setTitle("Tap to Re-record", forState: .Normal)
@@ -107,9 +103,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             
             let dayTimePeriodFormatter = NSDateFormatter()
             dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
-
-//            audioFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + ".m4a"
-            audioFilename = "recording.m4a"
+            audioFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + ".m4a"
             
             let fileWithPath = dir.stringByAppendingPathComponent(audioFilename)
             let audioURL = NSURL(fileURLWithPath: fileWithPath)
@@ -131,7 +125,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                 finishRecording(success: false)
             }
         }
-        
     }
     
     @IBAction func record(sender: AnyObject) {

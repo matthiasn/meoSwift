@@ -8,6 +8,7 @@
 
 import UIKit
 import RSBarcodes_Swift
+import ObjectMapper
 
 class ScanViewController: RSCodeReaderViewController {
     
@@ -21,9 +22,24 @@ class ScanViewController: RSCodeReaderViewController {
                 if !done {
                     print("uploading: " + barcode.stringValue)
                     let api = RestApiManager()
+
+                    if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+                        let path = dir.stringByAppendingPathComponent("text-entries.json");
+                        let data = String(data: NSData(contentsOfFile: path)!, encoding: NSUTF8StringEncoding)
+                        if let content = data {
+                            let jsonStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+                            for jsonString in jsonStrings {
+                                print(jsonString)
+                                let textEntry = Mapper<TextEntry>().map(jsonString)
+                                if let audioFilename = textEntry?.audioFile {
+                                    print(audioFilename)
+                                    api.uploadAudio(barcode.stringValue, filename: audioFilename)
+                                }
+                            }
+                        }
+                    }
                     api.upload(barcode.stringValue, filename: "text-entries.json")
                     api.upload(barcode.stringValue, filename: "visits.json")
-                    api.uploadAudio(barcode.stringValue, filename: "recording.m4a")
                     done = true
                 }
                 self.dismissViewControllerAnimated(true, completion: {});
