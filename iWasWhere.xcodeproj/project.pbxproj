@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		245F9016CFA4C09CCA9D5072 /* Pods_iWasWhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1A2D233FFD5FEEE3E770E4 /* Pods_iWasWhere.framework */; };
 		A2A2341B667602DB79A8CD3C /* Pods_iWasWhereTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6F75C86F831FA028E6F74 /* Pods_iWasWhereTests.framework */; };
 		AB1FFFDB1874EB9F6E5DA126 /* Pods_iWasWhereUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137115D8B7A19643B9EE29FB /* Pods_iWasWhereUITests.framework */; };
 		AD17CE421D3D20FF00322E90 /* Pods_iWasWhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */; };
@@ -89,6 +90,7 @@
 			files = (
 				AD17CE421D3D20FF00322E90 /* Pods_iWasWhere.framework in Frameworks */,
 				ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */,
+				245F9016CFA4C09CCA9D5072 /* Pods_iWasWhere.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
