@@ -18,6 +18,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var camButton: UIButton!
+    @IBOutlet weak var logsButton: UIButton!
     
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
@@ -29,6 +31,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        textInput.becomeFirstResponder()
 
         saveButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         saveButton.setTitle(String.fontAwesomeIconWithName(.FloppyO), forState: .Normal)
@@ -36,6 +40,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         uploadButton.setTitle(String.fontAwesomeIconWithName(.Upload), forState: .Normal)
         recordButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         recordButton.setTitle(String.fontAwesomeIconWithName(.Microphone), forState: .Normal)
+        camButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
+        camButton.setTitle(String.fontAwesomeIconWithName(.CameraRetro), forState: .Normal)
+        logsButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
+        logsButton.setTitle(String.fontAwesomeIconWithName(.FileText), forState: .Normal)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didUpdateLocations", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didVisit", object: nil)
@@ -88,7 +96,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
         textInput.text = ""
-        textInput.resignFirstResponder()
+        //textInput.resignFirstResponder()
         locationManager.requestLocation()
         audioFilename = nil
     }
@@ -145,18 +153,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             isRecording = true
             saveButton.enabled = false
             uploadButton.enabled = false
+            camButton.enabled = false
+            logsButton.enabled = false
         }
         else {
             finishRecording(success: true)
             isRecording = false
             saveButton.enabled = true
             uploadButton.enabled = true
+            camButton.enabled = true
+            logsButton.enabled = true
         }
     }
     
     @IBAction func upload(sender: AnyObject) {
+        textInput.resignFirstResponder()
         let svc = ScanViewController()
-        self.presentViewController(svc, animated: true, completion: nil)
+        self.presentViewController(svc, animated: true, completion: { () -> Void in
+            self.textInput.becomeFirstResponder() })
     }
 
     @objc func updateUI(notification: NSNotification) {
