@@ -25,162 +25,124 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="dWE-aq-lhv">
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
+                                    <constraint firstAttribute="height" constant="478" id="tuI-xT-xkV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="twitter"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="dWE-aq-lhv"/>
+                                        <exclude reference="tuI-xT-xkV"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="dWE-aq-lhv"/>
+                                        <include reference="tuI-xT-xkV"/>
                                     </mask>
                                 </variation>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-l8-NKS">
-                                <rect key="frame" x="20" y="547" width="188" height="30"/>
-                                <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                <state key="normal" title="logs"/>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwT-So-zkU">
-                                <rect key="frame" x="20" y="547" width="188" height="30"/>
-                                <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                <state key="normal" title="upload"/>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="C44-pD-ev6">
+                                <rect key="frame" x="10" y="486" width="380" height="74"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-l8-NKS">
+                                        <rect key="frame" x="20" y="20" width="57" height="34"/>
+                                        <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
+                                        <state key="normal" title="logs"/>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwT-So-zkU">
+                                        <rect key="frame" x="81" y="20" width="77" height="34"/>
+                                        <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
+                                        <state key="normal" title="upload"/>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="upload:" destination="BYZ-38-t0r" eventType="touchDown" id="bgf-Zm-g3U"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtj-if-EOc">
+                                        <rect key="frame" x="153" y="20" width="75" height="34"/>
+                                        <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
+                                        <state key="normal" title="record"/>
+                                        <connections>
+                                            <action selector="record:" destination="BYZ-38-t0r" eventType="touchDown" id="MGm-gG-XE3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1j-KT-8BQ">
+                                        <rect key="frame" x="243" y="20" width="57" height="34"/>
+                                        <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
+                                        <state key="normal" title="cam"/>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
+                                        <rect key="frame" x="300" y="20" width="60" height="34"/>
+                                        <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
+                                        <state key="normal" title="save"/>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveText:" destination="BYZ-38-t0r" eventType="touchDown" id="aMg-HR-0ir"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="91" y="506" width="77" height="34"/>
+                                    <rect key="frame" x="30" y="506" width="354" height="34"/>
                                 </variation>
-                                <connections>
-                                    <action selector="upload:" destination="BYZ-38-t0r" eventType="touchDown" id="bgf-Zm-g3U"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtj-if-EOc">
-                                <rect key="frame" x="20" y="547" width="188" height="30"/>
-                                <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                <state key="normal" title="record"/>
-                                <connections>
-                                    <action selector="record:" destination="BYZ-38-t0r" eventType="touchDown" id="MGm-gG-XE3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1j-KT-8BQ">
-                                <rect key="frame" x="20" y="547" width="188" height="30"/>
-                                <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                <state key="normal" title="cam"/>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="253" y="506" width="57" height="34"/>
-                                </variation>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
-                                <rect key="frame" x="20" y="547" width="188" height="30"/>
-                                <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                <state key="normal" title="save"/>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveText:" destination="BYZ-38-t0r" eventType="touchDown" id="aMg-HR-0ir"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qtj-if-EOc" secondAttribute="bottom" constant="260" id="0eQ-rl-21d"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5kY-l8-NKS" secondAttribute="bottom" constant="260" id="1Y7-AS-8UI"/>
-                            <constraint firstItem="u1j-KT-8BQ" firstAttribute="leading" secondItem="Qtj-if-EOc" secondAttribute="trailing" constant="25" id="8P3-yw-JNT">
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                            </constraint>
-                            <constraint firstItem="Qtj-if-EOc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="90H-Mm-Yh3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="P4Q-UI-ZPt" secondAttribute="trailing" constant="3" id="Bgi-aG-BWj">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="P4Q-UI-ZPt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="XDf-va-JCg">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="5kY-l8-NKS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="YBi-3F-qsY"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W08-ep-yBc" secondAttribute="bottom" constant="50" id="cOX-3a-8b9">
-                                <variation key="heightClass=regular-widthClass=compact" constant="260"/>
-                            </constraint>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C44-pD-ev6" secondAttribute="bottom" constant="260" id="bUH-1x-uE7"/>
                             <constraint firstItem="P4Q-UI-ZPt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="djB-Vs-5mC">
                                 <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                             </constraint>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="u1j-KT-8BQ" secondAttribute="bottom" constant="260" id="egX-TY-Jev"/>
-                            <constraint firstItem="u1j-KT-8BQ" firstAttribute="leading" secondItem="pwT-So-zkU" secondAttribute="trailing" constant="78" id="ftL-hF-Ibb"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pwT-So-zkU" secondAttribute="bottom" constant="260" id="oeZ-q4-3kt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="W08-ep-yBc" secondAttribute="trailing" constant="10" id="rKL-tu-e2r"/>
-                            <constraint firstItem="W08-ep-yBc" firstAttribute="top" secondItem="P4Q-UI-ZPt" secondAttribute="bottom" constant="3" id="vEM-eS-P1G">
-                                <variation key="heightClass=regular-widthClass=compact" constant="3"/>
-                            </constraint>
+                            <constraint firstItem="C44-pD-ev6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x6l-1H-tme"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="P4Q-UI-ZPt"/>
-                                <exclude reference="5kY-l8-NKS"/>
-                                <exclude reference="pwT-So-zkU"/>
-                                <exclude reference="Qtj-if-EOc"/>
-                                <exclude reference="u1j-KT-8BQ"/>
-                                <exclude reference="W08-ep-yBc"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Bgi-aG-BWj"/>
                                 <exclude reference="XDf-va-JCg"/>
                                 <exclude reference="djB-Vs-5mC"/>
-                                <exclude reference="YBi-3F-qsY"/>
-                                <exclude reference="90H-Mm-Yh3"/>
-                                <exclude reference="8P3-yw-JNT"/>
-                                <exclude reference="ftL-hF-Ibb"/>
-                                <exclude reference="rKL-tu-e2r"/>
-                                <exclude reference="vEM-eS-P1G"/>
-                                <exclude reference="0eQ-rl-21d"/>
-                                <exclude reference="1Y7-AS-8UI"/>
-                                <exclude reference="cOX-3a-8b9"/>
-                                <exclude reference="egX-TY-Jev"/>
-                                <exclude reference="oeZ-q4-3kt"/>
+                                <exclude reference="x6l-1H-tme"/>
+                                <exclude reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="P4Q-UI-ZPt"/>
-                                <include reference="5kY-l8-NKS"/>
-                                <include reference="pwT-So-zkU"/>
-                                <include reference="Qtj-if-EOc"/>
-                                <include reference="u1j-KT-8BQ"/>
-                                <include reference="W08-ep-yBc"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Bgi-aG-BWj"/>
                                 <include reference="XDf-va-JCg"/>
                                 <include reference="djB-Vs-5mC"/>
-                                <include reference="YBi-3F-qsY"/>
-                                <include reference="90H-Mm-Yh3"/>
-                                <include reference="8P3-yw-JNT"/>
-                                <include reference="ftL-hF-Ibb"/>
-                                <include reference="rKL-tu-e2r"/>
-                                <include reference="vEM-eS-P1G"/>
-                                <include reference="0eQ-rl-21d"/>
-                                <include reference="1Y7-AS-8UI"/>
-                                <include reference="cOX-3a-8b9"/>
-                                <include reference="egX-TY-Jev"/>
-                                <include reference="oeZ-q4-3kt"/>
+                                <include reference="x6l-1H-tme"/>
+                                <include reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                     </view>

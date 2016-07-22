@@ -96,7 +96,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
         textInput.text = ""
-        //textInput.resignFirstResponder()
         locationManager.requestLocation()
         audioFilename = nil
     }
@@ -107,13 +106,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         audioRecorder = nil
         print("finishRecording " + audioFilename)
         recordButton.setTitle(String.fontAwesomeIconWithName(.Microphone), forState: .Normal)
-
-        if success {
-            //recordButton.setTitle("Tap to Re-record", forState: .Normal)
-        } else {
-            //recordButton.setTitle("Tap to Record", forState: .Normal)
-            // recording failed :(
-        }
     }
     
     var isRecording = false
