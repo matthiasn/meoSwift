@@ -9,6 +9,7 @@
 import UIKit
 import RSBarcodes_Swift
 import ObjectMapper
+import Photos
 
 class ScanViewController: RSCodeReaderViewController {
     
@@ -40,19 +41,43 @@ class ScanViewController: RSCodeReaderViewController {
                                 if let imgFilename = textEntry?.imgFile {
                                     print(imgFilename)
                                     
-                                    
+                                    let fetchResults = PHAsset.fetchAssetsWithLocalIdentifiers([imgFilename], options: nil)
+                                    print(fetchResults)
 
-                                    let img = UIImage(contentsOfFile: imgFilename)
-                                    print(img)
-                                    do {
-                                        let imgData = try NSData(contentsOfFile: imgFilename, options: NSDataReadingOptions.DataReadingMappedIfSafe)
-                                        
-                                        
-                                        
-                                        print("imgData?.length in ScanViewController")
-                                        print(imgData.length)
+                                    if fetchResults.count > 0 {
+                                        if let imageAsset = fetchResults.objectAtIndex(0) as? PHAsset {
+                                            let requestOptions = PHImageRequestOptions()
+                                            requestOptions.deliveryMode = .HighQualityFormat
+
+                                            PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+                                                print("requestImageDataForAsset")
+                                                print(data?.length)
+                                                api.uploadImage(barcode.stringValue, data: data!, filename: "image3.jpg")
+                                            })
+                                            
+                                            PHImageManager.defaultManager().requestImageForAsset(imageAsset, targetSize: PHImageManagerMaximumSize, contentMode: .AspectFill, options: requestOptions, resultHandler: { (image, info) -> Void in
+                                                let data = UIImageJPEGRepresentation(image!, 1.0)
+                                                print("UIImageJPEGRepresentation(image!, 1.0)")
+                                                print(data!.length)
+                                                print(image)
+                                                print(image?.imageOrientation)
+                                                //completion(image: image)
+                                            })
+                                        } else {
+                                            //completion(image: nil)
+                                        }
+                                    } else {
+                                        //completion(image: nil)
                                     }
-                                    catch let error as NSError {print("Could not read: \(error)")}
+
+//                                    let img = UIImage(contentsOfFile: imgFilename)
+//                                    print(img)
+//                                    do {
+//                                        let imgData = try NSData(contentsOfFile: imgFilename, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+//                                        print("imgData?.length in ScanViewController")
+//                                        print(imgData.length)
+//                                    }
+//                                    catch let error as NSError {print("Could not read: \(error)")}
                                     
                                     //api.uploadAudio(barcode.stringValue, filename: audioFilename)
                                 }
