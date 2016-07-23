@@ -10,9 +10,10 @@ import UIKit
 import CoreLocation
 import ObjectMapper
 import AVFoundation
+import MobileCoreServices
 import FontAwesome_swift
 
-class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var recordButton: UIButton!
@@ -90,6 +91,57 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         //locationManager.startMonitoringSignificantLocationChanges()
     }
     
+    func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafePointer<Void>) {
+        print(contextInfo)
+
+        if let asset = image.imageAsset {
+            print(asset)
+        }
+        if error != nil {
+        // Report error to user
+        }
+    }
+
+    func getDocumentsURL() -> NSURL {
+        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        return documentsURL
+    }
+
+    func fileInDocumentsDirectory(filename: String) -> String {
+        let fileURL = getDocumentsURL().URLByAppendingPathComponent(filename)
+        return fileURL.path!
+    }
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        print(info)
+        let mediaType = info["UIImagePickerControllerMediaType"] as! NSString
+        print(mediaType)
+
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        //let jpgImageData = UIImageJPEGRepresentation(image, 1.0)
+        //jpgImageData?.writeToFile(fileInDocumentsDirectory("image.jpg"), atomically: true)
+
+        UIImageWriteToSavedPhotosAlbum(image, self,
+                                       #selector(ViewController.image( _:didFinishSavingWithError:contextInfo:)), nil)
+
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    @IBAction func cam(sender: AnyObject) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+
+        if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        } else {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        }
+
+        imagePicker.mediaTypes = [kUTTypeImage as String]
+        imagePicker.allowsEditing = false
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+
     @IBAction func saveText(sender: AnyObject) {
         let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename)
         let newEntryString = Mapper().toJSONString(newEntry!)
