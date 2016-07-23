@@ -28,7 +28,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var audioRecorder: AVAudioRecorder!
     var audioFilename: String!
     var imgFilename: String!
-
+    var imgIdentifier: String!
+    
     let fileManager = FileManager()
     var tempEntry: TextEntry? = nil
     private var locationManager = CLLocationManager()
@@ -37,7 +38,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         super.viewDidLoad()
         
         textInput.becomeFirstResponder()
-
+        
         saveButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         saveButton.setTitle(String.fontAwesomeIconWithName(.FloppyO), forState: .Normal)
         uploadButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
@@ -48,7 +49,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         camButton.setTitle(String.fontAwesomeIconWithName(.CameraRetro), forState: .Normal)
         logsButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         logsButton.setTitle(String.fontAwesomeIconWithName(.FileText), forState: .Normal)
-
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didUpdateLocations", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didVisit", object: nil)
         locationManager.delegate = self
@@ -71,12 +72,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             // failed to record!
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-  
+    
     func someNotification(sender: AnyObject) {
         let notification = UILocalNotification()
         notification.applicationIconBadgeNumber = 1
@@ -94,97 +95,103 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         //locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafePointer<Void>) {
+    func imageSaved(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafePointer<Void>) {
         if let asset = image.imageAsset {
-            //print(asset)
+            let fetchOptions: PHFetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+            let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+            
+            if (fetchResult.firstObject != nil) {
+                let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
+                print(lastAsset.localIdentifier)
+                print(lastAsset.creationDate)
+                let requestOptions = PHImageRequestOptions()
+                PHImageManager.defaultManager().requestImageDataForAsset(lastAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+                    print("requestImageDataForAsset in VC")
+                    let path = info!["PHImageFileURLKey"] as! NSURL
+                    let fileName = path.absoluteString.componentsSeparatedByString("/").last
+                    
+                    let dayTimePeriodFormatter = NSDateFormatter()
+                    dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
+                    self.imgFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + "_" + fileName!
+                })
+                imgIdentifier = lastAsset.localIdentifier
+            }
         }
         if error != nil {
-        // Report error to user
+            // Report error to user
         }
     }
-
+    
     func getDocumentsURL() -> NSURL {
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         return documentsURL
     }
-
+    
     func fileInDocumentsDirectory(filename: String) -> String {
         let fileURL = getDocumentsURL().URLByAppendingPathComponent(filename)
         return fileURL.path!
     }
-
-    // from: http://stackoverflow.com/questions/26025487/nsurl-from-phasset
-    func getAssetUrl(mPhasset : PHAsset, completionHandler : ((responseURL : NSURL?) -> Void)){
-        if mPhasset.mediaType == .Image {
-            let options: PHContentEditingInputRequestOptions = PHContentEditingInputRequestOptions()
-            options.canHandleAdjustmentData = {(adjustmeta: PHAdjustmentData) -> Bool in
-                return true
-            }
-            mPhasset.requestContentEditingInputWithOptions(options, completionHandler: {(contentEditingInput: PHContentEditingInput?, info: [NSObject : AnyObject]) -> Void in
-                completionHandler(responseURL : contentEditingInput!.fullSizeImageURL)
-            })
-        } else if mPhasset.mediaType == .Video {
-            let options: PHVideoRequestOptions = PHVideoRequestOptions()
-            options.version = .Original
-            PHImageManager.defaultManager().requestAVAssetForVideo(mPhasset, options: options, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [NSObject : AnyObject]?) -> Void in
-                
-                if let urlAsset = asset as? AVURLAsset {
-                    let localVideoUrl : NSURL = urlAsset.URL
-                    completionHandler(responseURL : localVideoUrl)
-                } else {
-                    completionHandler(responseURL : nil)
-                }
-            })
-        }
-    }
-
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        //let jpgImageData = UIImageJPEGRepresentation(image, 1.0)
-        //jpgImageData?.writeToFile(fileInDocumentsDirectory("image.jpg"), atomically: true)
-
-        UIImageWriteToSavedPhotosAlbum(image, self,
-                                       #selector(ViewController.image( _:didFinishSavingWithError:contextInfo:)), nil)
+        let metadata = info[UIImagePickerControllerMediaMetadata] as! [NSObject : AnyObject]
+        //let imgData = UIImagePNGRepresentation(image)
+        let imgData = UIImageJPEGRepresentation(image, 1.0)
+        //imgData?.writeToFile(fileInDocumentsDirectory("image.jpg"), atomically: true)
         
-        let fetchOptions: PHFetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-        let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+        //UIImageWriteToSavedPhotosAlbum(image, self,
+        //                               #selector(ViewController.imageSaved( _:didFinishSavingWithError:contextInfo:)), nil)
         
-        if (fetchResult.firstObject != nil) {
-            let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
-            print(lastAsset.localIdentifier)
-            imgFilename = lastAsset.localIdentifier
+        ALAssetsLibrary().writeImageDataToSavedPhotosAlbum(imgData, metadata: metadata) { (url, error) in
+            if let asset = image.imageAsset {
+                let fetchOptions: PHFetchOptions = PHFetchOptions()
+                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+                let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+                
+                if (fetchResult.firstObject != nil) {
+                    let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
+                    print(lastAsset.localIdentifier)
+                    print(lastAsset.creationDate)
+                    
+                    let requestOptions = PHImageRequestOptions()
+                    PHImageManager.defaultManager().requestImageDataForAsset(lastAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+                        print("requestImageDataForAsset in VC")
+                        let path = info!["PHImageFileURLKey"] as! NSURL
+                        let fileName = path.absoluteString.componentsSeparatedByString("/").last
+                        
+                        let dayTimePeriodFormatter = NSDateFormatter()
+                        dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
+                        self.imgFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + "_" + fileName!
+                        print(self.imgFilename)
+                        print(data?.length)
+                    })
+                    self.imgIdentifier = lastAsset.localIdentifier
+                }
+            }
             
-//            getAssetUrl(lastAsset, completionHandler: { (responseURL) in
-//                // this is the actual url wrapped in Optional
-//                print(responseURL)
-//                print(responseURL?.absoluteString)
-//                self.imgFilename = responseURL?.absoluteString
-//                print(self.imgFilename)
-//                let data = NSData(contentsOfURL: responseURL!)
-//                print(data?.length)
-//            })
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     @IBAction func cam(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-
+        
         if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
             imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         } else {
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         }
-
+        
         imagePicker.mediaTypes = [kUTTypeImage as String]
         imagePicker.allowsEditing = false
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
-
+    
     @IBAction func saveText(sender: AnyObject) {
-        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename, imgFile: imgFilename)
+        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename, imgFile: imgFilename,
+                                 imgIdentifier: imgIdentifier)
         let newEntryString = Mapper().toJSONString(newEntry!)
         fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
@@ -202,7 +209,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     var isRecording = false
-
+    
     // adapted from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
     func startRecording() {
         if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
@@ -214,7 +221,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             let fileWithPath = dir.stringByAppendingPathComponent(audioFilename)
             let audioURL = NSURL(fileURLWithPath: fileWithPath)
             recordButton.setTitle(String.fontAwesomeIconWithName(.Stop), forState: .Normal)
-
+            
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
                 AVSampleRateKey: 44100.0,
@@ -257,7 +264,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         self.presentViewController(svc, animated: true, completion: { () -> Void in
             self.textInput.becomeFirstResponder() })
     }
-
+    
     @objc func updateUI(notification: NSNotification) {
         if let userInfo = notification.userInfo {
         }
@@ -272,7 +279,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             tempEntry?.longitude = loc.coordinate.longitude
             tempEntry?.horizontalAccuracy = loc.horizontalAccuracy
             tempEntry?.gpsTimestamp = loc.timestamp.timeIntervalSince1970
-
+            
             let JSONString = Mapper().toJSONString(tempEntry!)
             fileManager.appendLine("text-entries.json", line: JSONString!)
             tempEntry = nil
@@ -282,6 +289,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print(error, terminator: "")
     }
- 
+    
 }
 

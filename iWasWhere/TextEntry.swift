@@ -20,6 +20,7 @@ class TextEntry: Mappable {
     var dateTime: String?
     var audioFile: String?
     var imgFile: String?
+    var imgIdentifier: String?
     var horizontalAccuracy: Double?
     var device: String = "iPhone"
     var type: String = "text"
@@ -42,13 +43,15 @@ class TextEntry: Mappable {
     init?(md: String,
           submitDateTime: NSDate,
           audioFile: String?,
-          imgFile: String?) {
+          imgFile: String?,
+          imgIdentifier: String?) {
         // Initialize stored properties.
         self.md = md
         self.timestamp = submitDateTime.timeIntervalSince1970
         self.dateTime = "\(submitDateTime)"
         self.audioFile = audioFile
         self.imgFile = imgFile
+        self.imgIdentifier = imgIdentifier
     }
     
     required init?(_ map: Map) {
@@ -62,6 +65,7 @@ class TextEntry: Mappable {
         dateTime           <- map["date_time"]
         audioFile          <- map["audio_file"]
         imgFile            <- map["img_file"]
+        imgIdentifier      <- map["img_identifier"]
         timestamp          <- map["timestamp"]
         gpsTimestamp       <- map["gps_timestamp"]
         horizontalAccuracy <- map["horizontal_accuracy"]
