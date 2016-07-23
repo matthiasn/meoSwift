@@ -137,7 +137,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         let metadata = info[UIImagePickerControllerMediaMetadata] as! [NSObject : AnyObject]
         //let imgData = UIImagePNGRepresentation(image)
-        let imgData = UIImageJPEGRepresentation(image, 1.0)
+        let imgData = UIImageJPEGRepresentation(image, 0.5)
         //imgData?.writeToFile(fileInDocumentsDirectory("image.jpg"), atomically: true)
         
         //UIImageWriteToSavedPhotosAlbum(image, self,
