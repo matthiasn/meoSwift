@@ -12,6 +12,8 @@ import ObjectMapper
 import AVFoundation
 import MobileCoreServices
 import FontAwesome_swift
+import AssetsLibrary
+import Photos
 
 class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -25,6 +27,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     var audioFilename: String!
+    var imgFilename: String!
 
     let fileManager = FileManager()
     var tempEntry: TextEntry? = nil
@@ -92,10 +95,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafePointer<Void>) {
-        print(contextInfo)
-
         if let asset = image.imageAsset {
-            print(asset)
+            //print(asset)
         }
         if error != nil {
         // Report error to user
@@ -112,18 +113,58 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         return fileURL.path!
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        print(info)
-        let mediaType = info["UIImagePickerControllerMediaType"] as! NSString
-        print(mediaType)
+    // from: http://stackoverflow.com/questions/26025487/nsurl-from-phasset
+    func getAssetUrl(mPhasset : PHAsset, completionHandler : ((responseURL : NSURL?) -> Void)){
+        if mPhasset.mediaType == .Image {
+            let options: PHContentEditingInputRequestOptions = PHContentEditingInputRequestOptions()
+            options.canHandleAdjustmentData = {(adjustmeta: PHAdjustmentData) -> Bool in
+                return true
+            }
+            mPhasset.requestContentEditingInputWithOptions(options, completionHandler: {(contentEditingInput: PHContentEditingInput?, info: [NSObject : AnyObject]) -> Void in
+                completionHandler(responseURL : contentEditingInput!.fullSizeImageURL)
+            })
+        } else if mPhasset.mediaType == .Video {
+            let options: PHVideoRequestOptions = PHVideoRequestOptions()
+            options.version = .Original
+            PHImageManager.defaultManager().requestAVAssetForVideo(mPhasset, options: options, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [NSObject : AnyObject]?) -> Void in
+                
+                if let urlAsset = asset as? AVURLAsset {
+                    let localVideoUrl : NSURL = urlAsset.URL
+                    completionHandler(responseURL : localVideoUrl)
+                } else {
+                    completionHandler(responseURL : nil)
+                }
+            })
+        }
+    }
 
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         //let jpgImageData = UIImageJPEGRepresentation(image, 1.0)
         //jpgImageData?.writeToFile(fileInDocumentsDirectory("image.jpg"), atomically: true)
 
         UIImageWriteToSavedPhotosAlbum(image, self,
                                        #selector(ViewController.image( _:didFinishSavingWithError:contextInfo:)), nil)
-
+        
+        let fetchOptions: PHFetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+        
+        if (fetchResult.firstObject != nil) {
+            let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
+            print(lastAsset.localIdentifier)
+            imgFilename = lastAsset.localIdentifier
+            
+//            getAssetUrl(lastAsset, completionHandler: { (responseURL) in
+//                // this is the actual url wrapped in Optional
+//                print(responseURL)
+//                print(responseURL?.absoluteString)
+//                self.imgFilename = responseURL?.absoluteString
+//                print(self.imgFilename)
+//                let data = NSData(contentsOfURL: responseURL!)
+//                print(data?.length)
+//            })
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
@@ -143,7 +184,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
 
     @IBAction func saveText(sender: AnyObject) {
-        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename)
+        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename, imgFile: imgFilename)
         let newEntryString = Mapper().toJSONString(newEntry!)
         fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry

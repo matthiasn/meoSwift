@@ -35,9 +35,31 @@ class ScanViewController: RSCodeReaderViewController {
                                     print(audioFilename)
                                     api.uploadAudio(barcode.stringValue, filename: audioFilename)
                                 }
+                                print("print(textEntry?.imgFile) ScanViewController ")
+                                print(textEntry?.imgFile)
+                                if let imgFilename = textEntry?.imgFile {
+                                    print(imgFilename)
+                                    
+                                    
+
+                                    let img = UIImage(contentsOfFile: imgFilename)
+                                    print(img)
+                                    do {
+                                        let imgData = try NSData(contentsOfFile: imgFilename, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                                        
+                                        
+                                        
+                                        print("imgData?.length in ScanViewController")
+                                        print(imgData.length)
+                                    }
+                                    catch let error as NSError {print("Could not read: \(error)")}
+                                    
+                                    //api.uploadAudio(barcode.stringValue, filename: audioFilename)
+                                }
                             }
                         }
                     }
+
                     api.upload(barcode.stringValue, filename: "text-entries.json")
                     api.upload(barcode.stringValue, filename: "visits.json")
                     done = true

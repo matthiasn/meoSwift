@@ -13,6 +13,7 @@
 		AD17CE421D3D20FF00322E90 /* Pods_iWasWhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */; };
 		AD2B7A9F1D3845D100B720F3 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */; };
 		AD5F97481D3FA72A00F5F883 /* GeoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F97451D3FA72A00F5F883 /* GeoEntry.swift */; };
+		AD71BBB71D4285F900ECEAB1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD71BBB61D4285F900ECEAB1 /* AssetsLibrary.framework */; };
 		AD79B1611CBB61D3006AFECC /* TextEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD79B1601CBB61D3006AFECC /* TextEntry.swift */; };
 		ADB28B461CB5D3CD00CF15D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */; };
 		ADB28B481CB5D3CD00CF15D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B471CB5D3CD00CF15D5 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 		ADB28B691CB5D3CD00CF15D5 /* iWasWhereUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB28B681CB5D3CD00CF15D5 /* iWasWhereUITests.swift */; };
 		ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */; };
 		ADB28B7F1CB69BE600CF15D5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADB28B7E1CB69BE600CF15D5 /* Podfile */; };
+		ADBE3FD71D42DAB100DC002D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBE3FD61D42DAB100DC002D /* Photos.framework */; };
 		ADCF3E4C1D3C41CA004FED07 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */; };
 		ADDDB7311CB936320036E175 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* FileManager.swift */; };
 		ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7321CB95F3C0036E175 /* Visit.swift */; };
@@ -59,6 +61,7 @@
 		AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		AD2B7AA01D39908500B720F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AD5F97451D3FA72A00F5F883 /* GeoEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoEntry.swift; sourceTree = "<group>"; };
+		AD71BBB61D4285F900ECEAB1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		AD79B1601CBB61D3006AFECC /* TextEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEntry.swift; sourceTree = "<group>"; };
 		ADB28B421CB5D3CD00CF15D5 /* iWasWhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWasWhere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		ADB28B6A1CB5D3CD00CF15D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB28B761CB5D3D900CF15D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		ADB28B7E1CB69BE600CF15D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		ADBE3FD61D42DAB100DC002D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		ADDDB7301CB936320036E175 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		ADDDB7321CB95F3C0036E175 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADBE3FD71D42DAB100DC002D /* Photos.framework in Frameworks */,
+				AD71BBB71D4285F900ECEAB1 /* AssetsLibrary.framework in Frameworks */,
 				AD17CE421D3D20FF00322E90 /* Pods_iWasWhere.framework in Frameworks */,
 				ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */,
 				245F9016CFA4C09CCA9D5072 /* Pods_iWasWhere.framework in Frameworks */,
@@ -191,6 +197,8 @@
 		F11B7744BD2C8B57A84EBF02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADBE3FD61D42DAB100DC002D /* Photos.framework */,
+				AD71BBB61D4285F900ECEAB1 /* AssetsLibrary.framework */,
 				AD17CE431D3D210700322E90 /* ObjectMapper.framework */,
 				AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */,
 				AD2B7AA01D39908500B720F3 /* CFNetwork.framework */,
