@@ -42,25 +42,25 @@
                                     </mask>
                                 </variation>
                             </textView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="C44-pD-ev6">
-                                <rect key="frame" x="10" y="486" width="380" height="74"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="C44-pD-ev6">
+                                <rect key="frame" x="10" y="486" width="354" height="34"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-l8-NKS">
-                                        <rect key="frame" x="20" y="20" width="57" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-l8-NKS">
+                                        <rect key="frame" x="0.0" y="0.0" width="57" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                        <state key="normal" title="logs"/>
+                                        <state key="normal" title="log"/>
                                         <state key="disabled">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwT-So-zkU">
-                                        <rect key="frame" x="81" y="20" width="77" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwT-So-zkU">
+                                        <rect key="frame" x="64" y="0.0" width="77" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                        <state key="normal" title="upload"/>
+                                        <state key="normal" title="upl"/>
                                         <state key="disabled">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -68,18 +68,18 @@
                                             <action selector="upload:" destination="BYZ-38-t0r" eventType="touchDown" id="bgf-Zm-g3U"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtj-if-EOc">
-                                        <rect key="frame" x="153" y="20" width="75" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtj-if-EOc">
+                                        <rect key="frame" x="148" y="0.0" width="75" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                        <state key="normal" title="record"/>
+                                        <state key="normal" title="mic"/>
                                         <connections>
                                             <action selector="record:" destination="BYZ-38-t0r" eventType="touchDown" id="MGm-gG-XE3"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1j-KT-8BQ">
-                                        <rect key="frame" x="243" y="20" width="57" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1j-KT-8BQ">
+                                        <rect key="frame" x="230" y="0.0" width="57" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -91,8 +91,16 @@
                                             <action selector="cam:" destination="BYZ-38-t0r" eventType="touchDown" id="xz6-Kf-nD6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
-                                        <rect key="frame" x="300" y="20" width="60" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgp-s4-ZvT">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="roll"/>
+                                        <connections>
+                                            <action selector="imagePick:" destination="BYZ-38-t0r" eventType="touchDown" id="vsL-3r-8Gh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
+                                        <rect key="frame" x="294" y="0.0" width="60" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -106,7 +114,7 @@
                                     </button>
                                 </subviews>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="30" y="506" width="354" height="34"/>
+                                    <rect key="frame" x="30" y="506" width="328" height="34"/>
                                 </variation>
                             </stackView>
                         </subviews>
@@ -129,11 +137,11 @@
                                 <exclude reference="P4Q-UI-ZPt"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="x6l-1H-tme"/>
+                                <exclude reference="bUH-1x-uE7"/>
                                 <exclude reference="Bgi-aG-BWj"/>
                                 <exclude reference="XDf-va-JCg"/>
                                 <exclude reference="djB-Vs-5mC"/>
-                                <exclude reference="x6l-1H-tme"/>
-                                <exclude reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -141,16 +149,17 @@
                                 <include reference="P4Q-UI-ZPt"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="x6l-1H-tme"/>
+                                <include reference="bUH-1x-uE7"/>
                                 <include reference="Bgi-aG-BWj"/>
                                 <include reference="XDf-va-JCg"/>
                                 <include reference="djB-Vs-5mC"/>
-                                <include reference="x6l-1H-tme"/>
-                                <include reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="camButton" destination="u1j-KT-8BQ" id="J24-nX-srZ"/>
+                        <outlet property="camRollBtn" destination="Wgp-s4-ZvT" id="s1q-kM-cUx"/>
                         <outlet property="logsButton" destination="5kY-l8-NKS" id="cle-0p-pjF"/>
                         <outlet property="recordButton" destination="Qtj-if-EOc" id="Ky8-MC-Lha"/>
                         <outlet property="saveButton" destination="W08-ep-yBc" id="VmC-MR-o88"/>

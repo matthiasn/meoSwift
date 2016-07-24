@@ -14,8 +14,9 @@ import MobileCoreServices
 import FontAwesome_swift
 import AssetsLibrary
 import Photos
+import ImagePicker
 
-class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate {
     
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var recordButton: UIButton!
@@ -23,6 +24,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var camButton: UIButton!
     @IBOutlet weak var logsButton: UIButton!
+    @IBOutlet weak var camRollBtn: UIButton!
     
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
@@ -33,6 +35,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     let fileManager = FileManager()
     var tempEntry: TextEntry? = nil
     private var locationManager = CLLocationManager()
+    
+    let imagePickerController2 = ImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +51,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         recordButton.setTitle(String.fontAwesomeIconWithName(.Microphone), forState: .Normal)
         camButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         camButton.setTitle(String.fontAwesomeIconWithName(.CameraRetro), forState: .Normal)
+        camRollBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
+        camRollBtn.setTitle(String.fontAwesomeIconWithName(.Film), forState: .Normal)
         logsButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         logsButton.setTitle(String.fontAwesomeIconWithName(.FileText), forState: .Normal)
         
@@ -87,6 +93,41 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         notification.soundName = UILocalNotificationDefaultSoundName
         notification.userInfo = ["CustomField1": "w00t"]
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
+    
+    func wrapperDidPress(images: [UIImage]) {
+    }
+    
+    func doneButtonDidPress(images: [UIImage]) {
+        //self.imagePickerController(<#T##picker: UIImagePickerController##UIImagePickerController#>, didFinishPickingMediaWithInfo: <#T##[String : AnyObject]#>)
+        //self.imagePickerController.stack
+        let imgAsset = imagePickerController2.stack.assets.first
+        print(imgAsset?.localIdentifier)
+        imgIdentifier = imgAsset!.localIdentifier
+        
+        let requestOptions = PHImageRequestOptions()
+        PHImageManager.defaultManager().requestImageDataForAsset(imgAsset!, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+            print("requestImageDataForAsset in VC")
+            let path = info!["PHImageFileURLKey"] as! NSURL
+            let fileName = path.absoluteString.componentsSeparatedByString("/").last
+            
+            let dayTimePeriodFormatter = NSDateFormatter()
+            dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
+            self.imgFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + "_" + fileName!
+        })
+        
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func cancelButtonDidPress() {
+    }
+    
+    @IBAction func imagePick(sender: AnyObject) {
+        //let imagePickerController = ImagePickerController()
+        imagePickerController2.imageLimit = 1
+        imagePickerController2.delegate = self
+        presentViewController(imagePickerController2, animated: true, completion: nil)
     }
     
     @IBAction func geoRecord(sender: AnyObject) {
@@ -246,6 +287,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             saveButton.enabled = false
             uploadButton.enabled = false
             camButton.enabled = false
+            camRollBtn.enabled = false
             logsButton.enabled = false
         }
         else {
@@ -254,6 +296,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             saveButton.enabled = true
             uploadButton.enabled = true
             camButton.enabled = true
+            camRollBtn.enabled = true
             logsButton.enabled = true
         }
     }

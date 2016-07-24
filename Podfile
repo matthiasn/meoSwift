@@ -7,6 +7,7 @@ target 'iWasWhere' do
   pod 'ObjectMapper', '~> 1.3'
   pod 'RSBarcodes_Swift', '~> 0.1.9'
   pod 'FontAwesome.swift'
+  pod 'ImagePicker'
 end
 
 target 'iWasWhereTests' do

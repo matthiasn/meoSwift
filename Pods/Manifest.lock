@@ -1,18 +1,21 @@
 PODS:
   - FontAwesome.swift (0.7.3)
+  - ImagePicker (1.3.0)
   - ObjectMapper (1.3.0)
   - RSBarcodes_Swift (0.1.9)
 
 DEPENDENCIES:
   - FontAwesome.swift
+  - ImagePicker
   - ObjectMapper (~> 1.3)
   - RSBarcodes_Swift (~> 0.1.9)
 
 SPEC CHECKSUMS:
   FontAwesome.swift: f694fe0f667d6d3390b5919cdb0556a27b75d427
+  ImagePicker: ed649bfeb850b2b8715c9e95a35725c730b5f627
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   RSBarcodes_Swift: 3c37a05faa0c8742739e1b47eec2f0d3d786330f
 
-PODFILE CHECKSUM: 2b5bbd78a8c937f4248060c0a6ea90105376e05e
+PODFILE CHECKSUM: a6c426e496295017d0ccdf255fde935b1ad3a21b
 
 COCOAPODS: 1.0.1
