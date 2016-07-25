@@ -22,23 +22,24 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="LxC-Oc-Tcx"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="dWE-aq-lhv">
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
-                                    <constraint firstAttribute="height" constant="478" id="tuI-xT-xkV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="twitter"/>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="LxC-Oc-Tcx"/>
                                         <exclude reference="dWE-aq-lhv"/>
-                                        <exclude reference="tuI-xT-xkV"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="20" y="25" width="360" height="150"/>
                                     <mask key="constraints">
+                                        <include reference="LxC-Oc-Tcx"/>
                                         <include reference="dWE-aq-lhv"/>
-                                        <include reference="tuI-xT-xkV"/>
                                     </mask>
                                 </variation>
                             </textView>
@@ -113,16 +114,34 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="30" y="506" width="328" height="34"/>
-                                </variation>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="41i-KT-2d0">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="14z-kA-2K8"/>
+                                    <constraint firstAttribute="width" constant="240" id="fvY-Z4-u3j"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="14z-kA-2K8"/>
+                                        <exclude reference="fvY-Z4-u3j"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="80" y="183" width="240" height="180"/>
+                                    <mask key="constraints">
+                                        <include reference="14z-kA-2K8"/>
+                                        <include reference="fvY-Z4-u3j"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="P4Q-UI-ZPt" secondAttribute="trailing" constant="3" id="Bgi-aG-BWj">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="41i-KT-2d0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K3c-dR-cDM"/>
                             <constraint firstItem="P4Q-UI-ZPt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="XDf-va-JCg">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -130,36 +149,46 @@
                             <constraint firstItem="P4Q-UI-ZPt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="djB-Vs-5mC">
                                 <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                             </constraint>
-                            <constraint firstItem="C44-pD-ev6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x6l-1H-tme"/>
+                            <constraint firstItem="41i-KT-2d0" firstAttribute="top" secondItem="P4Q-UI-ZPt" secondAttribute="bottom" id="rex-mI-AJX"/>
+                            <constraint firstItem="C44-pD-ev6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x6l-1H-tme">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-6"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="P4Q-UI-ZPt"/>
+                                <exclude reference="41i-KT-2d0"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="x6l-1H-tme"/>
-                                <exclude reference="bUH-1x-uE7"/>
                                 <exclude reference="Bgi-aG-BWj"/>
                                 <exclude reference="XDf-va-JCg"/>
                                 <exclude reference="djB-Vs-5mC"/>
+                                <exclude reference="K3c-dR-cDM"/>
+                                <exclude reference="rex-mI-AJX"/>
+                                <exclude reference="x6l-1H-tme"/>
+                                <exclude reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="P4Q-UI-ZPt"/>
+                                <include reference="41i-KT-2d0"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="x6l-1H-tme"/>
-                                <include reference="bUH-1x-uE7"/>
                                 <include reference="Bgi-aG-BWj"/>
                                 <include reference="XDf-va-JCg"/>
                                 <include reference="djB-Vs-5mC"/>
+                                <include reference="K3c-dR-cDM"/>
+                                <include reference="rex-mI-AJX"/>
+                                <include reference="x6l-1H-tme"/>
+                                <include reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="camButton" destination="u1j-KT-8BQ" id="J24-nX-srZ"/>
                         <outlet property="camRollBtn" destination="Wgp-s4-ZvT" id="s1q-kM-cUx"/>
+                        <outlet property="imgView" destination="41i-KT-2d0" id="BCZ-sc-v9k"/>
                         <outlet property="logsButton" destination="5kY-l8-NKS" id="cle-0p-pjF"/>
                         <outlet property="recordButton" destination="Qtj-if-EOc" id="Ky8-MC-Lha"/>
                         <outlet property="saveButton" destination="W08-ep-yBc" id="VmC-MR-o88"/>

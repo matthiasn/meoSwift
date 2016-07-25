@@ -31,6 +31,9 @@ class ScanViewController: RSCodeReaderViewController {
                             let jsonStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
                             for jsonString in jsonStrings {
                                 print(jsonString)
+                                
+                                //api.uploadEntry(barcode.stringValue, entry: jsonString, filename: "text-entries.json")
+                                
                                 let textEntry = Mapper<TextEntry>().map(jsonString)
                                 if let audioFilename = textEntry?.audioFile {
                                     print(audioFilename)
@@ -45,6 +48,7 @@ class ScanViewController: RSCodeReaderViewController {
                                         
                                         PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
                                             api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
+                                            //api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
                                         })
                                     }
                                 }

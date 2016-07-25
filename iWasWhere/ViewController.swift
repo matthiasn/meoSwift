@@ -21,6 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var uploadButton: UIButton!
+    @IBOutlet weak var imgView: UIImageView!    
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var camButton: UIButton!
     @IBOutlet weak var logsButton: UIButton!
@@ -36,12 +37,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var tempEntry: TextEntry? = nil
     private var locationManager = CLLocationManager()
     
-    let imagePickerController2 = ImagePickerController()
+    var imagePickerController2: ImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textInput.becomeFirstResponder()
+
+        imgView.contentMode = .ScaleAspectFit
         
         saveButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         saveButton.setTitle(String.fontAwesomeIconWithName(.FloppyO), forState: .Normal)
@@ -99,8 +102,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     func doneButtonDidPress(images: [UIImage]) {
-        //self.imagePickerController(<#T##picker: UIImagePickerController##UIImagePickerController#>, didFinishPickingMediaWithInfo: <#T##[String : AnyObject]#>)
-        //self.imagePickerController.stack
+        let img = images.first
+        print(img?.size)
+        imgView.image = img
+
         let imgAsset = imagePickerController2.stack.assets.first
         print(imgAsset?.localIdentifier)
         imgIdentifier = imgAsset!.localIdentifier
@@ -124,9 +129,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     @IBAction func imagePick(sender: AnyObject) {
-        //let imagePickerController = ImagePickerController()
+        imagePickerController2 = ImagePickerController()
         imagePickerController2.imageLimit = 1
         imagePickerController2.delegate = self
+        
         presentViewController(imagePickerController2, animated: true, completion: nil)
     }
     
@@ -176,6 +182,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+
+        imgView.image = image
+        
         let metadata = info[UIImagePickerControllerMediaMetadata] as! [NSObject : AnyObject]
         //let imgData = UIImagePNGRepresentation(image)
         let imgData = UIImageJPEGRepresentation(image, 0.5)
@@ -219,12 +228,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
-        if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        } else {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        }
-        
+//        if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
+//            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+//        } else {
+//            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+//        }
+        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.mediaTypes = [kUTTypeImage as String]
         imagePicker.allowsEditing = false
         self.presentViewController(imagePicker, animated: true, completion: nil)
@@ -239,6 +248,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         textInput.text = ""
         locationManager.requestLocation()
         audioFilename = nil
+        imgView.image = nil
     }
     
     // from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder

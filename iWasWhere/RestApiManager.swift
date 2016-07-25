@@ -41,6 +41,20 @@ class RestApiManager {
         task.resume()
     }
 
+    func uploadEntry (address: String, entry: String, filename: String) {
+        let request = NSMutableURLRequest(URL: NSURL(string: address + filename)!)
+        request.HTTPMethod = "POST"
+        let data = entry.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        task = session.uploadTaskWithRequest(request, fromData: data) { (data, response, error) -> Void in
+            if let data = data {
+                let response = NSString(data: data, encoding: NSUTF8StringEncoding)
+                print(response)
+            }
+        }
+        task.resume()
+    }
+
     func uploadImage (address: String, data: NSData, filename: String) {
         let request = NSMutableURLRequest(URL: NSURL(string: address + "images/" + filename)!)
         request.HTTPMethod = "PUT"
