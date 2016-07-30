@@ -235,6 +235,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
 //        }
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.mediaTypes = [kUTTypeImage as String]
+        imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashMode.Off
         imagePicker.allowsEditing = false
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
@@ -249,6 +250,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         locationManager.requestLocation()
         audioFilename = nil
         imgView.image = nil
+        imgFilename = nil
+        imgIdentifier = nil
     }
     
     // from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
