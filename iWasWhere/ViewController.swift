@@ -39,11 +39,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     var imagePickerController2: ImagePickerController!
     
+    let lightBackground = UIColor(red: 190/255, green: 205/255, blue: 210/255, alpha: 1)
+    let lightTextBackground = UIColor(red: 225/255, green: 230/255, blue: 235/255, alpha: 1)
+    let darkBackground = UIColor(red: 45/255, green: 62/255, blue: 80/255, alpha: 1)
+    let darkTextBackground = UIColor(red: 190/255, green: 205/255, blue: 210/255, alpha: 1)
+    
+    var nightMode = false
+    
+    @IBAction func toggleNightMode(sender: AnyObject) {
+        nightMode = !nightMode
+        if nightMode {
+            textInput.backgroundColor = darkTextBackground
+            self.view.backgroundColor = darkBackground
+        } else {
+            textInput.backgroundColor = lightTextBackground
+            self.view.backgroundColor = lightBackground
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+   
         textInput.becomeFirstResponder()
 
+        textInput.backgroundColor = lightTextBackground
+        self.view.backgroundColor = lightBackground
+        
         imgView.contentMode = .ScaleAspectFit
         
         saveButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
@@ -57,7 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         camRollBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
         camRollBtn.setTitle(String.fontAwesomeIconWithName(.Film), forState: .Normal)
         logsButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        logsButton.setTitle(String.fontAwesomeIconWithName(.FileText), forState: .Normal)
+        logsButton.setTitle(String.fontAwesomeIconWithName(.MoonO), forState: .Normal)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didUpdateLocations", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateUI), name:"didVisit", object: nil)

@@ -44,20 +44,23 @@
                                 </variation>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="C44-pD-ev6">
-                                <rect key="frame" x="10" y="486" width="354" height="34"/>
+                                <rect key="frame" x="10" y="486" width="328" height="34"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-l8-NKS">
-                                        <rect key="frame" x="0.0" y="0.0" width="57" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-l8-NKS" userLabel="Night Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="49" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                        <state key="normal" title="log"/>
+                                        <state key="normal" title="night"/>
                                         <state key="disabled">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="toggleNightMode:" destination="BYZ-38-t0r" eventType="touchDown" id="L5p-yD-PnV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwT-So-zkU">
-                                        <rect key="frame" x="64" y="0.0" width="77" height="34"/>
+                                        <rect key="frame" x="55" y="0.0" width="49" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -70,7 +73,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtj-if-EOc">
-                                        <rect key="frame" x="148" y="0.0" width="75" height="34"/>
+                                        <rect key="frame" x="110" y="0.0" width="53" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -80,7 +83,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1j-KT-8BQ">
-                                        <rect key="frame" x="230" y="0.0" width="57" height="34"/>
+                                        <rect key="frame" x="169" y="0.0" width="57" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -92,8 +95,8 @@
                                             <action selector="cam:" destination="BYZ-38-t0r" eventType="touchDown" id="xz6-Kf-nD6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgp-s4-ZvT">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgp-s4-ZvT">
+                                        <rect key="frame" x="232" y="0.0" width="30" height="34"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="roll"/>
                                         <connections>
@@ -101,7 +104,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
-                                        <rect key="frame" x="294" y="0.0" width="60" height="34"/>
+                                        <rect key="frame" x="268" y="0.0" width="60" height="34"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -114,6 +117,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="30" y="506" width="343" height="34"/>
+                                </variation>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="41i-KT-2d0">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -160,13 +166,13 @@
                                 <exclude reference="41i-KT-2d0"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="x6l-1H-tme"/>
+                                <exclude reference="bUH-1x-uE7"/>
+                                <exclude reference="K3c-dR-cDM"/>
+                                <exclude reference="rex-mI-AJX"/>
                                 <exclude reference="Bgi-aG-BWj"/>
                                 <exclude reference="XDf-va-JCg"/>
                                 <exclude reference="djB-Vs-5mC"/>
-                                <exclude reference="K3c-dR-cDM"/>
-                                <exclude reference="rex-mI-AJX"/>
-                                <exclude reference="x6l-1H-tme"/>
-                                <exclude reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -175,13 +181,13 @@
                                 <include reference="41i-KT-2d0"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="x6l-1H-tme"/>
+                                <include reference="bUH-1x-uE7"/>
+                                <include reference="K3c-dR-cDM"/>
+                                <include reference="rex-mI-AJX"/>
                                 <include reference="Bgi-aG-BWj"/>
                                 <include reference="XDf-va-JCg"/>
                                 <include reference="djB-Vs-5mC"/>
-                                <include reference="K3c-dR-cDM"/>
-                                <include reference="rex-mI-AJX"/>
-                                <include reference="x6l-1H-tme"/>
-                                <include reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                     </view>
