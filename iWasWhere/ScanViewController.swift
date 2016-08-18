@@ -42,14 +42,15 @@ class ScanViewController: RSCodeReaderViewController {
                                 if let imgIdentifier = textEntry?.imgIdentifier {
                                     let imgFilename = textEntry?.imgFile
                                     let fetchResults = PHAsset.fetchAssetsWithLocalIdentifiers([imgIdentifier], options: nil)
-                                    if let imageAsset = fetchResults.objectAtIndex(0) as? PHAsset {
-                                        let requestOptions = PHImageRequestOptions()
-                                        requestOptions.deliveryMode = .HighQualityFormat
-                                        
-                                        PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
-                                            api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
-                                            //api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
-                                        })
+                                    if fetchResults.count > 0 {
+                                        if let imageAsset = fetchResults.objectAtIndex(0) as? PHAsset {
+                                            let requestOptions = PHImageRequestOptions()
+                                            requestOptions.deliveryMode = .HighQualityFormat
+                                            
+                                            PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+                                                api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
+                                            })
+                                        }
                                     }
                                 }
                             }

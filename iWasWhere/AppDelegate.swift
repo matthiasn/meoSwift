@@ -25,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
         application.registerUserNotificationSettings(settings)
         
+        // activate proximity sensor, which automatically makes the screen turn dark when held to ear
+        // for notifications on changes, see http://stackoverflow.com/questions/30759711/proximity-sensor-in-swift-from-objective-c
+        let device = UIDevice.currentDevice()
+        device.proximityMonitoringEnabled = true
+        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.distanceFilter = 1000
