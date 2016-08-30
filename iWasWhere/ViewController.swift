@@ -42,7 +42,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     let lightBackground = UIColor(red: 190/255, green: 205/255, blue: 210/255, alpha: 1)
     let lightTextBackground = UIColor(red: 225/255, green: 230/255, blue: 235/255, alpha: 1)
     let darkBackground = UIColor(red: 45/255, green: 62/255, blue: 80/255, alpha: 1)
-    let darkTextBackground = UIColor(red: 190/255, green: 205/255, blue: 210/255, alpha: 1)
+    let darkTextBackground = UIColor(red: 140/255, green: 155/255, blue: 160/255, alpha: 1)
     
     var nightMode = false
     
@@ -51,9 +51,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         if nightMode {
             textInput.backgroundColor = darkTextBackground
             self.view.backgroundColor = darkBackground
+            textInput.keyboardAppearance = .Dark
         } else {
             textInput.backgroundColor = lightTextBackground
             self.view.backgroundColor = lightBackground
+            textInput.keyboardAppearance = .Light
         }
     }
     
