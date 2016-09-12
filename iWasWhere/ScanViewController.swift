@@ -48,7 +48,15 @@ class ScanViewController: RSCodeReaderViewController {
                                             requestOptions.deliveryMode = .HighQualityFormat
                                             
                                             PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
-                                                api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
+                                                
+                                                if let filename = imgFilename {
+                                                    api.uploadImage(barcode.stringValue, data: data!, filename: filename)
+                                                }
+                                                else {
+                                                    print(imgFilename, data)
+                                                }
+                                                
+                                                //api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
                                             })
                                         }
                                     }
