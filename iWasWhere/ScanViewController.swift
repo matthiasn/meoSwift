@@ -26,9 +26,13 @@ class ScanViewController: RSCodeReaderViewController {
                     
                     if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
                         let path = dir.stringByAppendingPathComponent("text-entries.json");
-                        let data = String(data: NSData(contentsOfFile: path)!, encoding: NSUTF8StringEncoding)
+                        //let data = String(data: NSData(contentsOfFile: path)!, encoding: NSUTF8StringEncoding)
+                        
+                        let data = NSData(contentsOfFile: path)
+                        
                         if let content = data {
-                            let jsonStrings = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+                            let dataString = String(data: content, encoding: NSUTF8StringEncoding)
+                            let jsonStrings = dataString!.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
                             for jsonString in jsonStrings {
                                 print(jsonString)
                                 
