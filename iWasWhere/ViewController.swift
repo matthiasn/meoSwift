@@ -32,6 +32,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var audioFilename: String!
     var imgFilename: String!
     var imgIdentifier: String!
+    var linkedImgAssets = [PHAsset]()
     
     let fileManager = FileManager()
     var tempEntry: TextEntry? = nil
@@ -126,6 +127,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     func doneButtonDidPress(images: [UIImage]) {
         let img = images.first
+        linkedImgAssets = imagePickerController2.stack.assets
+        print(images)
+        print(linkedImgAssets)
+        print(linkedImgAssets.first?.location)
         print(img?.size)
         imgView.image = img
 
@@ -135,15 +140,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         
         let requestOptions = PHImageRequestOptions()
         PHImageManager.defaultManager().requestImageDataForAsset(imgAsset!, options: requestOptions, resultHandler: { (data, str, orientation, info) in
-            print("requestImageDataForAsset in VC")
+            print("requestImageDataForAsset in VC", info)
             let path = info!["PHImageFileURLKey"] as! NSURL
             let fileName = path.absoluteString.componentsSeparatedByString("/").last
             
             let dayTimePeriodFormatter = NSDateFormatter()
-            dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
-            self.imgFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + "_" + fileName!
+            dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss_SSS"
+//            self.imgFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + "_" + fileName!
+            self.imgFilename = dayTimePeriodFormatter.stringFromDate((imgAsset?.creationDate)!) + "_" + fileName!
+            print(self.imgFilename)
         })
-        
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -153,7 +159,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     @IBAction func imagePick(sender: AnyObject) {
         imagePickerController2 = ImagePickerController()
-        imagePickerController2.imageLimit = 1
+        imagePickerController2.imageLimit = 50
         imagePickerController2.delegate = self
         
         presentViewController(imagePickerController2, animated: true, completion: nil)
@@ -264,8 +270,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     @IBAction func saveText(sender: AnyObject) {
-        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename, imgFile: imgFilename,
-                                 imgIdentifier: imgIdentifier)
+        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename,
+                                 imgFile: imgFilename, imgIdentifier: imgIdentifier)
         let newEntryString = Mapper().toJSONString(newEntry!)
         fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
@@ -275,6 +281,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         imgView.image = nil
         imgFilename = nil
         imgIdentifier = nil
+        
+        for asset in linkedImgAssets {
+            let dayTimePeriodFormatter = NSDateFormatter()
+            dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss_SSS"
+            
+            let requestOptions = PHImageRequestOptions()
+            PHImageManager.defaultManager().requestImageDataForAsset(asset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+                let path = info!["PHImageFileURLKey"] as! NSURL
+                let fileName = path.absoluteString.componentsSeparatedByString("/").last
+                let dayTimePeriodFormatter = NSDateFormatter()
+                dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss_SSS"
+                
+                let linkedEntry = TextEntry(md: "linked image",
+                    submitDateTime: asset.creationDate!,
+                    audioFile: nil,
+                    imgFile: dayTimePeriodFormatter.stringFromDate((asset.creationDate)!) + "_" + fileName!,
+                    imgIdentifier: asset.localIdentifier)
+                linkedEntry?.horizontalAccuracy = asset.location?.horizontalAccuracy
+                linkedEntry?.latitude = asset.location?.coordinate.latitude
+                linkedEntry?.longitude = asset.location?.coordinate.longitude
+                let linkedEntryString = Mapper().toJSONString(linkedEntry!)
+
+                print(linkedEntryString!)
+                //self.fileManager.appendLine("text-entries.json", line: linkedEntryString!)
+            })
+        }
     }
     
     // from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
