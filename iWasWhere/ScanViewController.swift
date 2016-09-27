@@ -59,8 +59,6 @@ class ScanViewController: RSCodeReaderViewController {
                                                 else {
                                                     print(imgFilename, data)
                                                 }
-                                                
-                                                //api.uploadImage(barcode.stringValue, data: data!, filename: imgFilename!)
                                             })
                                         }
                                     }

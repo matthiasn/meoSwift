@@ -16,6 +16,7 @@ class TextEntry: Mappable {
     var latitude: Double?
     var longitude: Double?
     var timestamp: Double?
+    var linkedTimestamp: Double?
     var gpsTimestamp: Double?
     var dateTime: String?
     var audioFile: String?
@@ -67,6 +68,7 @@ class TextEntry: Mappable {
         imgFile            <- map["img_file"]
         imgIdentifier      <- map["img_identifier"]
         timestamp          <- map["timestamp"]
+        linkedTimestamp    <- map["linked_timestamp"]
         gpsTimestamp       <- map["gps_timestamp"]
         horizontalAccuracy <- map["horizontal_accuracy"]
         device             <- map["device"]

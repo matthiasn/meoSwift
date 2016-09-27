@@ -125,32 +125,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     func wrapperDidPress(images: [UIImage]) {
     }
     
+    // called when done button in image picker is pressed
     func doneButtonDidPress(images: [UIImage]) {
-        let img = images.first
         linkedImgAssets = imagePickerController2.stack.assets
-        print(images)
-        print(linkedImgAssets)
-        print(linkedImgAssets.first?.location)
-        print(img?.size)
-        imgView.image = img
-
-        let imgAsset = imagePickerController2.stack.assets.first
-        print(imgAsset?.localIdentifier)
-        imgIdentifier = imgAsset!.localIdentifier
-        
-        let requestOptions = PHImageRequestOptions()
-        PHImageManager.defaultManager().requestImageDataForAsset(imgAsset!, options: requestOptions, resultHandler: { (data, str, orientation, info) in
-            print("requestImageDataForAsset in VC", info)
-            let path = info!["PHImageFileURLKey"] as! NSURL
-            let fileName = path.absoluteString.componentsSeparatedByString("/").last
-            
-            let dayTimePeriodFormatter = NSDateFormatter()
-            dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss_SSS"
-//            self.imgFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + "_" + fileName!
-            self.imgFilename = dayTimePeriodFormatter.stringFromDate((imgAsset?.creationDate)!) + "_" + fileName!
-            print(self.imgFilename)
-        })
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -256,12 +233,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     @IBAction func cam(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        
-//        if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
-//            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-//        } else {
-//            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-//        }
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.mediaTypes = [kUTTypeImage as String]
         imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashMode.Off
@@ -282,6 +253,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         imgFilename = nil
         imgIdentifier = nil
         
+        // create linked entry for each asset in linkedImgAssets
         for asset in linkedImgAssets {
             let dayTimePeriodFormatter = NSDateFormatter()
             dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss_SSS"
@@ -293,7 +265,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                 let dayTimePeriodFormatter = NSDateFormatter()
                 dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss_SSS"
                 
-                let linkedEntry = TextEntry(md: "linked image",
+                let linkedEntry = TextEntry(md: "see linked entry for description",
                     submitDateTime: asset.creationDate!,
                     audioFile: nil,
                     imgFile: dayTimePeriodFormatter.stringFromDate((asset.creationDate)!) + "_" + fileName!,
@@ -301,10 +273,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                 linkedEntry?.horizontalAccuracy = asset.location?.horizontalAccuracy
                 linkedEntry?.latitude = asset.location?.coordinate.latitude
                 linkedEntry?.longitude = asset.location?.coordinate.longitude
+                linkedEntry?.linkedTimestamp = newEntry?.timestamp
+                
                 let linkedEntryString = Mapper().toJSONString(linkedEntry!)
-
                 print(linkedEntryString!)
-                //self.fileManager.appendLine("text-entries.json", line: linkedEntryString!)
+                self.fileManager.appendLine("text-entries.json", line: linkedEntryString!)
             })
         }
     }
