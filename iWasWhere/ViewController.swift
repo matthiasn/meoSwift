@@ -246,12 +246,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         let newEntryString = Mapper().toJSONString(newEntry!)
         fileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
-        textInput.text = ""
         locationManager.requestLocation()
-        audioFilename = nil
-        imgView.image = nil
-        imgFilename = nil
-        imgIdentifier = nil
         
         // create linked entry for each asset in linkedImgAssets
         for asset in linkedImgAssets {
@@ -276,10 +271,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                 linkedEntry?.linkedTimestamp = newEntry?.timestamp
                 
                 let linkedEntryString = Mapper().toJSONString(linkedEntry!)
-                print(linkedEntryString!)
                 self.fileManager.appendLine("text-entries.json", line: linkedEntryString!)
             })
         }
+        textInput.text = ""
+        audioFilename = nil
+        imgView.image = nil
+        imgFilename = nil
+        imgIdentifier = nil
+        linkedImgAssets = [PHAsset]()
     }
     
     // from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
