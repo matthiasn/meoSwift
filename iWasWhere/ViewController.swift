@@ -241,7 +241,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     @IBAction func saveText(sender: AnyObject) {
-        let newEntry = TextEntry(md: textInput.text, submitDateTime: NSDate(), audioFile: audioFilename,
+        let entryText = textInput.text
+        let newEntry = TextEntry(md: entryText, submitDateTime: NSDate(), audioFile: audioFilename,
                                  imgFile: imgFilename, imgIdentifier: imgIdentifier)
         let newEntryString = Mapper().toJSONString(newEntry!)
         fileManager.appendLine("text-entries.json", line: newEntryString!)
@@ -260,7 +261,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                 let dayTimePeriodFormatter = NSDateFormatter()
                 dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss_SSS"
                 
-                let linkedEntry = TextEntry(md: "see linked entry for description",
+                let linkedEntry = TextEntry(
+                    md: entryText + " (from linked entry)",
                     submitDateTime: asset.creationDate!,
                     audioFile: nil,
                     imgFile: dayTimePeriodFormatter.stringFromDate((asset.creationDate)!) + "_" + fileName!,
