@@ -72,22 +72,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
         textInput.becomeFirstResponder()
-
         textInput.backgroundColor = lightTextBackground
         self.view.backgroundColor = lightBackground
-    
         saveButton.setTitle("save", for: [])
         uploadButton.setTitle("upload", for: [])
         recordButton.setTitle("mic", for: [])
         camRollBtn.setTitle("camRoll", for: [])
         logsButton.setTitle("night", for: [])
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name:NSNotification.Name(rawValue: "didUpdateLocations"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name:NSNotification.Name(rawValue: "didVisit"), object: nil)
         locationManager.delegate = self
-        
         recordingSession = AVAudioSession.sharedInstance()
         
         do {
@@ -112,17 +105,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         // Dispose of any resources that can be recreated.
     }
     
-    func someNotification(_ sender: AnyObject) {
-        let notification = UILocalNotification()
-        notification.applicationIconBadgeNumber = 1
-        notification.fireDate = Date(timeIntervalSinceNow: 5)
-        notification.alertBody = "Hey you! Yeah you! Swipe to unlock!"
-        notification.alertAction = "be awesome!"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = ["CustomField1": "w00t"]
-        UIApplication.shared.scheduleLocalNotification(notification)
-    }
-    
+
     func wrapperDidPress(_ images: [UIImage]) {
     }
     
@@ -150,15 +133,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     func imageSaved(_ image: UIImage, didFinishSavingWithError error: NSErrorPointer?, contextInfo:UnsafeRawPointer) {
-        if let asset = image.imageAsset {
+        if image.imageAsset != nil {
             let fetchOptions: PHFetchOptions = PHFetchOptions()
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
             let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
             
             if (fetchResult.firstObject != nil) {
-                let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
+                let lastAsset: PHAsset = fetchResult.lastObject!
                 print(lastAsset.localIdentifier)
-                print(lastAsset.creationDate)
+                print(lastAsset.creationDate!)
                 let requestOptions = PHImageRequestOptions()
                 PHImageManager.default().requestImageData(for: lastAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
                     print("requestImageDataForAsset in VC")
@@ -191,23 +174,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         let metadata = info[UIImagePickerControllerMediaMetadata] as! [AnyHashable: Any]
-        //let imgData = UIImagePNGRepresentation(image)
         let imgData = UIImageJPEGRepresentation(image, 0.5)
-        //imgData?.writeToFile(fileInDocumentsDirectory("image.jpg"), atomically: true)
-        
-        //UIImageWriteToSavedPhotosAlbum(image, self,
-        //                               #selector(ViewController.imageSaved( _:didFinishSavingWithError:contextInfo:)), nil)
         
         ALAssetsLibrary().writeImageData(toSavedPhotosAlbum: imgData, metadata: metadata) { (url, error) in
-            if let asset = image.imageAsset {
+            if image.imageAsset != nil {
                 let fetchOptions: PHFetchOptions = PHFetchOptions()
                 fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
                 let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
                 
                 if (fetchResult.firstObject != nil) {
-                    let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
+                    let lastAsset: PHAsset = fetchResult.lastObject!
                     print(lastAsset.localIdentifier)
-                    print(lastAsset.creationDate)
+                    print(lastAsset.creationDate!)
                     
                     let requestOptions = PHImageRequestOptions()
                     PHImageManager.default().requestImageData(for: lastAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
@@ -219,7 +197,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                         dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
                         self.imgFilename = dayTimePeriodFormatter.string(from: Date()) + "_" + fileName!
                         print(self.imgFilename)
-                        print(data?.count)
+                        print(data?.count as Any)
                     })
                     self.imgIdentifier = lastAsset.localIdentifier
                 }
@@ -294,7 +272,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     // adapted from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
     func startRecording() {
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString {
             
             let dayTimePeriodFormatter = DateFormatter()
             dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
@@ -349,15 +327,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         controller.dismissalDelegate = self
         
         present(controller, animated: true, completion: nil)
-        
-        //let svc = ScanViewController()
-        //self.presentViewController(svc, animated: true, completion: { () -> Void in
-        //    self.textInput.becomeFirstResponder() })
-    }
     
-    @objc func updateUI(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-        }
     }
     
     // MARK: CLLocationManagerDelegate
@@ -386,7 +356,6 @@ extension ViewController: BarcodeScannerCodeDelegate {
     
     func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String) {
         print("Barcode Data: \(code)")
-        print("Symbology Type: \(type)")
         
         let api = RestApiManager()
         
@@ -441,16 +410,13 @@ extension ViewController: BarcodeScannerCodeDelegate {
 }
 
 extension ViewController: BarcodeScannerErrorDelegate {
-    
     func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
         print(error)
     }
 }
 
 extension ViewController: BarcodeScannerDismissalDelegate {
-    
     func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
-
