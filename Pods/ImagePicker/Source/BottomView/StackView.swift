@@ -22,12 +22,12 @@ class ImageStackView: UIView {
 
   var views: [UIImageView] = {
     var array = [UIImageView]()
-    for i in 0...3 {
+    for _ in 0...3 {
       let view = UIImageView()
       view.layer.cornerRadius = 3
-      view.layer.borderColor = UIColor.whiteColor().CGColor
+      view.layer.borderColor = UIColor.white.cgColor
       view.layer.borderWidth = 1
-      view.contentMode = .ScaleAspectFill
+      view.contentMode = .scaleAspectFill
       view.clipsToBounds = true
       view.alpha = 0
       array.append(view)
@@ -45,7 +45,6 @@ class ImageStackView: UIView {
     views.forEach { addSubview($0) }
     addSubview(activityView)
     views.first?.alpha = 1
-    layoutSubviews()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -53,25 +52,25 @@ class ImageStackView: UIView {
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
   // MARK: - Helpers
 
   func subscribe() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
+    NotificationCenter.default.addObserver(self,
       selector: #selector(imageDidPush(_:)),
-      name: ImageStack.Notifications.imageDidPush,
+      name: NSNotification.Name(rawValue: ImageStack.Notifications.imageDidPush),
       object: nil)
 
-    NSNotificationCenter.defaultCenter().addObserver(self,
+    NotificationCenter.default.addObserver(self,
       selector: #selector(imageStackDidChangeContent(_:)),
-      name: ImageStack.Notifications.imageDidDrop,
+      name: NSNotification.Name(rawValue: ImageStack.Notifications.imageDidDrop),
       object: nil)
 
-    NSNotificationCenter.defaultCenter().addObserver(self,
+    NotificationCenter.default.addObserver(self,
       selector: #selector(imageStackDidChangeContent(_:)),
-      name: ImageStack.Notifications.stackDidReload,
+      name: NSNotification.Name(rawValue: ImageStack.Notifications.stackDidReload),
       object: nil)
   }
 
@@ -96,17 +95,17 @@ class ImageStackView: UIView {
       activityView.frame.origin.x = firstVisibleView.center.x
       activityView.frame.origin.y = firstVisibleView.center.y
     }
-  
+
     activityView.startAnimating()
-    UIView.animateWithDuration(0.3) {
+    UIView.animate(withDuration: 0.3, animations: {
       self.activityView.alpha = 1.0
-    }
+    })
   }
 }
 
 extension ImageStackView {
 
-  func imageDidPush(notification: NSNotification) {
+  @objc func imageDidPush(_ notification: Notification) {
     let emptyView = views.filter { $0.image == nil }.first
 
     if let emptyView = emptyView {
@@ -119,18 +118,18 @@ extension ImageStackView {
     }
   }
 
-  func imageStackDidChangeContent(notification: NSNotification) {
+  @objc func imageStackDidChangeContent(_ notification: Notification) {
     if let sender = notification.object as? ImageStack {
       renderViews(sender.assets)
       activityView.stopAnimating()
     }
   }
 
-  func renderViews(assets: [PHAsset]) {
-    if let firstView = views.first where assets.isEmpty {
-      for imageView in views {
-        imageView.image = nil
-        imageView.alpha = 0
+  @objc func renderViews(_ assets: [PHAsset]) {
+    if let firstView = views.first, assets.isEmpty {
+      views.forEach {
+        $0.image = nil
+        $0.alpha = 0
       }
 
       firstView.alpha = 1
@@ -139,9 +138,9 @@ extension ImageStackView {
 
     let photos = Array(assets.suffix(4))
 
-    for (index, view) in views.enumerate() {
+    for (index, view) in views.enumerated() {
       if index <= photos.count - 1 {
-        ImagePicker.resolveAsset(photos[index], size: CGSize(width: Dimensions.imageSize, height: Dimensions.imageSize)) { image in
+        AssetManager.resolveAsset(photos[index], size: CGSize(width: Dimensions.imageSize, height: Dimensions.imageSize)) { image in
           view.image = image
         }
         view.alpha = 1
@@ -151,26 +150,25 @@ extension ImageStackView {
       }
 
       if index == photos.count {
-        UIView.animateWithDuration(0.3) {
-          self.activityView.frame.origin.x = view.center.x + 3
-          self.activityView.frame.origin.y = view.center.y + 3
-        }
+        UIView.animate(withDuration: 0.3, animations: {
+          self.activityView.frame.origin = CGPoint(x: view.center.x + 3, y: view.center.x + 3)
+        })
       }
     }
   }
 
-  private func animateImageView(imageView: UIImageView) {
-    imageView.transform = CGAffineTransformMakeScale(0, 0)
+  fileprivate func animateImageView(_ imageView: UIImageView) {
+    imageView.transform = CGAffineTransform(scaleX: 0, y: 0)
 
-    UIView.animateWithDuration(0.3, animations: {
-      imageView.transform = CGAffineTransformMakeScale(1.05, 1.05)
-      }) { _ in
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
+    UIView.animate(withDuration: 0.3, animations: {
+      imageView.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+      }, completion: { _ in
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
           self.activityView.alpha = 0.0
-          imageView.transform = CGAffineTransformIdentity
+          imageView.transform = CGAffineTransform.identity
           }, completion: { _ in
             self.activityView.stopAnimating()
         })
-    }
+    })
   }
 }

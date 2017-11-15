@@ -41,7 +41,7 @@ class GeoEntry: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         lat                <- map["latitude"]
         lon                <- map["longitude"]
         altitude           <- map["altitude"]

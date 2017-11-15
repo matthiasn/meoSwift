@@ -30,7 +30,7 @@ class TextEntry: Mappable {
     init?(md: String,
           lat: Double,
           lon: Double,
-          submitDateTime: NSDate,
+          submitDateTime: Date,
           horizontalAccuracy: Double) {
         // Initialize stored properties.
         self.md = md
@@ -42,7 +42,7 @@ class TextEntry: Mappable {
     }
     
     init?(md: String,
-          submitDateTime: NSDate,
+          submitDateTime: Date,
           audioFile: String?,
           imgFile: String?,
           imgIdentifier: String?) {
@@ -59,7 +59,7 @@ class TextEntry: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         latitude           <- map["latitude"]
         md                 <- map["md"]
         longitude          <- map["longitude"]

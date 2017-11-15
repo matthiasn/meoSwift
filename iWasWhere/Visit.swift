@@ -38,7 +38,7 @@ class Visit: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         latitude           <- map["latitude"]
         longitude          <- map["longitude"]
         arrivalDate        <- map["arrival_date"]

@@ -11,53 +11,53 @@ import ObjectMapper
 
 class FileManager {
 
-    let fm = NSFileManager.defaultManager()
-    let dayTimePeriodFormatter = NSDateFormatter()
+    let fm = Foundation.FileManager.default
+    let dayTimePeriodFormatter = DateFormatter()
     
-    func rollingFilename(prefix: String) -> String {
+    func rollingFilename(_ prefix: String) -> String {
         dayTimePeriodFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dayTimePeriodFormatter.stringFromDate(NSDate())
+        let dateString = dayTimePeriodFormatter.string(from: Date())
         return "\(prefix)\(dateString).json"
     }
     
-    func appendLine(fileName: String, line: String) {
+    func appendLine(_ fileName: String, line: String) {
         let withNewline = "\(line)\r\n"
         
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = dir.stringByAppendingPathComponent(fileName);
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
+            let path = dir.appendingPathComponent(fileName);
             
             //create file if it doesn't exist
-            if !fm.fileExistsAtPath(path) {
-                fm.createFileAtPath(path, contents: nil, attributes: nil)
+            if !fm.fileExists(atPath: path) {
+                fm.createFile(atPath: path, contents: nil, attributes: nil)
             }
-            let fileHandle = NSFileHandle(forUpdatingAtPath: path)
+            let fileHandle = FileHandle(forUpdatingAtPath: path)
             fileHandle?.seekToEndOfFile()
-            fileHandle?.writeData(withNewline.dataUsingEncoding(NSUTF8StringEncoding)!)
+            fileHandle?.write(withNewline.data(using: String.Encoding.utf8)!)
             fileHandle?.closeFile()
         }
     }
     
-    func readBinaryFile(fileName: String) -> NSData? {
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = dir.stringByAppendingPathComponent(fileName);
-            let data = NSData(contentsOfFile: path)
+    func readBinaryFile(_ fileName: String) -> Data? {
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
+            let path = dir.appendingPathComponent(fileName);
+            let data = try? Data(contentsOf: URL(fileURLWithPath: path))
             return data
         }
-        return NSData()
+        return Data()
     }
     
-    func readFile(fileName: String) -> String {
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = dir.stringByAppendingPathComponent(fileName)
+    func readFile(_ fileName: String) -> String {
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
+            let path = dir.appendingPathComponent(fileName)
             
             //create file if it doesn't exist
-            if !fm.fileExistsAtPath(path) {
-                fm.createFileAtPath(path, contents: nil, attributes: nil)
+            if !fm.fileExists(atPath: path) {
+                fm.createFile(atPath: path, contents: nil, attributes: nil)
             }
-            let fileHandle = NSFileHandle(forUpdatingAtPath: path)
+            let fileHandle = FileHandle(forUpdatingAtPath: path)
             let fileData = fileHandle?.readDataToEndOfFile()
             fileHandle?.closeFile()
-            return NSString(data: fileData!, encoding: NSUTF8StringEncoding) as! String
+            return NSString(data: fileData!, encoding: String.Encoding.utf8.rawValue) as! String
         }
         return ""
     }

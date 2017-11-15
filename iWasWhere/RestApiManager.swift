@@ -9,80 +9,80 @@
 import Foundation
 
 class RestApiManager {
-    let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-    var task: NSURLSessionDataTask!
+    let session = URLSession(configuration: URLSessionConfiguration.default)
+    var task: URLSessionDataTask!
 
-    func upload (address: String, filename: String) {
-        let request = NSMutableURLRequest(URL: NSURL(string: address + filename)!)
-        request.HTTPMethod = "POST"
+    func upload (_ address: String, filename: String) {
+        let request = NSMutableURLRequest(url: URL(string: address + filename)!)
+        request.httpMethod = "POST"
         let fileManager = FileManager()
         let str = fileManager.readFile(filename)
-        let data = str.dataUsingEncoding(NSUTF8StringEncoding)
+        let data = str.data(using: String.Encoding.utf8)
 
-        task = session.uploadTaskWithRequest(request, fromData: data) { (data, response, error) -> Void in
+        task = session.uploadTask(with: request, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
-                let response = NSString(data: data, encoding: NSUTF8StringEncoding)
+                let response = NSString(data: data, encoding: String.Encoding.utf8)
                 print(response)
                 
-                let dayTimePeriodFormatter = NSDateFormatter()
+                let dayTimePeriodFormatter = DateFormatter()
                 dayTimePeriodFormatter.dateFormat = "yyyyMMdd-HHmmss-SSS-"
-                let newFilename = dayTimePeriodFormatter.stringFromDate(NSDate()) + filename
+                let newFilename = dayTimePeriodFormatter.string(from: Date()) + filename
                 
-                if let dir: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-                    let oldPath = dir.stringByAppendingPathComponent(filename);
-                    let newPath = dir.stringByAppendingPathComponent(newFilename);
+                if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first {
+                    let oldPath = dir.appendingPathComponent(filename);
+                    let newPath = dir.appendingPathComponent(newFilename);
                 
-                    let fileManager = NSFileManager.defaultManager()
-                    do { try fileManager.moveItemAtPath(oldPath, toPath: newPath) }
+                    let fileManager = Foundation.FileManager.default
+                    do { try fileManager.moveItem(atPath: oldPath, toPath: newPath) }
                     catch let error as NSError {print("Could not rename: \(error)")}
                 }
             }
-        }
+        }) 
         task.resume()
     }
 
-    func uploadEntry (address: String, entry: String, filename: String) {
-        let request = NSMutableURLRequest(URL: NSURL(string: address + filename)!)
-        request.HTTPMethod = "POST"
-        let data = entry.dataUsingEncoding(NSUTF8StringEncoding)
+    func uploadEntry (_ address: String, entry: String, filename: String) {
+        let request = NSMutableURLRequest(url: URL(string: address + filename)!)
+        request.httpMethod = "POST"
+        let data = entry.data(using: String.Encoding.utf8)
         
-        task = session.uploadTaskWithRequest(request, fromData: data) { (data, response, error) -> Void in
+        task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
-                let response = NSString(data: data, encoding: NSUTF8StringEncoding)
+                let response = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                 print(response)
             }
-        }
+        }) 
         task.resume()
     }
 
-    func uploadImage (address: String, data: NSData, filename: String) {
-        let request = NSMutableURLRequest(URL: NSURL(string: address + "images/" + filename)!)
-        request.HTTPMethod = "PUT"
+    func uploadImage (_ address: String, data: Data, filename: String) {
+        let request = NSMutableURLRequest(url: URL(string: address + "images/" + filename)!)
+        request.httpMethod = "PUT"
         request.addValue("image/jpeg", forHTTPHeaderField: "Content-Type")
         
-        task = session.uploadTaskWithRequest(request, fromData: data) { (data, response, error) -> Void in
+        task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
-                let response = NSString(data: data, encoding: NSUTF8StringEncoding)
+                let response = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                 print(response)
             }
-        }
+        }) 
         task.resume()
     }
     
-    func uploadAudio (address: String, filename: String) {
-        let request = NSMutableURLRequest(URL: NSURL(string: address + "audio/" + filename)!)
-        request.HTTPMethod = "PUT"
+    func uploadAudio (_ address: String, filename: String) {
+        let request = NSMutableURLRequest(url: URL(string: address + "audio/" + filename)!)
+        request.httpMethod = "PUT"
         request.addValue("audio/m4a", forHTTPHeaderField: "Content-Type")
         
         let fileManager = FileManager()
         let data = fileManager.readBinaryFile(filename)
         
-        task = session.uploadTaskWithRequest(request, fromData: data) { (data, response, error) -> Void in
+        task = session.uploadTask(with: request, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
-                let response = NSString(data: data, encoding: NSUTF8StringEncoding)
+                let response = NSString(data: data, encoding: String.Encoding.utf8)
                 print(response)
             }
-        }
+        }) 
         task.resume()
     }
 }
