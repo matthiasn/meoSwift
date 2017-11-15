@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let JSONString = Mapper().toJSONString(newEntry)
         fileManager.appendLine(fileManager.rollingFilename("geo-"), line: JSONString!)
         
-        NotificationCenter.defaultCenter().postNotificationName("didUpdateLocations", object:nil, userInfo: ["newEntry":newEntry])
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didUpdateLocations"), object:nil)
     }
     
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {

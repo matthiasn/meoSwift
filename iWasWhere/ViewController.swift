@@ -11,12 +11,24 @@ import CoreLocation
 import ObjectMapper
 import AVFoundation
 import MobileCoreServices
-import FontAwesome_swift
 import AssetsLibrary
 import Photos
 import ImagePicker
 
 class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate {
+    
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        
+    }
+    
     
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var recordButton: UIButton!
@@ -70,18 +82,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         
         imgView.contentMode = .scaleAspectFit
         
-        saveButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        saveButton.setTitle(String.fontAwesomeIconWithName(.FloppyO), for: .Normal)
-        uploadButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        uploadButton.setTitle(String.fontAwesomeIconWithName(.Upload), for: .Normal)
-        recordButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        recordButton.setTitle(String.fontAwesomeIconWithName(.Microphone), for: .Normal)
-        camButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        camButton.setTitle(String.fontAwesomeIconWithName(.CameraRetro), for: .Normal)
-        camRollBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        camRollBtn.setTitle(String.fontAwesomeIconWithName(.Film), for: .Normal)
-        logsButton.titleLabel?.font = UIFont.fontAwesomeOfSize(25)
-        logsButton.setTitle(String.fontAwesomeIconWithName(.MoonO), for: .Normal)
+        saveButton.setTitle("save", for: [])
+        uploadButton.setTitle("upload", for: [])
+        recordButton.setTitle("mic", for: [])
+        camRollBtn.setTitle("camRoll", for: [])
+        logsButton.setTitle("night", for: [])
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name:NSNotification.Name(rawValue: "didUpdateLocations"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name:NSNotification.Name(rawValue: "didVisit"), object: nil)
@@ -139,7 +144,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         imagePickerController2.imageLimit = 50
         imagePickerController2.delegate = self
         
-        presentViewController(imagePickerController2, animated: true, completion: nil)
+        present(imagePickerController2, animated: true, completion: nil)
     }
     
     @IBAction func geoRecord(_ sender: AnyObject) {
@@ -289,7 +294,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         audioRecorder.stop()
         audioRecorder = nil
         print("finishRecording " + audioFilename)
-        recordButton.setTitle(String.fontAwesomeIconWithName(.Microphone), for: .Normal)
+        recordButton.setTitle("record", for: [])
     }
     
     var isRecording = false
@@ -304,7 +309,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             
             let fileWithPath = dir.appendingPathComponent(audioFilename)
             let audioURL = URL(fileURLWithPath: fileWithPath)
-            recordButton.setTitle(String.fontAwesomeIconWithName(.Stop), for: .Normal)
+            recordButton.setTitle("stop", for: [])
             
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -346,9 +351,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     @IBAction func upload(_ sender: AnyObject) {
         textInput.resignFirstResponder()
-        let svc = ScanViewController()
-        self.presentViewController(svc, animated: true, completion: { () -> Void in
-            self.textInput.becomeFirstResponder() })
+//        let svc = ScanViewController()
+//        self.presentViewController(svc, animated: true, completion: { () -> Void in
+//            self.textInput.becomeFirstResponder() })
     }
     
     @objc func updateUI(_ notification: Notification) {

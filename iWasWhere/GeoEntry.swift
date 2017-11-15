@@ -37,11 +37,11 @@ class GeoEntry: Mappable {
         self.verticalAccuracy = location.verticalAccuracy
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
     }
     
     // Mappable
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         lat                <- map["latitude"]
         lon                <- map["longitude"]
         altitude           <- map["altitude"]

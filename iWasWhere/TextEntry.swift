@@ -55,11 +55,11 @@ class TextEntry: Mappable {
         self.imgIdentifier = imgIdentifier
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
     }
     
     // Mappable
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         latitude           <- map["latitude"]
         md                 <- map["md"]
         longitude          <- map["longitude"]

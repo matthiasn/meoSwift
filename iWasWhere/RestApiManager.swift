@@ -19,16 +19,16 @@ class RestApiManager {
         let str = fileManager.readFile(filename)
         let data = str.data(using: String.Encoding.utf8)
 
-        task = session.uploadTask(with: request, from: data, completionHandler: { (data, response, error) -> Void in
+        task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
-                let response = NSString(data: data, encoding: String.Encoding.utf8)
+                let response = NSString(data: data, encoding:String.Encoding.utf8.rawValue)
                 print(response)
                 
                 let dayTimePeriodFormatter = DateFormatter()
                 dayTimePeriodFormatter.dateFormat = "yyyyMMdd-HHmmss-SSS-"
                 let newFilename = dayTimePeriodFormatter.string(from: Date()) + filename
                 
-                if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first {
+                if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
                     let oldPath = dir.appendingPathComponent(filename);
                     let newPath = dir.appendingPathComponent(newFilename);
                 
@@ -77,9 +77,9 @@ class RestApiManager {
         let fileManager = FileManager()
         let data = fileManager.readBinaryFile(filename)
         
-        task = session.uploadTask(with: request, from: data, completionHandler: { (data, response, error) -> Void in
+        task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
-                let response = NSString(data: data, encoding: String.Encoding.utf8)
+                let response = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                 print(response)
             }
         }) 

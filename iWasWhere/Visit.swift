@@ -34,11 +34,11 @@ class Visit: Mappable {
         self.departureDate = "\(visit.departureDate)"
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
     }
     
     // Mappable
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         latitude           <- map["latitude"]
         longitude          <- map["longitude"]
         arrivalDate        <- map["arrival_date"]
