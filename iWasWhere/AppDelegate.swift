@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var window: UIWindow?
 
     fileprivate var locationManager = CLLocationManager()
-    let fileManager = FileManager()
+    let iwwFileManager = IwwFileManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        
         let newEntry = GeoEntry(location: locations.last!)!
         let JSONString = Mapper().toJSONString(newEntry)
-        fileManager.appendLine(fileManager.rollingFilename("geo-"), line: JSONString!)
+        iwwFileManager.appendLine(iwwFileManager.rollingFilename("geo-"), line: JSONString!)
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didUpdateLocations"), object:nil)
     }
@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
         let newVisit = Visit(visit: visit)
         let visitString = Mapper().toJSONString(newVisit!)
-        fileManager.appendLine("visits.json", line: visitString!)
+        iwwFileManager.appendLine("visits.json", line: visitString!)
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "didVisit"), object: nil)
     }

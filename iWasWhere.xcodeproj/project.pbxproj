@@ -23,7 +23,7 @@
 		ADB28B7F1CB69BE600CF15D5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ADB28B7E1CB69BE600CF15D5 /* Podfile */; };
 		ADBE3FD71D42DAB100DC002D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBE3FD61D42DAB100DC002D /* Photos.framework */; };
 		ADCF3E4C1D3C41CA004FED07 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */; };
-		ADDDB7311CB936320036E175 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* FileManager.swift */; };
+		ADDDB7311CB936320036E175 /* IwwFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* IwwFileManager.swift */; };
 		ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7321CB95F3C0036E175 /* Visit.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +54,7 @@
 		ADB28B7E1CB69BE600CF15D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ADBE3FD61D42DAB100DC002D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
-		ADDDB7301CB936320036E175 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		ADDDB7301CB936320036E175 /* IwwFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IwwFileManager.swift; sourceTree = "<group>"; };
 		ADDDB7321CB95F3C0036E175 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		DCBF09520CBDB9D320AE0C45 /* Pods-iWasWhereTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhereTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhereTests/Pods-iWasWhereTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD1A2D233FFD5FEEE3E770E4 /* Pods_iWasWhere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWasWhere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +123,7 @@
 				ADB28B511CB5D3CD00CF15D5 /* LaunchScreen.storyboard */,
 				ADB28B541CB5D3CD00CF15D5 /* Info.plist */,
 				ADB28B4C1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld */,
-				ADDDB7301CB936320036E175 /* FileManager.swift */,
+				ADDDB7301CB936320036E175 /* IwwFileManager.swift */,
 				ADCF3E4B1D3C41CA004FED07 /* ScanViewController.swift */,
 			);
 			path = iWasWhere;
@@ -263,11 +263,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iWasWhere/Pods-iWasWhere-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BarcodeScanner/BarcodeScanner.framework",
 				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BarcodeScanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
@@ -283,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADDDB7311CB936320036E175 /* FileManager.swift in Sources */,
+				ADDDB7311CB936320036E175 /* IwwFileManager.swift in Sources */,
 				ADB28B481CB5D3CD00CF15D5 /* ViewController.swift in Sources */,
 				AD5F97481D3FA72A00F5F883 /* GeoEntry.swift in Sources */,
 				ADB28B4E1CB5D3CD00CF15D5 /* iWasWhere.xcdatamodeld in Sources */,

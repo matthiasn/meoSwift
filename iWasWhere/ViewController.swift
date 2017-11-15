@@ -9,11 +9,11 @@
 import UIKit
 import CoreLocation
 import ObjectMapper
-import AVFoundation
 import MobileCoreServices
 import AssetsLibrary
 import Photos
 import ImagePicker
+import BarcodeScanner
 
 class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate {
     
@@ -33,9 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var uploadButton: UIButton!
-    @IBOutlet weak var imgView: UIImageView!    
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var camButton: UIButton!
     @IBOutlet weak var logsButton: UIButton!
     @IBOutlet weak var camRollBtn: UIButton!
     
@@ -46,7 +44,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var imgIdentifier: String!
     var linkedImgAssets = [PHAsset]()
     
-    let fileManager = FileManager()
+    let iwwFileManager = IwwFileManager()
     var tempEntry: TextEntry? = nil
     fileprivate var locationManager = CLLocationManager()
     
@@ -79,9 +77,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
 
         textInput.backgroundColor = lightTextBackground
         self.view.backgroundColor = lightBackground
-        
-        imgView.contentMode = .scaleAspectFit
-        
+    
         saveButton.setTitle("save", for: [])
         uploadButton.setTitle("upload", for: [])
         recordButton.setTitle("mic", for: [])
@@ -193,8 +189,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-
-        imgView.image = image
         
         let metadata = info[UIImagePickerControllerMediaMetadata] as! [AnyHashable: Any]
         //let imgData = UIImagePNGRepresentation(image)
@@ -250,7 +244,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         let newEntry = TextEntry(md: entryText!, submitDateTime: Date(), audioFile: audioFilename,
                                  imgFile: imgFilename, imgIdentifier: imgIdentifier)
         let newEntryString = Mapper().toJSONString(newEntry!)
-        fileManager.appendLine("text-entries.json", line: newEntryString!)
+        iwwFileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
         locationManager.requestLocation()
         
@@ -278,12 +272,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
                 linkedEntry?.linkedTimestamp = newEntry?.timestamp
                 
                 let linkedEntryString = Mapper().toJSONString(linkedEntry!)
-                self.fileManager.appendLine("text-entries.json", line: linkedEntryString!)
+                self.iwwFileManager.appendLine("text-entries.json", line: linkedEntryString!)
             })
         }
         textInput.text = ""
         audioFilename = nil
-        imgView.image = nil
         imgFilename = nil
         imgIdentifier = nil
         linkedImgAssets = [PHAsset]()
@@ -334,7 +327,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             isRecording = true
             saveButton.isEnabled = false
             uploadButton.isEnabled = false
-            camButton.isEnabled = false
             camRollBtn.isEnabled = false
             logsButton.isEnabled = false
         }
@@ -343,7 +335,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             isRecording = false
             saveButton.isEnabled = true
             uploadButton.isEnabled = true
-            camButton.isEnabled = true
             camRollBtn.isEnabled = true
             logsButton.isEnabled = true
         }
@@ -351,9 +342,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     @IBAction func upload(_ sender: AnyObject) {
         textInput.resignFirstResponder()
-//        let svc = ScanViewController()
-//        self.presentViewController(svc, animated: true, completion: { () -> Void in
-//            self.textInput.becomeFirstResponder() })
+        
+        let controller = BarcodeScannerController()
+        controller.codeDelegate = self
+        controller.errorDelegate = self
+        controller.dismissalDelegate = self
+        
+        present(controller, animated: true, completion: nil)
+        
+        //let svc = ScanViewController()
+        //self.presentViewController(svc, animated: true, completion: { () -> Void in
+        //    self.textInput.becomeFirstResponder() })
     }
     
     @objc func updateUI(_ notification: Notification) {
@@ -372,7 +371,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             tempEntry?.gpsTimestamp = loc.timestamp.timeIntervalSince1970
             
             let JSONString = Mapper().toJSONString(tempEntry!)
-            fileManager.appendLine("text-entries.json", line: JSONString!)
+            iwwFileManager.appendLine("text-entries.json", line: JSONString!)
             tempEntry = nil
         }
     }
@@ -381,5 +380,77 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         print(error, terminator: "")
     }
     
+}
+
+extension ViewController: BarcodeScannerCodeDelegate {
+    
+    func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String) {
+        print("Barcode Data: \(code)")
+        print("Symbology Type: \(type)")
+        
+        let api = RestApiManager()
+        
+//        if let dir: NSString = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.picturesDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString) {
+//            let path = dir.appendingPathComponent("text-entries.json");
+//            let data = NSData(contentsOfFile: path)
+//
+//            if let content = data {
+//                let dataString = String(data: content as Data, encoding: String.Encoding.utf8)
+//                let jsonStrings =
+//                    dataString?.components(separatedBy: NSCharacterSet.newlines)
+//                for jsonString in jsonStrings! {
+//                    print(jsonString)
+//
+//                    let textEntry = Mapper<TextEntry>().map(jsonString)
+//                    if let audioFilename = textEntry?.audioFile {
+//                        print(audioFilename)
+//                        api.uploadAudio(code, filename: audioFilename)
+//                    }
+//                    if let imgIdentifier = textEntry?.imgIdentifier {
+//                        let imgFilename = textEntry?.imgFile
+//                        let fetchResults = PHAsset.fetchAssetsWithLocalIdentifiers([imgIdentifier], options: nil)
+//                        if fetchResults.count > 0 {
+//                            if let imageAsset = fetchResults.objectAtIndex(0) as? PHAsset {
+//                                let requestOptions = PHImageRequestOptions()
+//                                requestOptions.deliveryMode = .highQualityFormat
+//
+//                                PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+//
+//                                    if let filename = imgFilename {
+//                                        api.uploadImage(barcode.stringValue, data: data!, filename: filename)
+//                                    }
+//                                    else {
+//                                        print(imgFilename, data)
+//                                    }
+//                                })
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        
+        api.upload(code, filename: "text-entries.json")
+        api.upload(code, filename: "visits.json")
+        
+        let delayTime = DispatchTime.now() + Double(Int64(6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            controller.resetWithError()
+        }
+    }
+}
+
+extension ViewController: BarcodeScannerErrorDelegate {
+    
+    func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
+        print(error)
+    }
+}
+
+extension ViewController: BarcodeScannerDismissalDelegate {
+    
+    func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }
 

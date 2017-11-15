@@ -15,8 +15,8 @@ class RestApiManager {
     func upload (_ address: String, filename: String) {
         let request = NSMutableURLRequest(url: URL(string: address + filename)!)
         request.httpMethod = "POST"
-        let fileManager = FileManager()
-        let str = fileManager.readFile(filename)
+        let iwwFileManager = IwwFileManager()
+        let str = iwwFileManager.readFile(filename)
         let data = str.data(using: String.Encoding.utf8)
 
         task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
@@ -74,8 +74,8 @@ class RestApiManager {
         request.httpMethod = "PUT"
         request.addValue("audio/m4a", forHTTPHeaderField: "Content-Type")
         
-        let fileManager = FileManager()
-        let data = fileManager.readBinaryFile(filename)
+        let iwwFileManager = IwwFileManager()
+        let data = iwwFileManager.readBinaryFile(filename)
         
         task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {

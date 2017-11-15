@@ -6,4 +6,5 @@ use_frameworks!
 target 'iWasWhere' do
   pod 'ObjectMapper'
   pod 'ImagePicker'
+  pod 'BarcodeScanner'
 end

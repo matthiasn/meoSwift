@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class FileManager {
+class IwwFileManager {
 
     let fm = Foundation.FileManager.default
     let dayTimePeriodFormatter = DateFormatter()
