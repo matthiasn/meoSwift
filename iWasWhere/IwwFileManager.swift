@@ -23,7 +23,7 @@ class IwwFileManager {
     func appendLine(_ fileName: String, line: String) {
         let withNewline = "\(line)\r\n"
         
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as NSString? {
             let path = dir.appendingPathComponent(fileName);
             
             //create file if it doesn't exist
@@ -38,7 +38,7 @@ class IwwFileManager {
     }
     
     func readBinaryFile(_ fileName: String) -> Data? {
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as NSString? {
             let path = dir.appendingPathComponent(fileName);
             let data = try? Data(contentsOf: URL(fileURLWithPath: path))
             return data
@@ -47,7 +47,7 @@ class IwwFileManager {
     }
     
     func readFile(_ fileName: String) -> String {
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString {
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as NSString? {
             let path = dir.appendingPathComponent(fileName)
             
             //create file if it doesn't exist
@@ -57,7 +57,7 @@ class IwwFileManager {
             let fileHandle = FileHandle(forUpdatingAtPath: path)
             let fileData = fileHandle?.readDataToEndOfFile()
             fileHandle?.closeFile()
-            return NSString(data: fileData!, encoding: String.Encoding.utf8.rawValue) as! String
+            return NSString(data: fileData!, encoding: String.Encoding.utf8.rawValue)! as String
         }
         return ""
     }

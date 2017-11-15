@@ -15,14 +15,14 @@ import Photos
 import ImagePicker
 import BarcodeScanner
 
-class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecorderDelegate, UINavigationControllerDelegate, ImagePickerDelegate {
     
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
     }
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        
+        print(images)
     }
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
@@ -48,10 +48,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var tempEntry: TextEntry? = nil
     fileprivate var locationManager = CLLocationManager()
     
-    var imagePickerController2: ImagePickerController!
+    var imagePickerController: ImagePickerController!
     
-    let lightBackground = UIColor(red: 190/255, green: 205/255, blue: 210/255, alpha: 1)
-    let lightTextBackground = UIColor(red: 225/255, green: 230/255, blue: 235/255, alpha: 1)
+    let lightBackground = UIColor(red: 170/255, green: 185/255, blue: 190/255, alpha: 1)
+    let lightTextBackground = UIColor(red: 215/255, green: 220/255, blue: 225/255, alpha: 1)
     let darkBackground = UIColor(red: 45/255, green: 62/255, blue: 80/255, alpha: 1)
     let darkTextBackground = UIColor(red: 140/255, green: 155/255, blue: 160/255, alpha: 1)
     
@@ -111,25 +111,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     // called when done button in image picker is pressed
     func doneButtonDidPress(_ images: [UIImage]) {
-        linkedImgAssets = imagePickerController2.stack.assets
+        linkedImgAssets = imagePickerController.stack.assets
         self.dismiss(animated: true, completion: nil)
     }
     
     func cancelButtonDidPress() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func imagePick(_ sender: AnyObject) {
-        imagePickerController2 = ImagePickerController()
-        imagePickerController2.imageLimit = 99
-        imagePickerController2.delegate = self
-        
-        present(imagePickerController2, animated: true, completion: nil)
+        var configuration = Configuration()
+        configuration.doneButtonTitle = "Finish"
+        configuration.noImagesTitle = "Sorry! There are no images here!"
+        configuration.recordLocation = true
+        let imagePicker = ImagePickerController(configuration: configuration)
+        imagePickerController = imagePicker
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     @IBAction func geoRecord(_ sender: AnyObject) {
-        //locationManager.requestLocation()
-        //locationManager.startUpdatingLocation()
-        //locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func getDocumentsURL() -> URL {
@@ -197,7 +201,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     // adapted from https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
     func startRecording() {
-        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString {
+        if let dir: NSString = NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as NSString? {
             
             let dayTimePeriodFormatter = DateFormatter()
             dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
@@ -337,6 +341,7 @@ extension ViewController: BarcodeScannerCodeDelegate {
 extension ViewController: BarcodeScannerErrorDelegate {
     func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
         print(error)
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 
