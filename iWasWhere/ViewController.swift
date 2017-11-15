@@ -120,7 +120,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     @IBAction func imagePick(_ sender: AnyObject) {
         imagePickerController2 = ImagePickerController()
-        imagePickerController2.imageLimit = 50
+        imagePickerController2.imageLimit = 99
         imagePickerController2.delegate = self
         
         present(imagePickerController2, animated: true, completion: nil)
@@ -132,34 +132,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         //locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    func imageSaved(_ image: UIImage, didFinishSavingWithError error: NSErrorPointer?, contextInfo:UnsafeRawPointer) {
-        if image.imageAsset != nil {
-            let fetchOptions: PHFetchOptions = PHFetchOptions()
-            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-            let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
-            
-            if (fetchResult.firstObject != nil) {
-                let lastAsset: PHAsset = fetchResult.lastObject!
-                print(lastAsset.localIdentifier)
-                print(lastAsset.creationDate!)
-                let requestOptions = PHImageRequestOptions()
-                PHImageManager.default().requestImageData(for: lastAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
-                    print("requestImageDataForAsset in VC")
-                    let path = info!["PHImageFileURLKey"] as! URL
-                    let fileName = path.absoluteString.components(separatedBy: "/").last
-                    
-                    let dayTimePeriodFormatter = DateFormatter()
-                    dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
-                    self.imgFilename = dayTimePeriodFormatter.string(from: Date()) + "_" + fileName!
-                })
-                imgIdentifier = lastAsset.localIdentifier
-            }
-        }
-        if error != nil {
-            // Report error to user
-        }
-    }
-    
     func getDocumentsURL() -> URL {
         let documentsURL = Foundation.FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return documentsURL
@@ -168,53 +140,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     func fileInDocumentsDirectory(_ filename: String) -> String {
         let fileURL = getDocumentsURL().appendingPathComponent(filename)
         return fileURL.path
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        let metadata = info[UIImagePickerControllerMediaMetadata] as! [AnyHashable: Any]
-        let imgData = UIImageJPEGRepresentation(image, 0.5)
-        
-        ALAssetsLibrary().writeImageData(toSavedPhotosAlbum: imgData, metadata: metadata) { (url, error) in
-            if image.imageAsset != nil {
-                let fetchOptions: PHFetchOptions = PHFetchOptions()
-                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-                let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
-                
-                if (fetchResult.firstObject != nil) {
-                    let lastAsset: PHAsset = fetchResult.lastObject!
-                    print(lastAsset.localIdentifier)
-                    print(lastAsset.creationDate!)
-                    
-                    let requestOptions = PHImageRequestOptions()
-                    PHImageManager.default().requestImageData(for: lastAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
-                        print("requestImageDataForAsset in VC")
-                        let path = info!["PHImageFileURLKey"] as! URL
-                        let fileName = path.absoluteString.components(separatedBy: "/").last
-                        
-                        let dayTimePeriodFormatter = DateFormatter()
-                        dayTimePeriodFormatter.dateFormat = "yyyyMMdd_HHmmss"
-                        self.imgFilename = dayTimePeriodFormatter.string(from: Date()) + "_" + fileName!
-                        print(self.imgFilename)
-                        print(data?.count as Any)
-                    })
-                    self.imgIdentifier = lastAsset.localIdentifier
-                }
-            }
-            
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func cam(_ sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-        imagePicker.mediaTypes = [kUTTypeImage as String]
-        imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashMode.off
-        imagePicker.allowsEditing = false
-        self.present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func saveText(_ sender: AnyObject) {
