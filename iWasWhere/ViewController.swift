@@ -22,13 +22,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     }
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        print(images)
+        linkedImgAssets = imagePicker.stack.assets
+        self.dismiss(animated: true, completion: nil)
     }
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
-    
     
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var recordButton: UIButton!
@@ -43,18 +43,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var imgFilename: String!
     var imgIdentifier: String!
     var linkedImgAssets = [PHAsset]()
-    
     let iwwFileManager = IwwFileManager()
     var tempEntry: TextEntry? = nil
     fileprivate var locationManager = CLLocationManager()
-    
     var imagePickerController: ImagePickerController!
-    
     let lightBackground = UIColor(red: 170/255, green: 185/255, blue: 190/255, alpha: 1)
     let lightTextBackground = UIColor(red: 215/255, green: 220/255, blue: 225/255, alpha: 1)
     let darkBackground = UIColor(red: 45/255, green: 62/255, blue: 80/255, alpha: 1)
     let darkTextBackground = UIColor(red: 140/255, green: 155/255, blue: 160/255, alpha: 1)
-    
     var nightMode = false
     
     @IBAction func toggleNightMode(_ sender: AnyObject) {
@@ -103,20 +99,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-
-    func wrapperDidPress(_ images: [UIImage]) {
-    }
-    
-    // called when done button in image picker is pressed
-    func doneButtonDidPress(_ images: [UIImage]) {
-        linkedImgAssets = imagePickerController.stack.assets
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func cancelButtonDidPress() {
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func imagePick(_ sender: AnyObject) {
@@ -249,14 +231,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     
     @IBAction func upload(_ sender: AnyObject) {
         textInput.resignFirstResponder()
-        
         let controller = BarcodeScannerController()
         controller.codeDelegate = self
         controller.errorDelegate = self
         controller.dismissalDelegate = self
-        
         present(controller, animated: true, completion: nil)
-    
     }
     
     // MARK: CLLocationManagerDelegate
@@ -278,7 +257,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error, terminator: "")
     }
-    
 }
 
 extension ViewController: BarcodeScannerCodeDelegate {
@@ -288,45 +266,45 @@ extension ViewController: BarcodeScannerCodeDelegate {
         
         let api = RestApiManager()
         
-//        if let dir: NSString = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.picturesDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first as! NSString) {
-//            let path = dir.appendingPathComponent("text-entries.json");
-//            let data = NSData(contentsOfFile: path)
-//
-//            if let content = data {
-//                let dataString = String(data: content as Data, encoding: String.Encoding.utf8)
-//                let jsonStrings =
-//                    dataString?.components(separatedBy: NSCharacterSet.newlines)
-//                for jsonString in jsonStrings! {
-//                    print(jsonString)
-//
-//                    let textEntry = Mapper<TextEntry>().map(jsonString)
-//                    if let audioFilename = textEntry?.audioFile {
-//                        print(audioFilename)
-//                        api.uploadAudio(code, filename: audioFilename)
-//                    }
-//                    if let imgIdentifier = textEntry?.imgIdentifier {
-//                        let imgFilename = textEntry?.imgFile
-//                        let fetchResults = PHAsset.fetchAssetsWithLocalIdentifiers([imgIdentifier], options: nil)
-//                        if fetchResults.count > 0 {
-//                            if let imageAsset = fetchResults.objectAtIndex(0) as? PHAsset {
-//                                let requestOptions = PHImageRequestOptions()
-//                                requestOptions.deliveryMode = .highQualityFormat
-//
-//                                PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
-//
-//                                    if let filename = imgFilename {
-//                                        api.uploadImage(barcode.stringValue, data: data!, filename: filename)
-//                                    }
-//                                    else {
-//                                        print(imgFilename, data)
-//                                    }
-//                                })
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        if let dir: NSString = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.picturesDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString) {
+            let path = dir.appendingPathComponent("text-entries.json");
+            let data = NSData(contentsOfFile: path)
+
+            if let content = data {
+                let dataString = String(data: content as Data, encoding: String.Encoding.utf8)
+                let jsonStrings =
+                    dataString?.components(separatedBy: NSCharacterSet.newlines)
+                for jsonString in jsonStrings! {
+                    print(jsonString)
+
+                    let textEntry = Mapper<TextEntry>().map(JSONString: jsonString)
+                    if let audioFilename = textEntry?.audioFile {
+                        print(audioFilename)
+                        api.uploadAudio(code, filename: audioFilename)
+                    }
+                    if let imgIdentifier = textEntry?.imgIdentifier {
+                        let imgFilename = textEntry?.imgFile
+                        let fetchResults = PHAsset.fetchAssets(withLocalIdentifiers: [imgIdentifier], options: nil)
+                        if fetchResults.count > 0 {
+                            if let imageAsset = fetchResults.object(at: 0) as? PHAsset {
+                                let requestOptions = PHImageRequestOptions()
+                                requestOptions.deliveryMode = .highQualityFormat
+
+                                PHImageManager.default().requestImageData(for: imageAsset, options: requestOptions, resultHandler: { (data, str, orientation, info) in
+
+                                    if let filename = imgFilename {
+                                        api.uploadImage(code, data: data!, filename: filename)
+                                    }
+                                    else {
+                                        print(imgFilename as Any, data as Any)
+                                    }
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
         api.upload(code, filename: "text-entries.json")
         api.upload(code, filename: "visits.json")
