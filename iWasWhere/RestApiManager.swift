@@ -18,7 +18,7 @@ class RestApiManager {
         let iwwFileManager = IwwFileManager()
         let str = iwwFileManager.readFile(filename)
         let data = str.data(using: String.Encoding.utf8)
-
+        
         task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
                 let response = NSString(data: data, encoding:String.Encoding.utf8.rawValue)

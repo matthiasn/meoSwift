@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import ObjectMapper
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         // activate proximity sensor, which automatically makes the screen turn dark when held to ear
         // for notifications on changes, see http://stackoverflow.com/questions/30759711/proximity-sensor-in-swift-from-objective-c
@@ -36,6 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         //locationManager.startMonitoringSignificantLocationChanges()
         locationManager.startMonitoringVisits()
         
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if error != nil {
+                //
+            }
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.badge = 1 // your badge count
         return true
     }
 
