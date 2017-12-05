@@ -1,6 +1,0 @@
-framework module Pods_iWasWhere {
-  umbrella header "Pods-iWasWhere-umbrella.h"
-
-  export *
-  module * { export * }
-}
