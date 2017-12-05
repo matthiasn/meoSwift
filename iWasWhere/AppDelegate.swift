@@ -21,10 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let types:UIUserNotificationType = ([.alert, .sound, .badge])
-        let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        
         // activate proximity sensor, which automatically makes the screen turn dark when held to ear
         // for notifications on changes, see http://stackoverflow.com/questions/30759711/proximity-sensor-in-swift-from-objective-c
         let device = UIDevice.current

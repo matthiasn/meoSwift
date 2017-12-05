@@ -59,11 +59,12 @@ class RestApiManager {
         let request = NSMutableURLRequest(url: URL(string: address + "images/" + filename)!)
         request.httpMethod = "PUT"
         request.addValue("image/jpeg", forHTTPHeaderField: "Content-Type")
-        
+        print("upload image", request)
+                
         task = session.uploadTask(with: request as URLRequest, from: data, completionHandler: { (data, response, error) -> Void in
             if let data = data {
                 let response = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-                print(response as Any)
+                print(response as Any, request)
             }
         }) 
         task.resume()

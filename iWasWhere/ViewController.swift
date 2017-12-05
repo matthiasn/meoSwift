@@ -34,7 +34,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var logsButton: UIButton!
     @IBOutlet weak var camRollBtn: UIButton!
     
     var recordingSession: AVAudioSession!
@@ -47,35 +46,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
     var tempEntry: TextEntry? = nil
     fileprivate var locationManager = CLLocationManager()
     var imagePickerController: ImagePickerController!
-    let lightBackground = UIColor(red: 170/255, green: 185/255, blue: 190/255, alpha: 1)
-    let lightTextBackground = UIColor(red: 215/255, green: 220/255, blue: 225/255, alpha: 1)
-    let darkBackground = UIColor(red: 45/255, green: 62/255, blue: 80/255, alpha: 1)
-    let darkTextBackground = UIColor(red: 140/255, green: 155/255, blue: 160/255, alpha: 1)
-    var nightMode = false
-    
-    @IBAction func toggleNightMode(_ sender: AnyObject) {
-        nightMode = !nightMode
-        if nightMode {
-            textInput.backgroundColor = darkTextBackground
-            self.view.backgroundColor = darkBackground
-            textInput.keyboardAppearance = .dark
-        } else {
-            textInput.backgroundColor = lightTextBackground
-            self.view.backgroundColor = lightBackground
-            textInput.keyboardAppearance = .light
-        }
-    }
+    let background = UIColor(red: 45/255, green: 62/255, blue: 80/255, alpha: 1)
+    let textBackground = UIColor(red: 140/255, green: 155/255, blue: 160/255, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textInput.becomeFirstResponder()
-        textInput.backgroundColor = lightTextBackground
-        self.view.backgroundColor = lightBackground
+        textInput.backgroundColor = textBackground
+        self.view.backgroundColor = background
         saveButton.setTitle("save", for: [])
         uploadButton.setTitle("upload", for: [])
         recordButton.setTitle("mic", for: [])
         camRollBtn.setTitle("camRoll", for: [])
-        logsButton.setTitle("night", for: [])
         locationManager.delegate = self
         recordingSession = AVAudioSession.sharedInstance()
         
@@ -136,6 +118,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
         iwwFileManager.appendLine("text-entries.json", line: newEntryString!)
         tempEntry = newEntry
         locationManager.requestLocation()
+        
+        print(entryText as Any, linkedImgAssets)
         
         // create linked entry for each asset in linkedImgAssets
         for asset in linkedImgAssets {
@@ -217,7 +201,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             saveButton.isEnabled = false
             uploadButton.isEnabled = false
             camRollBtn.isEnabled = false
-            logsButton.isEnabled = false
         }
         else {
             finishRecording(success: true)
@@ -225,7 +208,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, AVAudioRecord
             saveButton.isEnabled = true
             uploadButton.isEnabled = true
             camRollBtn.isEnabled = true
-            logsButton.isEnabled = true
         }
     }
     
@@ -266,7 +248,9 @@ extension ViewController: BarcodeScannerCodeDelegate {
         
         let api = RestApiManager()
         
-        if let dir: NSString = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.picturesDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString) {
+        if let dir: NSString =
+            NSSearchPathForDirectoriesInDomains(Foundation.FileManager.SearchPathDirectory.documentDirectory, Foundation.FileManager.SearchPathDomainMask.allDomainsMask, true).first as NSString? {
+            print("dir in line 271")
             let path = dir.appendingPathComponent("text-entries.json");
             let data = NSData(contentsOfFile: path)
 
@@ -284,7 +268,9 @@ extension ViewController: BarcodeScannerCodeDelegate {
                     }
                     if let imgIdentifier = textEntry?.imgIdentifier {
                         let imgFilename = textEntry?.imgFile
+                        print(imgFilename as Any)
                         let fetchResults = PHAsset.fetchAssets(withLocalIdentifiers: [imgIdentifier], options: nil)
+                        print(fetchResults as Any)
                         if fetchResults.count > 0 {
                             if let imageAsset = fetchResults.object(at: 0) as? PHAsset {
                                 let requestOptions = PHImageRequestOptions()

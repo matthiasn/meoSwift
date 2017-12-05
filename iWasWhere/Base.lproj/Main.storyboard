@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +26,7 @@
                                 <rect key="frame" x="20" y="25" width="374" height="281"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="LxC-Oc-Tcx"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="LxC-Oc-Tcx"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="dWE-aq-lhv">
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
@@ -47,23 +47,10 @@
                                 </variation>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="C44-pD-ev6">
-                                <rect key="frame" x="5.6666666666666572" y="376" width="391" height="40"/>
+                                <rect key="frame" x="46.333333333333343" y="376" width="310" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-l8-NKS" userLabel="Night Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="40"/>
-                                        <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
-                                        <state key="normal" title="night"/>
-                                        <state key="disabled">
-                                            <color key="titleColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleNightMode:" destination="BYZ-38-t0r" eventType="touchDown" id="L5p-yD-PnV"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwT-So-zkU">
-                                        <rect key="frame" x="81" y="0.0" width="91" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="91" height="40"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -76,7 +63,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtj-if-EOc">
-                                        <rect key="frame" x="178" y="0.0" width="61" height="40"/>
+                                        <rect key="frame" x="97" y="0.0" width="61" height="40"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -86,7 +73,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgp-s4-ZvT">
-                                        <rect key="frame" x="245" y="0.0" width="69" height="40"/>
+                                        <rect key="frame" x="164" y="0.0" width="69" height="40"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="images"/>
                                         <connections>
@@ -94,7 +81,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ep-yBc">
-                                        <rect key="frame" x="320" y="0.0" width="71" height="40"/>
+                                        <rect key="frame" x="239" y="0.0" width="71" height="40"/>
                                         <color key="backgroundColor" red="0.85062792279999999" green="0.94027124890000002" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="8" maxX="11" maxY="8"/>
@@ -130,11 +117,11 @@
                                 <exclude reference="P4Q-UI-ZPt"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="x6l-1H-tme"/>
-                                <exclude reference="bUH-1x-uE7"/>
                                 <exclude reference="Bgi-aG-BWj"/>
                                 <exclude reference="XDf-va-JCg"/>
                                 <exclude reference="djB-Vs-5mC"/>
+                                <exclude reference="x6l-1H-tme"/>
+                                <exclude reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -142,17 +129,16 @@
                                 <include reference="P4Q-UI-ZPt"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="x6l-1H-tme"/>
-                                <include reference="bUH-1x-uE7"/>
                                 <include reference="Bgi-aG-BWj"/>
                                 <include reference="XDf-va-JCg"/>
                                 <include reference="djB-Vs-5mC"/>
+                                <include reference="x6l-1H-tme"/>
+                                <include reference="bUH-1x-uE7"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="camRollBtn" destination="Wgp-s4-ZvT" id="s1q-kM-cUx"/>
-                        <outlet property="logsButton" destination="5kY-l8-NKS" id="cle-0p-pjF"/>
                         <outlet property="recordButton" destination="Qtj-if-EOc" id="Ky8-MC-Lha"/>
                         <outlet property="saveButton" destination="W08-ep-yBc" id="VmC-MR-o88"/>
                         <outlet property="textInput" destination="P4Q-UI-ZPt" id="ILC-7F-Bcn"/>
