@@ -144,9 +144,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ADB28B411CB5D3CD00CF15D5 /* iWasWhere */ = {
+		ADB28B411CB5D3CD00CF15D5 /* meo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ADB28B6D1CB5D3CD00CF15D5 /* Build configuration list for PBXNativeTarget "iWasWhere" */;
+			buildConfigurationList = ADB28B6D1CB5D3CD00CF15D5 /* Build configuration list for PBXNativeTarget "meo" */;
 			buildPhases = (
 				92E973FC8CD81B8937C54302 /* [CP] Check Pods Manifest.lock */,
 				ADB28B3E1CB5D3CD00CF15D5 /* Sources */,
@@ -159,7 +159,7 @@
 			);
 			dependencies = (
 			);
-			name = iWasWhere;
+			name = meo;
 			productName = iWasWhere;
 			productReference = ADB28B421CB5D3CD00CF15D5 /* iWasWhere.app */;
 			productType = "com.apple.product-type.application";
@@ -187,7 +187,7 @@
 					};
 				};
 			};
-			buildConfigurationList = ADB28B3D1CB5D3CD00CF15D5 /* Build configuration list for PBXProject "iWasWhere" */;
+			buildConfigurationList = ADB28B3D1CB5D3CD00CF15D5 /* Build configuration list for PBXProject "meo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -200,7 +200,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ADB28B411CB5D3CD00CF15D5 /* iWasWhere */,
+				ADB28B411CB5D3CD00CF15D5 /* meo */,
 			);
 		};
 /* End PBXProject section */
@@ -360,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -408,7 +408,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -426,7 +426,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iWasWhere/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "matthiasn.meo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,7 +445,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iWasWhere/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "matthiasn.meo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -458,7 +458,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ADB28B3D1CB5D3CD00CF15D5 /* Build configuration list for PBXProject "iWasWhere" */ = {
+		ADB28B3D1CB5D3CD00CF15D5 /* Build configuration list for PBXProject "meo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADB28B6B1CB5D3CD00CF15D5 /* Debug */,
@@ -467,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ADB28B6D1CB5D3CD00CF15D5 /* Build configuration list for PBXNativeTarget "iWasWhere" */ = {
+		ADB28B6D1CB5D3CD00CF15D5 /* Build configuration list for PBXNativeTarget "meo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADB28B6E1CB5D3CD00CF15D5 /* Debug */,
