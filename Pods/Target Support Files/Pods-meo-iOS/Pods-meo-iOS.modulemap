@@ -1,6 +1,0 @@
-framework module Pods_meo_iOS {
-  umbrella header "Pods-meo-iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

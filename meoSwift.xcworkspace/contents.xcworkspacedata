@@ -2,7 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/mn/github/app/iWasWhere/meoSwift.xcodeproj">
+      location = "group:../meo/doc/icon.png">
+   </FileRef>
+   <FileRef
+      location = "group:meoSwift.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

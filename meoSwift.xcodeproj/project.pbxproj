@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		97C28157A4609F6585986A96 /* Pods_meo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BF5CBC0F70B5AEA6DF6244 /* Pods_meo_iOS.framework */; };
 		AD2B7A9F1D3845D100B720F3 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B7A9E1D3845D100B720F3 /* RestApiManager.swift */; };
 		AD5F97481D3FA72A00F5F883 /* GeoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F97451D3FA72A00F5F883 /* GeoEntry.swift */; };
 		AD71BBB71D4285F900ECEAB1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD71BBB61D4285F900ECEAB1 /* AssetsLibrary.framework */; };
@@ -23,14 +22,18 @@
 		ADBE3FD71D42DAB100DC002D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBE3FD61D42DAB100DC002D /* Photos.framework */; };
 		ADDDB7311CB936320036E175 /* IwwFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7301CB936320036E175 /* IwwFileManager.swift */; };
 		ADDDB7331CB95F3C0036E175 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDDB7321CB95F3C0036E175 /* Visit.swift */; };
+		B8054EB39D2367405F975541 /* Pods_meoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9CAA9C856DFDA5BECA413 /* Pods_meoSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		042BCFDF0BFA65F8FBFB7200 /* Pods-iWasWhere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhere/Pods-iWasWhere.debug.xcconfig"; sourceTree = "<group>"; };
 		137115D8B7A19643B9EE29FB /* Pods_iWasWhereUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWasWhereUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19F9CAA9C856DFDA5BECA413 /* Pods_meoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_meoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4145E150155D50B6FB5101B9 /* Pods-meoSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meoSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-meoSwift/Pods-meoSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		4741348F4CBC0832FDA95678 /* Pods-iWasWhereTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhereTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhereTests/Pods-iWasWhereTests.debug.xcconfig"; sourceTree = "<group>"; };
 		59DB11821C96229C2AE5F8C2 /* Pods-iWasWhereUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhereUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhereUITests/Pods-iWasWhereUITests.release.xcconfig"; sourceTree = "<group>"; };
 		607BB19CB50E04C1E9AF76BC /* Pods-iWasWhere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhere.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhere/Pods-iWasWhere.release.xcconfig"; sourceTree = "<group>"; };
+		7F54F6F84D7CEE811F269298 /* Pods-meoSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meoSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-meoSwift/Pods-meoSwift.release.xcconfig"; sourceTree = "<group>"; };
 		8E8E23474723C526663619C0 /* Pods-iWasWhereUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWasWhereUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWasWhereUITests/Pods-iWasWhereUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A2A6F75C86F831FA028E6F74 /* Pods_iWasWhereTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWasWhereTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD17CE411D3D20FF00322E90 /* Pods_iWasWhere.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_iWasWhere.framework; path = "../../../Library/Developer/Xcode/DerivedData/iWasWhere-haynazeelaygtgcmhctnahqxqleo/Build/Products/Debug-iphonesimulator/Pods_iWasWhere.framework"; sourceTree = "<group>"; };
@@ -41,7 +44,7 @@
 		AD71BBB61D4285F900ECEAB1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		AD79B1601CBB61D3006AFECC /* TextEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEntry.swift; sourceTree = "<group>"; };
 		AD9C25F01FD7056B00CC1FD2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		ADB28B421CB5D3CD00CF15D5 /* iWasWhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = iWasWhere.app; path = "meo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADB28B421CB5D3CD00CF15D5 /* meoSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meoSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB28B451CB5D3CD00CF15D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB28B471CB5D3CD00CF15D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ADB28B4A1CB5D3CD00CF15D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,7 +72,7 @@
 				ADBE3FD71D42DAB100DC002D /* Photos.framework in Frameworks */,
 				AD71BBB71D4285F900ECEAB1 /* AssetsLibrary.framework in Frameworks */,
 				ADB28B771CB5D3D900CF15D5 /* CoreLocation.framework in Frameworks */,
-				97C28157A4609F6585986A96 /* Pods_meo_iOS.framework in Frameworks */,
+				B8054EB39D2367405F975541 /* Pods_meoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +90,8 @@
 				59DB11821C96229C2AE5F8C2 /* Pods-iWasWhereUITests.release.xcconfig */,
 				C45536F9F8460E1065B6C663 /* Pods-meo-iOS.debug.xcconfig */,
 				D1C8F3F2803D0DE3A4E6EBE1 /* Pods-meo-iOS.release.xcconfig */,
+				4145E150155D50B6FB5101B9 /* Pods-meoSwift.debug.xcconfig */,
+				7F54F6F84D7CEE811F269298 /* Pods-meoSwift.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -107,7 +112,7 @@
 		ADB28B431CB5D3CD00CF15D5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ADB28B421CB5D3CD00CF15D5 /* iWasWhere.app */,
+				ADB28B421CB5D3CD00CF15D5 /* meoSwift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 				A2A6F75C86F831FA028E6F74 /* Pods_iWasWhereTests.framework */,
 				137115D8B7A19643B9EE29FB /* Pods_iWasWhereUITests.framework */,
 				E2BF5CBC0F70B5AEA6DF6244 /* Pods_meo_iOS.framework */,
+				19F9CAA9C856DFDA5BECA413 /* Pods_meoSwift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,7 +173,7 @@
 			);
 			name = meoSwift;
 			productName = iWasWhere;
-			productReference = ADB28B421CB5D3CD00CF15D5 /* iWasWhere.app */;
+			productReference = ADB28B421CB5D3CD00CF15D5 /* meoSwift.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,8 +189,8 @@
 				TargetAttributes = {
 					ADB28B411CB5D3CD00CF15D5 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 7DN35ABWYL;
 						LastSwiftMigration = 0910;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -194,7 +200,7 @@
 				};
 			};
 			buildConfigurationList = ADB28B3D1CB5D3CD00CF15D5 /* Build configuration list for PBXProject "meoSwift" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -238,7 +244,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-meo-iOS/Pods-meo-iOS-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-meoSwift/Pods-meoSwift-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92E973FC8CD81B8937C54302 /* [CP] Check Pods Manifest.lock */ = {
@@ -252,7 +258,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-meo-iOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-meoSwift-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -265,7 +271,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-meo-iOS/Pods-meo-iOS-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-meoSwift/Pods-meoSwift-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BarcodeScanner/BarcodeScanner.framework",
 				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
@@ -278,7 +284,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-meo-iOS/Pods-meo-iOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-meoSwift/Pods-meoSwift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -425,12 +431,13 @@
 		};
 		ADB28B6E1CB5D3CD00CF15D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C45536F9F8460E1065B6C663 /* Pods-meo-iOS.debug.xcconfig */;
+			baseConfigurationReference = 4145E150155D50B6FB5101B9 /* Pods-meoSwift.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7DN35ABWYL;
 				INFOPLIST_FILE = iWasWhere/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -438,19 +445,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = matthiasn.meoSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		ADB28B6F1CB5D3CD00CF15D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1C8F3F2803D0DE3A4E6EBE1 /* Pods-meo-iOS.release.xcconfig */;
+			baseConfigurationReference = 7F54F6F84D7CEE811F269298 /* Pods-meoSwift.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7DN35ABWYL;
 				INFOPLIST_FILE = iWasWhere/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -458,8 +468,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = matthiasn.meoSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

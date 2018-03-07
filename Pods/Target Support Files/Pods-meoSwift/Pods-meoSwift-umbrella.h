@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_meo_iOSVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_meo_iOSVersionString[];
+FOUNDATION_EXPORT double Pods_meoSwiftVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_meoSwiftVersionString[];
 
